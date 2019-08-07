@@ -1,0 +1,49 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% NAME:             designdoc.tex
+%
+% AUTHOR:           Ethan D. Twardy <edtwardy@mtu.edu>
+%
+% DESCRIPTION:      Design Document for the project.
+%
+% CREATED:          05/15/2019
+%
+% LAST EDITED:      08/07/2019
+%%%
+
+\documentclass{designdoc}
+
+\begin{document}
+\section{Introduction}
+\textit{SortMedia} is a program used to enumerate and restructure a Music
+library. Taking as an argument the path of a directory to organize as a music
+library, the application recursively searches the directory for media files,
+parsing each one for its metadata, then organizing the files into a
+(potentially) new directory structure according to some basic rules.
+
+The needs of this kind of program have a tendency to change frequently, so the
+goal of this design is to be as versatile as possible.
+
+\section{Axes of Change}
+An \textit{Axis of Change} for software is a reason for the code to undergo
+some change as a result of a requirements change. It's often useful to predict
+the axes of change that a project has before beginning its design. The
+SortMedia project will be designed with the following axes of change in mind:
+
+\subsection{Adding New Organizational Schemas}
+An Organizational Schema is a set of rules that dictate the organization of
+media files on the filesystem, as well as the metadata that they contain. The
+schema that I prefer has changed slightly over the years, and is likely to
+change again.
+
+\subsection{Adding New Media File Types}
+There are many types of media files. It's not reasonable to support all of them
+from the beginning. The design shall make it easy to incorporate new media file
+types into the project.
+
+\subsection{Adding New File Operations to an Organizational Schema}
+Separate from the organizational schema are the file operations. These are
+rules that dictate how a change is performed to a file. With new Organizational
+Schemas naturally comes the need for new File Operations.
+\end{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

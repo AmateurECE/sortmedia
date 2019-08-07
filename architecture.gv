@@ -1,0 +1,96 @@
+digraph G {
+    node [
+         fontsize = 8
+         shape = "record"
+    ]
+    edge [
+        fontsize = 8
+    ]
+
+    IFileLocator [
+        label = "{interface IFileLocator\l"
+                + "}"]
+    MusicFileLocator [
+        label = "{class MusicFileLocator\l"
+                + "}"]
+    MediaSorter [
+        label = "{class MediaSorter\l|"
+                + "+ run() : int\l"
+                + "- static makeOrganizationalSchema() :"
+                + " IOrganizationalSchema\l"
+                + "- static makeFileLocator() : IFileLocator\l"
+                + "}"]
+    IFileOperation [
+        label = "{interface IFileOperation\l|"
+                + "+ IFileOperation(IMediaFile&)\l"
+                + "+ apply() : void\l"
+                + "+ revert() : void\l"
+                + "}"]
+    FileMoveOperation [
+        label = "{class FileMoveOperation\l"
+                + "}"]
+    FileRenameOperation [
+        label = "{class FileRenameOperation\l"
+                + "}"]
+    DirectoryCreateOperation [
+        label = "{class DirectoryCreateOperation\l"
+                + "}"]
+    MetadataChangeOperation [
+        label = "{class MetadataChangeOperation\l"
+                + "}"]
+    IMediaFile [
+        label = "{interface IMediaFile\l"
+                + "}"]
+    MediaFile [
+        label = "{class MediaFile\l"
+                + "}"]
+    MP3File [
+        label = "{class MP3File\l"
+                + "}"]
+    MKVFile [
+        label = "{class MKVFile\l"
+                + "}"]
+    IOrganizationalSchema [
+        label = "{interface IOrganizationalSchema\l|"
+                + "+ applyToFileByPath(std::string) : void\l"
+                + "- makeMediaFile(std::string) : IMediaFile\l"
+                + "- pure virtual determineOperations(IMediaFile&) :"
+                + " std::list\<IFileOperation\>\l"
+                + "- pure virtual createFileMoveOperation(IMediaFile&) :"
+                + " FileMoveOperation\l"
+                + "- pure virtual createFileRenameOperation(IMediaFile&) :"
+                + " FileRenameOperation\l"
+                + "- pure virtual createDirectoryCreateOperation(IMediaFile&)"
+                + " : DirectoryCreateOperation\l"
+                + "- pure virtual createMetadataChangeOperation(IMediaFile&) :"
+                + " MetadataChangeOperation\l"
+                + "}"]
+    OrganizationalSchema [
+        label = "{class OrganizationalSchema\l"
+                + "}"]
+    OperationalFailureException [
+        label = "{class OperationalFailureException\l|"
+                + "+ what() const : const char*\l"
+                + "}"]
+
+    IFileLocator -> MediaSorter [arrowhead="diamond"]
+    MusicFileLocator -> IFileLocator [arrowhead="empty",style="dashed"]
+    FileMoveOperation -> IFileOperation [arrowhead="empty",style="dashed"]
+    FileRenameOperation -> IFileOperation [arrowhead="empty",style="dashed"]
+    DirectoryCreateOperation -> IFileOperation
+        [arrowhead="empty",style="dashed"]
+    MetadataChangeOperation -> IFileOperation
+        [arrowhead="empty",style="dashed"]
+    MediaFile -> IMediaFile [arrowhead="empty",style="dashed"]
+    MP3File -> MediaFile [arrowhead="empty",style="dashed"]
+    MKVFile -> MediaFile [arrowhead="empty",style="dashed"]
+    IFileOperation -> IMediaFile [arrowhead="open"]
+    IOrganizationalSchema -> IFileOperation [arrowhead="open"]
+    MediaSorter -> IOrganizationalSchema [arrowhead="open"]
+    OrganizationalSchema -> IOrganizationalSchema
+        [arrowhead="empty",style="dashed"]
+    IOrganizationalSchema -> IMediaFile [arrowhead="open"]        
+    MediaSorter -> OrganizationalSchema [arrowhead="open"]
+    MediaSorter -> MusicFileLocator [arrowhead="open"]
+    IFileOperation -> OperationalFailureException [arrowhead="open"]
+}
