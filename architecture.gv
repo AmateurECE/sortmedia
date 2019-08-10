@@ -7,15 +7,35 @@ digraph G {
         fontsize = 8
     ]
 
+    Argument [
+        label = "{enum Argument\l|"
+                + "+ INPUT\l"
+                + "+ OUTPUT\l"
+                + "}"]
+    ArgumentParser [
+        label = "{class ArgumentParser\l|"
+                + "+ ArgumentParser()\l"
+                + "+ verify()\l"
+                + "+ parse()\l"
+                + "+ enum Argument\l"
+                + "+ getArgument(Argument) : std::string\l"
+                + "}"]
     IFileLocator [
-        label = "{interface IFileLocator\l"
+        label = "{interface IFileLocator\l|"
+                + "+ listFilesInDirectory(const std::string& directory)"
+                + " : std::vector\<std::string\>\l"
+                + "+ recursivelyListFilesInDirectory(const std::string& "
+                + "directory) : std::vector\<std::string\>\l"
                 + "}"]
     MusicFileLocator [
-        label = "{class MusicFileLocator\l"
+        label = "{class MusicFileLocator\l|"
                 + "}"]
     MediaSorter [
         label = "{class MediaSorter\l|"
+                + "+ MediaSorter(const std::string& directory)\l"
                 + "+ run() : int\l"
+                + "- initialization() : void\l"
+                + "- organization() : void\l"
                 + "- static makeOrganizationalSchema() :"
                 + " IOrganizationalSchema\l"
                 + "- static makeFileLocator() : IFileLocator\l"
@@ -23,55 +43,136 @@ digraph G {
     IFileOperation [
         label = "{interface IFileOperation\l|"
                 + "+ IFileOperation(IMediaFile&)\l"
-                + "+ apply() : void\l"
-                + "+ revert() : void\l"
+                + "+ apply() const : void\l"
+                + "+ revert() const : void\l"
                 + "}"]
     FileMoveOperation [
-        label = "{class FileMoveOperation\l"
+        label = "{class FileMoveOperation\l|"
                 + "}"]
     FileRenameOperation [
-        label = "{class FileRenameOperation\l"
+        label = "{class FileRenameOperation\l|"
                 + "}"]
     DirectoryCreateOperation [
-        label = "{class DirectoryCreateOperation\l"
+        label = "{class DirectoryCreateOperation\l|"
+                + "}"]
+    DirectoryDeleteOperation [
+        label = "{class DirectoryDeleteOperation\l|"
+                + "}"]
+    MetaDiff [
+        label = "{struct MetadataChangeOperation::MetaDiff\l|"
+                + "+ (*setTag)(const std::string&) : void\l"
+                + "+ oldValue : const std::string\l"
+                + "+ newValue : const std::string\l"
                 + "}"]
     MetadataChangeOperation [
-        label = "{class MetadataChangeOperation\l"
+        label = "{class MetadataChangeOperation\l|"
+                + "+ struct MetaDiff\l"
+                + "+ MetaDataChangeOperation("
+                + "const std::list\<const MetaDiff\>&)\l"
+                + "}"]
+    FileDeleteOperation [
+        label = "{class FileDeleteOperation\l|"
+                + "}"]
+    NullOperation [
+        label = "{class NullOperation\l|"
                 + "}"]
     IMediaFile [
-        label = "{interface IMediaFile\l"
+        label = "{interface IMediaFile\l|"
+                + "+ rename(const std::string&)\l"
+                + "+ remove()\l"
+                + "}"]
+    MusicFile [
+        label = "{class MusicFile\l|"
+                + "+ getArtist() const : const std::string&\l"
+                + "+ setArtist(std::string) noexcept : bool\l"
+                + "+ getAlbum() const : const std::string&\l"
+                + "+ setAlbum(std::string) noexcept : bool\l"
+                + "}"]
+    MovieFile [
+        label = "{class MovieFile\l|"
+                + "+ getDirector() const : const std::string&\l"
+                + "+ setDirector(std::string) noexcept : bool\l"
                 + "}"]
     MediaFile [
-        label = "{class MediaFile\l"
+        label = "{class MediaFile\l|"
                 + "}"]
     MP3File [
-        label = "{class MP3File\l"
+        label = "{class MP3File\l|"
                 + "}"]
     MKVFile [
-        label = "{class MKVFile\l"
+        label = "{class MKVFile\l|"
                 + "}"]
     IOrganizationalSchema [
         label = "{interface IOrganizationalSchema\l|"
                 + "+ applyToFileByPath(std::string) : void\l"
                 + "- makeMediaFile(std::string) : IMediaFile\l"
-                + "- pure virtual determineOperations(IMediaFile&) :"
-                + " std::list\<IFileOperation\>\l"
-                + "- pure virtual createFileMoveOperation(IMediaFile&) :"
-                + " FileMoveOperation\l"
-                + "- pure virtual createFileRenameOperation(IMediaFile&) :"
-                + " FileRenameOperation\l"
-                + "- pure virtual createDirectoryCreateOperation(IMediaFile&)"
-                + " : DirectoryCreateOperation\l"
-                + "- pure virtual createMetadataChangeOperation(IMediaFile&) :"
-                + " MetadataChangeOperation\l"
+                + "- determineOperations(IMediaFile&)"
+                + " : std::list\<std::unique_ptr\<const IFileOperation\>\>\l"
+                + "- getFileMoveOperation(IMediaFile&)"
+                + " : IFileOperation\l"
+                + "- getFileRenameOperation(IMediaFile&)"
+                + " : IFileOperation\l"
+                + "- getDirectoryCreateOperation(IMediaFile&)"
+                + " : IFileOperation\l"
+                + "- getMetadataChangeOperation(IMediaFile&)"
+                + " : IFileOperation\l"
+                + "- getFileDeleteOperation(IMediaFile&)"
+                + " : IFileOperation\l"
                 + "}"]
     OrganizationalSchema [
-        label = "{class OrganizationalSchema\l"
+        label = "{class OrganizationalSchema\l|"
+                + "+ final override applyToFileByPath(std::string) : void\l"
+                + "- final override makeMediaFile(std::string) : IMediaFile\l"
+                + "- final override determineOperations(IMediaFile&)"
+                + " : std::list\<std::unique_ptr\<const IFileOperation\>\>\l"
+                + "- pure virtual getFileMoveOperation(IMediaFile&)"
+                + " : IFileOperation\l"
+                + "- pure virtual getFileRenameOperation(IMediaFile&)"
+                + " : IFileOperation\l"
+                + "- pure virtual getDirectoryCreateOperation(IMediaFile&)"
+                + " : IFileOperation\l"
+                + "- pure virtual getMetadataChangeOperation(IMediaFile&)"
+                + " : IFileOperation\l"
+                + "- pure virtual getFileDeleteOperation(IMediaFile&)"
+                + " : IFileOperation\l"
                 + "}"]
     OperationalFailureException [
         label = "{class OperationalFailureException\l|"
-                + "+ what() const : const char*\l"
+                + "+ what() const noexcept : const char*\l"
                 + "}"]
+    LogLevel [
+        label = "{enum Logger::LogLevel\l|"
+                + "+ INFO\l"
+                + "+ WARNING\l"
+                + "+ ERROR\l"
+                + "}"]
+    Logger [
+        label = "{class Logger\l|"
+                + "+ enum LogLevel\l"
+                + "+ Logger() = delete\l"
+                + "+ Logger(LogLevel)\l"
+                + "+ appendNext(std::unique_ptr\<Logger\>)"
+                + " : Logger&\l"
+                + "+ message(const std::string&, LogLevel) : void\l|"
+                + "- loggers : std::list\<std::unique_ptr\<Logger\>\>"
+                + "}"]
+    IMusicTagEditorFacade [
+        label = "{interface IMusicTagEditorFacade\l|"
+                + "}"]
+    MusicTagEditorFacade [
+        label = "{class MusicTagEditorFacade\l|"
+                + "}"]
+    IMovieTagEditorFacade [
+        label = "{interface IMovieTagEditorFacade\l|"
+                + "}"]
+    MovieTagEditorFacade [
+        label = "{class MovieTagEditorFacade\l|"
+                + "}"]
+
+    subgraph TagLib {
+        label = "namespace TagLib"
+        color="lightgrey"
+    }
 
     IFileLocator -> MediaSorter [arrowhead="diamond"]
     MusicFileLocator -> IFileLocator [arrowhead="empty",style="dashed"]
@@ -81,16 +182,34 @@ digraph G {
         [arrowhead="empty",style="dashed"]
     MetadataChangeOperation -> IFileOperation
         [arrowhead="empty",style="dashed"]
+    MetaDiff -> MetadataChangeOperation [arrowhead="diamond"]
     MediaFile -> IMediaFile [arrowhead="empty",style="dashed"]
-    MP3File -> MediaFile [arrowhead="empty",style="dashed"]
-    MKVFile -> MediaFile [arrowhead="empty",style="dashed"]
+    MP3File -> MusicFile [arrowhead="empty",style="dashed"]
+    MKVFile -> MovieFile [arrowhead="empty",style="dashed"]
+    MusicFile -> MediaFile [arrowhead="empty",style="dashed"]
+    MovieFile -> MediaFile [arrowhead="empty",style="dashed"]
     IFileOperation -> IMediaFile [arrowhead="open"]
     IOrganizationalSchema -> IFileOperation [arrowhead="open"]
-    MediaSorter -> IOrganizationalSchema [arrowhead="open"]
+    IOrganizationalSchema -> MediaSorter [arrowhead="diamond"]
     OrganizationalSchema -> IOrganizationalSchema
         [arrowhead="empty",style="dashed"]
     IOrganizationalSchema -> IMediaFile [arrowhead="open"]        
     MediaSorter -> OrganizationalSchema [arrowhead="open"]
     MediaSorter -> MusicFileLocator [arrowhead="open"]
     IFileOperation -> OperationalFailureException [arrowhead="open"]
+    FileDeleteOperation -> IFileOperation [arrowhead="empty",style="dashed"]
+    NullOperation -> IFileOperation [arrowhead="empty",style="dashed"]
+    Logger -> MediaSorter [arrowhead="diamond"]
+    LogLevel -> Logger [arrowhead="open"]
+    MediaSorter -> ArgumentParser [arrowhead="open"]
+    MediaSorter -> Argument [arrowhead="open"]
+    ArgumentParser -> Argument [arrowhead="open"]
+    MP3File -> IMusicTagEditorFacade [arrowhead="open"]
+    MKVFile -> IMovieTagEditorFacade [arrowhead="open"]
+    MusicTagEditorFacade -> IMusicTagEditorFacade
+        [arrowhead="empty",style="dashed"]
+    MovieTagEditorFacade -> IMovieTagEditorFacade
+        [arrowhead="empty",style="dashed"]
+    DirectoryDeleteOperation -> IFileOperation
+        [arrowhead="empty",style="dashed"]
 }

@@ -7,7 +7,7 @@
 %
 % CREATED:          05/15/2019
 %
-% LAST EDITED:      05/15/2019
+% LAST EDITED:      08/08/2019
 %%%
 
 \LoadClass{article}
@@ -42,6 +42,7 @@
 \fancyhf{}
 \rhead{Ethan D. Twardy}
 \lhead{SortMedia Design Document}
+\cfoot{\thepage}
 
 \newcommand{\expnumber}[2]{{#1}\mathrm{e}{#2}}
 
