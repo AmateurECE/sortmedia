@@ -52,9 +52,13 @@ performing new or different functions per the axes of change outlined above,
 the command line interface will also allow expansion to expose greater amounts
 of configuration to the user. This will be accomplished in part via the
 abundance of Factor Pattern methods in the design. These methods may be moved
-to their own class, which can be probed and extended to determine its
+to their own class, which can each then be probed and extended to determine its
 functionality during the verification of runtime arguments, and also to provide
-helpful messages to the user.
+helpful messages to the user. There will also be a high degree of segregation
+between the classes whose responsibility includes the command line interface
+itself and those that use the arguments provided thereby, achieved using the
+methods explained previously and creative use of the Dependency Injection
+idiom.
 
 \section{Software Requirements}
 This section outlines the requirements of the software. From this point

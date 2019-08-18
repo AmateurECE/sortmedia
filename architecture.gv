@@ -15,8 +15,8 @@ digraph G {
     ArgumentParser [
         label = "{class ArgumentParser\l|"
                 + "+ ArgumentParser()\l"
-                + "+ verify()\l"
-                + "+ parse()\l"
+                + "+ verify() : void\l"
+                + "+ parse() : void\l"
                 + "+ enum Argument\l"
                 + "+ getArgument(Argument) : std::string\l"
                 + "}"]
@@ -32,31 +32,35 @@ digraph G {
                 + "}"]
     MediaSorter [
         label = "{class MediaSorter\l|"
-                + "+ MediaSorter(const std::string& directory)\l"
-                + "+ run() : int\l"
+                + "+ MediaSorter(const std::string& directory,"
+                + " const IOrganizationalSchema& schema,"
+                + " const IFileLocator& locator)\l"
+                + "+ organize() : int\l"
                 + "- initialization() : void\l"
                 + "- organization() : void\l"
-                + "- static makeOrganizationalSchema() :"
-                + " IOrganizationalSchema\l"
-                + "- static makeFileLocator() : IFileLocator\l"
                 + "}"]
     IFileOperation [
         label = "{interface IFileOperation\l|"
-                + "+ IFileOperation(IMediaFile&)\l"
                 + "+ apply() const : void\l"
                 + "+ revert() const : void\l"
                 + "}"]
     FileMoveOperation [
         label = "{class FileMoveOperation\l|"
+                + "+ FileMoveOperation(ILibraryFile&,"
+                + " const std::string& newLocation)\l"
                 + "}"]
     FileRenameOperation [
         label = "{class FileRenameOperation\l|"
+                + "+ FileRenameOperation(ILibraryFile&,"
+                + " const std::string& newName)\l"
                 + "}"]
     DirectoryCreateOperation [
         label = "{class DirectoryCreateOperation\l|"
+                + "+ DirectoryCreateOperation(const std::string& path)\l"
                 + "}"]
     DirectoryDeleteOperation [
         label = "{class DirectoryDeleteOperation\l|"
+                + "+ DirectoryDeleteOperation(const std::string& path)\l"
                 + "}"]
     MetaDiff [
         label = "{struct MetadataChangeOperation::MetaDiff\l|"
@@ -68,36 +72,43 @@ digraph G {
         label = "{class MetadataChangeOperation\l|"
                 + "+ struct MetaDiff\l"
                 + "+ MetaDataChangeOperation("
-                + "const std::list\<const MetaDiff\>&)\l"
+                + "ILibraryFile&, const std::list\<const MetaDiff\>&)\l"
                 + "}"]
     FileDeleteOperation [
         label = "{class FileDeleteOperation\l|"
+                + "+ FileDeleteOperation(ILibraryFile&)\l"
                 + "}"]
-    NullOperation [
-        label = "{class NullOperation\l|"
-                + "}"]
-    IMediaFile [
-        label = "{interface IMediaFile\l|"
+    ILibraryFile [
+        label = "{interface ILibraryFile\l|"
                 + "+ rename(const std::string&)\l"
                 + "+ remove()\l"
                 + "}"]
     MusicFile [
         label = "{class MusicFile\l|"
                 + "+ getArtist() const : const std::string&\l"
-                + "+ setArtist(std::string) noexcept : bool\l"
+                + "+ setArtist(std::string) : bool\l"
                 + "+ getAlbum() const : const std::string&\l"
-                + "+ setAlbum(std::string) noexcept : bool\l"
+                + "+ setAlbum(std::string) : bool\l"
                 + "}"]
     MovieFile [
         label = "{class MovieFile\l|"
                 + "+ getDirector() const : const std::string&\l"
-                + "+ setDirector(std::string) noexcept : bool\l"
+                + "+ setDirector(std::string) : bool\l"
                 + "}"]
-    MediaFile [
-        label = "{class MediaFile\l|"
+    LibraryFile [
+        label = "{class LibraryFile\l|"
                 + "}"]
     MP3File [
         label = "{class MP3File\l|"
+                + "}"]
+    M4AFile [
+        label = "{class M4AFile\l|"
+                + "}"]
+    FLACFile [
+        label = "{class FLACFile\l|"
+                + "}"]
+    MP4File [
+        label = "{class MP4File\l|"
                 + "}"]
     MKVFile [
         label = "{class MKVFile\l|"
@@ -105,75 +116,66 @@ digraph G {
     IOrganizationalSchema [
         label = "{interface IOrganizationalSchema\l|"
                 + "+ applyToFileByPath(std::string) : void\l"
-                + "- makeMediaFile(std::string) : IMediaFile\l"
-                + "- determineOperations(IMediaFile&)"
-                + " : std::list\<std::unique_ptr\<const IFileOperation\>\>\l"
-                + "- getFileMoveOperation(IMediaFile&)"
-                + " : IFileOperation\l"
-                + "- getFileRenameOperation(IMediaFile&)"
-                + " : IFileOperation\l"
-                + "- getDirectoryCreateOperation(IMediaFile&)"
-                + " : IFileOperation\l"
-                + "- getMetadataChangeOperation(IMediaFile&)"
-                + " : IFileOperation\l"
-                + "- getFileDeleteOperation(IMediaFile&)"
-                + " : IFileOperation\l"
+                + "- makeOrganizer(std::string) : IOrganizationalPolicy\l"
                 + "}"]
     OrganizationalSchema [
         label = "{class OrganizationalSchema\l|"
                 + "+ final override applyToFileByPath(std::string) : void\l"
-                + "- final override makeMediaFile(std::string) : IMediaFile\l"
-                + "- final override determineOperations(IMediaFile&)"
-                + " : std::list\<std::unique_ptr\<const IFileOperation\>\>\l"
-                + "- pure virtual getFileMoveOperation(IMediaFile&)"
-                + " : IFileOperation\l"
-                + "- pure virtual getFileRenameOperation(IMediaFile&)"
-                + " : IFileOperation\l"
-                + "- pure virtual getDirectoryCreateOperation(IMediaFile&)"
-                + " : IFileOperation\l"
-                + "- pure virtual getMetadataChangeOperation(IMediaFile&)"
-                + " : IFileOperation\l"
-                + "- pure virtual getFileDeleteOperation(IMediaFile&)"
-                + " : IFileOperation\l"
+                + "- pure virtual std::unique_ptr\<IOrganizationalPolicy\>"
+                + " makeOrganizer(std::string) : IOrganizationalPolicy\l"
+                + "}"]
+    PlexMusicOrganizationalSchema [
+        label = "{class PlexMusicOrganizationalSchema\l|"
+                + "}"]
+    PlexMovieOrganizationalSchema [
+        label = "{class PlexMovieOrganizationalSchema\l|"
+                + "}"]
+    IOrganizationalPolicy [
+        label = "{interface IOrganizationalPolicy\l|"
+                + "+ then(IOrganizationalPolicy) : IOrganizationalPolicy&\l"
+                + "+ ensure() : std::unique_ptr\<IFileOperation\>\l"
+                + "}"]
+    OrganizationalPolicy [
+        label = "{class OrganizationalPolicy\l|"
+                + "}"]
+    DefaultMusicOrganizationalPolicy [
+        label = "{class DefaultMusicOrganizationalPolicy\l|"
                 + "}"]
     OperationalFailureException [
         label = "{class OperationalFailureException\l|"
                 + "+ what() const noexcept : const char*\l"
                 + "}"]
-    LogLevel [
-        label = "{enum Logger::LogLevel\l|"
-                + "+ INFO\l"
-                + "+ WARNING\l"
-                + "+ ERROR\l"
-                + "}"]
-    Logger [
-        label = "{class Logger\l|"
-                + "+ enum LogLevel\l"
-                + "+ Logger() = delete\l"
-                + "+ Logger(LogLevel)\l"
-                + "+ appendNext(std::unique_ptr\<Logger\>)"
-                + " : Logger&\l"
-                + "+ message(const std::string&, LogLevel) : void\l|"
-                + "- loggers : std::list\<std::unique_ptr\<Logger\>\>"
-                + "}"]
     IMusicTagEditorFacade [
         label = "{interface IMusicTagEditorFacade\l|"
                 + "}"]
-    MusicTagEditorFacade [
-        label = "{class MusicTagEditorFacade\l|"
+    MusicTagEditor [
+        label = "{class MusicTagEditor\l|"
                 + "}"]
     IMovieTagEditorFacade [
         label = "{interface IMovieTagEditorFacade\l|"
+                + "(Interface TBD)\l"
                 + "}"]
     MovieTagEditorFacade [
         label = "{class MovieTagEditorFacade\l|"
                 + "}"]
+    ThreeLevelMusicFileOrganizationalPolicy [
+        label = "{class ThreeLevelMusicFileOrganizationalPolicy\l|"
+                + "}"]
+
+    subgraph clusterCrossCutting {
+        label = "namespace CrossCutting"
+        color = "lightgrey"
+        Logging [
+            label = "Logging Subsystem"
+        ]
+    }
 
     subgraph TagLib {
         label = "namespace TagLib"
         color="lightgrey"
     }
 
+    MediaSorter -> Logging [arrowhead="open"]
     IFileLocator -> MediaSorter [arrowhead="diamond"]
     MusicFileLocator -> IFileLocator [arrowhead="empty",style="dashed"]
     FileMoveOperation -> IFileOperation [arrowhead="empty",style="dashed"]
@@ -183,33 +185,48 @@ digraph G {
     MetadataChangeOperation -> IFileOperation
         [arrowhead="empty",style="dashed"]
     MetaDiff -> MetadataChangeOperation [arrowhead="diamond"]
-    MediaFile -> IMediaFile [arrowhead="empty",style="dashed"]
+    LibraryFile -> ILibraryFile [arrowhead="empty",style="dashed"]
     MP3File -> MusicFile [arrowhead="empty",style="dashed"]
     MKVFile -> MovieFile [arrowhead="empty",style="dashed"]
-    MusicFile -> MediaFile [arrowhead="empty",style="dashed"]
-    MovieFile -> MediaFile [arrowhead="empty",style="dashed"]
-    IFileOperation -> IMediaFile [arrowhead="open"]
+    MusicFile -> LibraryFile [arrowhead="empty",style="dashed"]
+    MovieFile -> LibraryFile [arrowhead="empty",style="dashed"]
+    IFileOperation -> ILibraryFile [arrowhead="open"]
     IOrganizationalSchema -> IFileOperation [arrowhead="open"]
     IOrganizationalSchema -> MediaSorter [arrowhead="diamond"]
     OrganizationalSchema -> IOrganizationalSchema
         [arrowhead="empty",style="dashed"]
-    IOrganizationalSchema -> IMediaFile [arrowhead="open"]        
-    MediaSorter -> OrganizationalSchema [arrowhead="open"]
+    IOrganizationalSchema -> ILibraryFile [arrowhead="open"]        
+    MediaSorter -> PlexMusicOrganizationalSchema
+        [arrowhead="open",style="dashed",label="&#x300A;instantiates&#x300B;"]
+    MediaSorter -> PlexMovieOrganizationalSchema
+        [arrowhead="open",style="dashed",label="&#x300A;instantiates&#x300B;"]
     MediaSorter -> MusicFileLocator [arrowhead="open"]
     IFileOperation -> OperationalFailureException [arrowhead="open"]
     FileDeleteOperation -> IFileOperation [arrowhead="empty",style="dashed"]
-    NullOperation -> IFileOperation [arrowhead="empty",style="dashed"]
-    Logger -> MediaSorter [arrowhead="diamond"]
-    LogLevel -> Logger [arrowhead="open"]
     MediaSorter -> ArgumentParser [arrowhead="open"]
     MediaSorter -> Argument [arrowhead="open"]
     ArgumentParser -> Argument [arrowhead="open"]
     MP3File -> IMusicTagEditorFacade [arrowhead="open"]
     MKVFile -> IMovieTagEditorFacade [arrowhead="open"]
-    MusicTagEditorFacade -> IMusicTagEditorFacade
+    MusicTagEditor -> IMusicTagEditorFacade
         [arrowhead="empty",style="dashed"]
     MovieTagEditorFacade -> IMovieTagEditorFacade
         [arrowhead="empty",style="dashed"]
     DirectoryDeleteOperation -> IFileOperation
         [arrowhead="empty",style="dashed"]
+    M4AFile -> MusicFile [arrowhead="empty",style="dashed"]
+    M4AFile -> IMusicTagEditorFacade [arrowhead="open"]
+    FLACFile -> MusicFile [arrowhead="empty",style="dashed"]
+    FLACFile -> IMusicTagEditorFacade [arrowhead="open"]
+    MP4File -> MovieFile [arrowhead="empty",style="dashed"]
+    MP4File -> IMovieTagEditorFacade [arrowhead="open"]
+    IOrganizationalSchema -> IOrganizationalPolicy [arrowhead="open"]
+    OrganizationalPolicy -> IOrganizationalPolicy
+        [arrowhead="empty",style="dashed"]
+    DefaultMusicOrganizationalPolicy -> OrganizationalPolicy
+        [arrowhead="empty",style="dashed"]
+    PlexMusicOrganizationalSchema -> OrganizationalSchema
+        [arrowhead="empty",style="dashed"]
+    PlexMusicOrganizationalSchema -> ThreeLevelMusicFileOrganizationalPolicy
+        [arrowhead="open",style="dashed",label="&#x300A;instantiates&#x300B;"]
 }

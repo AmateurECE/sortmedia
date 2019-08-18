@@ -1,0 +1,68 @@
+digraph G {
+    label = "namespace CrossCutting::Logging::"        
+    node [
+        shape = "record"
+        fontsize = 8
+    ]
+    edge [
+        fontsize = 8
+    ]
+
+    Application [
+        label = "{class Application\l|"
+                + "+ main() : int\l"
+                + "}"]
+    ILogger [
+        label = "{interface ILogger\l|"
+                + "+ log(const std::string& message, LogLevel level) : void\l"
+                + "}"]
+    LogLevel [
+        label = "{enum LogLevel\l|"
+                + "+ INFO\l"
+                + "+ WARNING\l"
+                + "+ ERROR\l"
+                + "}"]
+    NullLogger [
+        label = "{class NullLogger\l|"
+                + "+ NullLogger() = delete\l"
+                + "+ NullLogger(const NullLogger&) = delete\l"
+                + "+ const NullLogger& operator=(const NullLogger&) = delete\l"
+                + "|"
+                + "- NullLogger(std::ostream&,"
+                + " std::initializer_list\<LogLevel\>)\l"
+                + "friend class LoggerFactory"
+                + "}"]
+    Logger [
+        label = "{class Logger\l|"
+                + "+ Logger() = delete\l"
+                + "+ Logger(const Logger&) = delete\l"
+                + "+ const Logger& operator=(const Logger&) = delete\l"
+                + "|"
+                + "- Logger(std::ostream&,"
+                + " std::initializer_list\<LogLevel\>)\l"
+                + "friend class LoggerFactory"
+                + "}"]
+    LoggerConfiguration [
+        label = "{class LoggerConfiguration\l|"
+                + "+ appendLogger(std::ostream&,"
+                + " std::initializer_list\<LogLevel\>)"
+                + " : LoggerConfiguration&\l"
+                + "}"]
+    LoggerFactory [
+        label = "{class LoggerFactory\l|"
+                + "+ static makeLogger() : std::shared_ptr\<ILogger\>\l"
+                + "friend class LoggerConfiguration\l"
+                + "- setLogger(std::shared_ptr\<ILogger\>) : void\l"
+                + "- static logChain : std::shared_ptr\<ILogger\>\l"
+                + "}"]
+
+    Application -> LoggerConfiguration [arrowhead="open"]
+    Application -> LoggerFactory [arrowhead="open"]
+    Application -> ILogger [arrowhead="open"]
+    ILogger -> LoggerFactory [arrowhead="diamond"]
+    Logger -> ILogger [arrowhead="empty",style="dashed"]
+    LoggerConfiguration -> LoggerFactory [arrowhead="open"]
+    ILogger -> LogLevel [arrowhead="open"]
+    LoggerConfiguration -> LogLevel [arrowhead="open"]
+    NullLogger -> ILogger [arrowhead="empty",style="dashed"]
+}
