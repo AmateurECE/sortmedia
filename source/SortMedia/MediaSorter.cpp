@@ -13,8 +13,10 @@
 
 #include <SortMedia/MediaSorter.h>
 
-SortMedia::MediaSorter::MediaSorter(Interfaces::ILogger& logger)
-  : logger(logger)
+SortMedia::MediaSorter::MediaSorter(Interfaces::ILogger& logger,
+                                    Interfaces::IOrganizationalSchema& schema,
+                                    Interfaces::IFileLocator& locator)
+  : logger(logger), schema(schema), locator(locator)
 {
 }
 

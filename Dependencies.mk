@@ -10,6 +10,8 @@
 # LAST EDITED:	    08/27/2019
 ###
 
+SortMedia-obj += source/SortMedia/Factories/OrganizationalSchemaFactory.o
+SortMedia-obj += source/SortMedia/Factories/FileLocatorFactory.o
 SortMedia-obj += source/SortMedia/Logging/StreamLogger.o
 SortMedia-obj += source/SortMedia/Logging/NullLogger.o
 SortMedia-obj += source/SortMedia/MediaSorter.o

@@ -23,12 +23,16 @@
 class SortMedia::MediaSorter
 {
 public:
-  MediaSorter(Interfaces::ILogger& logger);
+  MediaSorter(Interfaces::ILogger& logger,
+              Interfaces::IOrganizationalSchema& schema,
+              Interfaces::IFileLocator& locator);
   ~MediaSorter();
   int sortDirectory(const std::string& directory);
 
 private:
   Interfaces::ILogger& logger;
+  Interfaces::IOrganizationalSchema& schema;
+  Interfaces::IFileLocator& locator;
 };
 
 #endif // __ET_MEDIASORTER__

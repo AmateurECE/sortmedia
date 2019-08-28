@@ -8,7 +8,7 @@
 #
 # CREATED:	    02/03/2019
 #
-# LAST EDITED:	    08/18/2019
+# LAST EDITED:	    08/27/2019
 ###
 
 flags=-shell-escape
@@ -22,7 +22,7 @@ else
     CXX=$(shell xcode-select -p)/usr/bin/gcc
 endif
 
-CXXFLAGS = -g -Wall -O0 -I ./include --std=c++17
+CXXFLAGS = -g -Wall -Wextra -O0 -I ./include --std=c++17
 LDFLAGS  = -lc++
 
 include Dependencies.mk
