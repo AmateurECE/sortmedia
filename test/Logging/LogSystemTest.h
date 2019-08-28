@@ -7,15 +7,13 @@
 //
 // CREATED:         08/18/2019
 //
-// LAST EDITED:     08/18/2019
+// LAST EDITED:     08/27/2019
 ////
 
 #ifndef __ET_LOGSYSTEMTEST__
 #define __ET_LOGSYSTEMTEST__
 
 #include "gtest/gtest.h"
-
-#include <CrossCutting/Logging/LoggerConfiguration.h>
 
 class LogSystemTest : public ::testing::Test
 {

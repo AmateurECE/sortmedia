@@ -8,21 +8,23 @@
 //
 // CREATED:         08/15/2019
 //
-// LAST EDITED:     08/15/2019
+// LAST EDITED:     08/27/2019
 ////
 
-#include <MediaSorter.h>
+#include <SortMedia/MediaSorter.h>
 
-MediaSorter::MediaSorter()
+SortMedia::MediaSorter::MediaSorter(Interfaces::ILogger& logger)
+  : logger(logger)
 {
 }
 
-MediaSorter::~MediaSorter()
+SortMedia::MediaSorter::~MediaSorter()
 {
 }
 
-int MediaSorter::run(int argc, char** argv)
+int SortMedia::MediaSorter::sortDirectory(const std::string& directory)
 {
+  logger.log("Sorting " + directory, Enums::LogLevel::INFO);
   return 0;
 }
 

@@ -7,15 +7,25 @@
 //
 // CREATED:         08/15/2019
 //
-// LAST EDITED:     08/15/2019
+// LAST EDITED:     08/27/2019
 ////
 
-#include <MediaSorter.h>
+#include <iostream>
+#include <memory>
+
+#include <SortMedia/MediaSorter.h>
+#include <SortMedia/Logging/StreamLogger.h>
 
 int main(int argc, char** argv)
 {
-  MediaSorter sorter;
-  return sorter.run(argc, argv);
+  using LogLevel = SortMedia::Enums::LogLevel;
+  auto allLevels = {LogLevel::INFO, LogLevel::WARNING, LogLevel::ERROR};
+
+  std::unique_ptr<SortMedia::Interfaces::ILogger> logger =
+    std::make_unique<SortMedia::Logging::StreamLogger>(std::cout, allLevels);
+
+  SortMedia::MediaSorter sorter{*logger};
+  sorter.sortDirectory("./Music");
 }
 
 ///////////////////////////////////////////////////////////////////////////////

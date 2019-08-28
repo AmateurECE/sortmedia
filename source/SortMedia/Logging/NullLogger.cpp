@@ -7,17 +7,17 @@
 //
 // CREATED:         08/18/2019
 //
-// LAST EDITED:     08/18/2019
+// LAST EDITED:     08/27/2019
 ////
 
-#include <CrossCutting/Logging/NullLogger.h>
+#include <SortMedia/Logging/NullLogger.h>
 
-CrossCutting::Logging::NullLogger::NullLogger()
+SortMedia::Logging::NullLogger::NullLogger()
 {
 }
 
-void CrossCutting::Logging::NullLogger
-::log(const std::string& message, LogLevel logLevel)
+void SortMedia::Logging::NullLogger
+::log(const std::string& message, Enums::LogLevel logLevel)
 {
 }
 

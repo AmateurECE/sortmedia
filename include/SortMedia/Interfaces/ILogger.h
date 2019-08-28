@@ -7,7 +7,7 @@
 //
 // CREATED:         08/17/2019
 //
-// LAST EDITED:     08/18/2019
+// LAST EDITED:     08/27/2019
 ////
 
 #ifndef __ET_ILOGGER__
@@ -15,17 +15,15 @@
 
 #include <string>
 
-enum LogLevel
-{
-  INFO,
-  WARNING,
-  ERROR
-};
+#include <namespaces/Interfaces.h>
+#include <namespaces/Enums.h>
 
-class ILogger
+class SortMedia::Interfaces::ILogger
 {
 public:
-  virtual void log(const std::string& message, LogLevel level) = 0;
+  virtual ~ILogger() {};
+  virtual void log(const std::string& message,
+                   SortMedia::Enums::LogLevel level) = 0;
 };
 
 #endif // __ET_ILOGGER__

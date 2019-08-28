@@ -7,13 +7,13 @@
 //
 // CREATED:         08/17/2019
 //
-// LAST EDITED:     08/18/2019
+// LAST EDITED:     08/27/2019
 ////
 
 #include "gtest/gtest.h"
 #include "LogSystemTest.h"
 
-#include <CrossCutting/Logging/LoggerFactory.h>
+#include <SortMedia/Logging/StreamLogger.h>
 
 // Cases to test:
 // OneInfo, OneWarning, OneError: Append only one logger of each level
@@ -25,16 +25,15 @@
 // InvalidLog: Reconfigure the logger and attempt to log to an invalid logger.
 // NoListener: Log a message that does not have a corresponding logger.
 
+using SortMedia::Logging::StreamLogger;
+using SortMedia::Enums::LogLevel;
+
 TEST_F(LogSystemTest, OneInfo)
 {
-  CrossCutting::Logging::LoggerConfiguration config;
   std::ostringstream infoStream;
+  StreamLogger logger{infoStream, {LogLevel::INFO}};
 
-  config.appendLogger(infoStream, {LogLevel::INFO});
-
-  std::shared_ptr<ILogger> log = \
-    CrossCutting::Logging::LoggerFactory::makeLogger();
-  log->log("Testing INFO", LogLevel::INFO);
+  logger.log("Testing INFO", LogLevel::INFO);
 
   EXPECT_EQ(infoStream.str(), "INFO: Testing INFO\n");
 }

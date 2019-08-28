@@ -8,28 +8,24 @@
 //
 // CREATED:         08/18/2019
 //
-// LAST EDITED:     08/18/2019
+// LAST EDITED:     08/27/2019
 ////
 
 #ifndef __ET_NULLLOGGER__
 #define __ET_NULLLOGGER__
 
-#include <interfaces/ILogger.h>
-#include <namespaces/CrossCutting.h>
+#include <namespaces/SortMedia.h>
+#include <SortMedia/Interfaces/ILogger.h>
 
-class CrossCutting::Logging::NullLogger : public ILogger
+class SortMedia::Logging::NullLogger : public SortMedia::Interfaces::ILogger
 {
 public:
+  NullLogger();
   virtual ~NullLogger() = default;
   NullLogger(const NullLogger&) = delete;
   const NullLogger& operator=(const NullLogger&) = delete;
-  virtual void log(const std::string& message, LogLevel logLevel)
+  virtual void log(const std::string& message, Enums::LogLevel logLevel)
     final override;
-
-private:
-  NullLogger();
-
-  friend LoggerFactory;
 };
 
 #endif // __ET_NULLLOGGER__

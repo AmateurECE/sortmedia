@@ -7,7 +7,7 @@
 %
 % CREATED:          05/15/2019
 %
-% LAST EDITED:      08/09/2019
+% LAST EDITED:      08/27/2019
 %%%
 
 \documentclass{designdoc}
@@ -59,6 +59,24 @@ between the classes whose responsibility includes the command line interface
 itself and those that use the arguments provided thereby, achieved using the
 methods explained previously and creative use of the Dependency Injection
 idiom.
+
+\section{Isolation of Cross-Cutting Concerns}
+Cross-cutting concerns are a major threat to the robustness and maintainability
+of Object-Oriented designs. This application has two major concerns that meet
+these requirements:
+\begin{enumerate}
+\item Logging
+\item Configuration
+\end{enumerate}
+Logging is fairly insulated from change by its nature, but Configuration is
+listed as part of the Axes of Change, so special care must be taken to prevent
+\textit{Rigidity} as a result of change in the Configuration class(es).
+
+To do this, the application will take on a ``flat'' hierarchy. Main will be
+responsible for constructing (either directly or via a construction pattern,
+e.g. Factory) the dependencies used by classes in the program. Furthermore,
+both of these responsibilities will be restricted to particular classes. See
+the architecture document for more information.
 
 \section{Software Requirements}
 This section outlines the requirements of the software. From this point

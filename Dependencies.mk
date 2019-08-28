@@ -7,13 +7,12 @@
 #
 # CREATED:	    08/15/2019
 #
-# LAST EDITED:	    08/18/2019
+# LAST EDITED:	    08/27/2019
 ###
 
-SortMedia-obj += source/CrossCutting/Logging/LoggerConfiguration.o
-SortMedia-obj += source/CrossCutting/Logging/LoggerFactory.o
-SortMedia-obj += source/CrossCutting/Logging/NullLogger.o
-SortMedia-obj += source/MediaSorter.o
+SortMedia-obj += source/SortMedia/Logging/StreamLogger.o
+SortMedia-obj += source/SortMedia/Logging/NullLogger.o
+SortMedia-obj += source/SortMedia/MediaSorter.o
 
 Test-objs += test/TestMain.o
 Test-objs += test/Logging/LogSystemTest.o
