@@ -18,6 +18,11 @@ namespace SortMedia
   namespace Interfaces
   {
     class ILogger;
+    class IFileOperation;
+    class IFileLocator;
+    class IOrganizationalSchema;
+    class IOrganizationalPolicy;
+    class IFile;
   };
 };
 

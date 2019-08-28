@@ -7,13 +7,16 @@
 //
 // CREATED:         08/07/2019
 //
-// LAST EDITED:     08/07/2019
+// LAST EDITED:     08/27/2019
 ////
 
 #ifndef __ET_IFILEOPERATION__
 #define __ET_IFILEOPERATION__
 
-class IFileOperation {
+#include <namespaces/Interfaces.h>
+
+class SortMedia::Interfaces::IFileOperation
+{
 public:
   virtual ~IFileOperation() {};
 };

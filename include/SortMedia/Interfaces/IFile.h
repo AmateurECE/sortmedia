@@ -1,26 +1,26 @@
 ///////////////////////////////////////////////////////////////////////////////
-// NAME:            IFileLocator.h
+// NAME:            IFile.h
 //
 // AUTHOR:          Ethan D. Twardy <edtwardy@mtu.edu>
 //
-// DESCRIPTION:     An interface for FileLocator classes.
+// DESCRIPTION:     Interface for interacting with Files.
 //
-// CREATED:         08/07/2019
+// CREATED:         08/27/2019
 //
 // LAST EDITED:     08/27/2019
 ////
 
-#ifndef __ET_IFILELOCATOR__
-#define __ET_IFILELOCATOR__
+#ifndef __ET_IFILE__
+#define __ET_IFILE__
 
 #include <namespaces/Interfaces.h>
 
-class SortMedia::Interfaces::IFileLocator
+class SortMedia::Interfaces::IFile
 {
 public:
-  virtual ~IFileLocator() {};
+  virtual ~IFIle() {};
 };
 
-#endif // __ET_IFILELOCATOR__
+#endif // __ET_IFILE__
 
 ///////////////////////////////////////////////////////////////////////////////
