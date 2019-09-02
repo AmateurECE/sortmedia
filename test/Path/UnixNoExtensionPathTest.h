@@ -7,7 +7,7 @@
 //
 // CREATED:         09/01/2019
 //
-// LAST EDITED:     09/01/2019
+// LAST EDITED:     09/02/2019
 ////
 
 #ifndef __ET_UNIXNOEXTENSIONPATHTEST__
@@ -19,8 +19,6 @@ class UnixNoExtensionPathTest : public ::testing::Test
 {
 protected:
   UnixNoExtensionPathTest();
-  void SetUp() override;
-  void TearDown() override;
 
   const std::string extension;
   const std::string filename;

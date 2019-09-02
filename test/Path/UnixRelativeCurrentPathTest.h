@@ -7,7 +7,7 @@
 //
 // CREATED:         09/01/2019
 //
-// LAST EDITED:     09/01/2019
+// LAST EDITED:     09/02/2019
 ////
 
 #ifndef __ET_UNIXRELATIVECURRENTPATHTEST__
@@ -19,8 +19,6 @@ class UnixRelativeCurrentPathTest : public ::testing::Test
 {
 protected:
   UnixRelativeCurrentPathTest();
-  void SetUp() override;
-  void TearDown() override;
 
   const std::string extension;
   const std::string filename;

@@ -7,7 +7,7 @@
 //
 // CREATED:         09/01/2019
 //
-// LAST EDITED:     09/01/2019
+// LAST EDITED:     09/02/2019
 ////
 
 #include "gtest/gtest.h"
@@ -15,18 +15,9 @@
 
 UnixNoExtensionPathTest::UnixNoExtensionPathTest()
   : filename{"test"},
-    actualPath{"/this/is/a/" + filename}
+    actualPath{"/this/is/a/" + filename},
+    path{SortMedia::Path{actualPath}}
 {}
-
-void UnixNoExtensionPathTest::SetUp()
-{
-  path = SortMedia::Path{actualPath};
-}
-
-void UnixNoExtensionPathTest::TearDown()
-{
-  path.~Path();
-}
 
 TEST_F(UnixNoExtensionPathTest, StringEquality)
 {

@@ -7,7 +7,7 @@
 //
 // CREATED:         08/30/2019
 //
-// LAST EDITED:     09/01/2019
+// LAST EDITED:     09/02/2019
 ////
 
 #ifndef __ET_PATHTEST__
@@ -19,8 +19,6 @@ class UnixAbsolutePathTest : public ::testing::Test
 {
 protected:
   UnixAbsolutePathTest();
-  void SetUp() override;
-  void TearDown() override;
 
   const std::string extension;
   const std::string filename;

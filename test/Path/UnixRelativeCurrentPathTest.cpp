@@ -7,7 +7,7 @@
 //
 // CREATED:         09/01/2019
 //
-// LAST EDITED:     09/01/2019
+// LAST EDITED:     09/02/2019
 ////
 
 #include "gtest/gtest.h"
@@ -15,18 +15,9 @@
 
 UnixRelativeCurrentPathTest::UnixRelativeCurrentPathTest()
   : extension{".test"}, filename{"path" + extension},
-    actualPath{"./this/is/a/" + filename}
+    actualPath{"./this/is/a/" + filename},
+    path{SortMedia::Path{actualPath}}
 {}
-
-void UnixRelativeCurrentPathTest::SetUp()
-{
-  path = SortMedia::Path{actualPath};
-}
-
-void UnixRelativeCurrentPathTest::TearDown()
-{
-  path.~Path();
-}
 
 TEST_F(UnixRelativeCurrentPathTest, StringEquality)
 {

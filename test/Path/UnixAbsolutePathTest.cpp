@@ -7,7 +7,7 @@
 //
 // CREATED:         08/30/2019
 //
-// LAST EDITED:     09/01/2019
+// LAST EDITED:     09/02/2019
 ////
 
 #include "gtest/gtest.h"
@@ -18,18 +18,9 @@
 
 UnixAbsolutePathTest::UnixAbsolutePathTest()
   : extension{".test"}, filename{"path" + extension},
-    actualPath{"/this/is/a/" + filename}
+    actualPath{"/this/is/a/" + filename},
+    path{SortMedia::Path{actualPath}}
 {}
-
-void UnixAbsolutePathTest::SetUp()
-{
-  path = SortMedia::Path{actualPath};
-}
-
-void UnixAbsolutePathTest::TearDown()
-{
-  path.~Path();
-}
 
 TEST_F(UnixAbsolutePathTest, StringEquality)
 {
