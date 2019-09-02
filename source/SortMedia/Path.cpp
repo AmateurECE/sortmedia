@@ -20,7 +20,7 @@ const std::regex SortMedia::Path::s_filenameRegex{"(\\..+)$"};
 // Format observers
 std::string SortMedia::Path::string() const
 {
-  return join(m_components, s_sep);
+  return join(m_components.begin(), m_components.end(), s_sep);
 }
 
 // Decomposition
@@ -42,21 +42,24 @@ SortMedia::Path SortMedia::Path::extension() const
 
 SortMedia::Path SortMedia::Path::parent_path() const
 {
-  return Path{""};
+  return Path{join(m_components.begin(), std::prev(m_components.end()),
+                   s_sep)};
 }
 
-std::string SortMedia::Path::join(const std::vector<std::string>& elements,
-                                  const char *const delimiter) const
+std::string
+SortMedia::Path::join(const std::vector<std::string>::const_iterator& first,
+                      const std::vector<std::string>::const_iterator& last,
+                      const char *const delimiter) const
 {
   std::ostringstream os;
-  auto b = begin(elements), e = end(elements);
 
-  if (b != e) {
-    std::copy(b, prev(e), std::ostream_iterator<std::string>(os, delimiter));
-    b = prev(e);
-  }
-  if (b != e) {
-    os << *b;
+  if (first != last) {
+    std::copy(first, prev(last),
+              std::ostream_iterator<std::string>(os, delimiter));
+    if (prev(last) != last)
+      {
+        os << *prev(last);
+      }
   }
 
   return os.str();

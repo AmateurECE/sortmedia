@@ -40,7 +40,8 @@ public:
   Path parent_path() const;
 
 private:
-  std::string join(const std::vector<std::string>& elements,
+  std::string join(const std::vector<std::string>::const_iterator& first,
+                   const std::vector<std::string>::const_iterator& last,
                    const char *const delimiter) const;
   std::vector<std::string> split(char delimiter,
                                  const std::string& input) const;
