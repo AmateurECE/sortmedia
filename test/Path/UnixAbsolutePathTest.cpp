@@ -18,7 +18,8 @@
 
 UnixAbsolutePathTest::UnixAbsolutePathTest()
   : extension{".test"}, filename{"path" + extension},
-    actualPath{"/this/is/a/" + filename},
+    parentPath{"/this/is/a"},
+    actualPath{parentPath + "/" + filename},
     path{SortMedia::Path{actualPath}}
 {}
 
@@ -35,6 +36,11 @@ TEST_F(UnixAbsolutePathTest, FilenameEquality)
 TEST_F(UnixAbsolutePathTest, ExtensionEquality)
 {
   ASSERT_EQ(path.extension().string(), extension);
+}
+
+TEST_F(UnixAbsolutePathTest, ParentPathEquality)
+{
+  ASSERT_EQ(path.parent_path().string(), parentPath);
 }
 
 ///////////////////////////////////////////////////////////////////////////////

@@ -41,7 +41,9 @@ SortMedia::Path SortMedia::Path::extension() const
 }
 
 SortMedia::Path SortMedia::Path::parent_path() const
-{}
+{
+  return Path{""};
+}
 
 std::string SortMedia::Path::join(const std::vector<std::string>& elements,
                                   const char *const delimiter) const

@@ -15,7 +15,8 @@
 
 UnixRelativeCurrentPathTest::UnixRelativeCurrentPathTest()
   : extension{".test"}, filename{"path" + extension},
-    actualPath{"./this/is/a/" + filename},
+    parentPath{"./this/is/a"},
+    actualPath{parentPath + "/" + filename},
     path{SortMedia::Path{actualPath}}
 {}
 
@@ -32,6 +33,11 @@ TEST_F(UnixRelativeCurrentPathTest, FilenameEquality)
 TEST_F(UnixRelativeCurrentPathTest, ExtensionEquality)
 {
   ASSERT_EQ(path.extension().string(), extension);
+}
+
+TEST_F(UnixRelativeCurrentPathTest, ParentPathEquality)
+{
+  ASSERT_EQ(path.parent_path().string(), parentPath);
 }
 
 ///////////////////////////////////////////////////////////////////////////////

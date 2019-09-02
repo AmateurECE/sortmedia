@@ -14,8 +14,8 @@
 #include "UnixNoExtensionPathTest.h"
 
 UnixNoExtensionPathTest::UnixNoExtensionPathTest()
-  : filename{"test"},
-    actualPath{"/this/is/a/" + filename},
+  : filename{"test"}, parentPath{"/this/is/a"},
+    actualPath{parentPath + "/" + filename},
     path{SortMedia::Path{actualPath}}
 {}
 
@@ -32,6 +32,11 @@ TEST_F(UnixNoExtensionPathTest, FilenameEquality)
 TEST_F(UnixNoExtensionPathTest, ExtensionEquality)
 {
   ASSERT_EQ(path.extension().string(), "");
+}
+
+TEST_F(UnixNoExtensionPathTest, ParentPathEquality)
+{
+  ASSERT_EQ(path.parent_path().string(), parentPath);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
