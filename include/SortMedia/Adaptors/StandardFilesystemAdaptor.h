@@ -8,7 +8,7 @@
 //
 // CREATED:         08/29/2019
 //
-// LAST EDITED:     08/30/2019
+// LAST EDITED:     09/02/2019
 ////
 
 #ifndef __ET_STANDARDFILESYSTEMADAPTOR__
@@ -24,6 +24,29 @@ public:
   ~StandardFilesystemAdaptor() {};
   virtual std::iterator_traits<Path> walk(const Path& directory)
     const final override;
+
+  // TODO: Test isEmpty
+  virtual bool isEmpty(const Path& p) const final override;
+  // TODO: Test isDirectory
+  virtual bool isDirectory(const Path& p) const final override;
+
+  // TODO: Test rename
+  virtual void rename(const Path& oldPath, const Path& newPath)
+    const final override;
+  // TODO: Test remove
+  virtual bool remove(const Path& p) const final override;
+  // TODO: Test equivalent
+  virtual bool equivalent(const Path& p1, const Path& p2) const final override;
+  // TODO: Test exists
+  virtual bool exists(const Path& p) const final override;
+  // TODO: Test currentPath
+  virtual Path currentPath() const final override;
+  // TODO: Test createDirectory
+  virtual bool createDirectory(const Path& p) const final override;
+  // TODO: Test createDirectories
+  virtual bool createDirectories(const Path& p) const final override;
+  // TODO: Test absolute
+  virtual Path absolute(const Path& p) const final override;
 };
 
 #endif // __ET_STANDARDFILESYSTEMADAPTOR__

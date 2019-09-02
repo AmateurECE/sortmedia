@@ -1,3 +1,6 @@
+SortMedia
+UnitTests
+*.o
 .venv/
 Pipfile.lock
 hash-cache/
