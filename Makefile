@@ -8,7 +8,7 @@
 #
 # CREATED:	    02/03/2019
 #
-# LAST EDITED:	    08/30/2019
+# LAST EDITED:	    09/02/2019
 ###
 
 flags=-shell-escape
@@ -58,5 +58,10 @@ docs:
 
 pipenv:
 	pipenv install
+
+clean:
+	rm -f `find . -name *.o`
+	rm SortMedia
+	rm UnitTests
 
 ##############################################################################
