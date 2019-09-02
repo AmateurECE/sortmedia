@@ -61,7 +61,7 @@ pipenv:
 
 clean:
 	rm -f `find . -name *.o`
-	rm SortMedia
-	rm UnitTests
+	rm -f SortMedia
+	rm -f UnitTests
 
 ##############################################################################
