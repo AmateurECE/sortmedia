@@ -7,15 +7,25 @@
 //
 // CREATED:         08/27/2019
 //
-// LAST EDITED:     08/27/2019
+// LAST EDITED:     08/30/2019
 ////
 
 #ifndef __ET_SORTMEDIA__
 #define __ET_SORTMEDIA__
 
+// As soon as Apple Clang gets C++17 filesystem library on my machine:
+// namespace std
+// {
+//   class path;
+// }
+
 namespace SortMedia
 {
   class MediaSorter;
+  // As soon as Apple Clang gets C++17 filesystem library on my machine:
+  // using Path = std::path;
+  class Path;
+
   namespace Logging
   {
     class NullLogger;

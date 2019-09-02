@@ -8,7 +8,7 @@
 #
 # CREATED:	    02/03/2019
 #
-# LAST EDITED:	    08/27/2019
+# LAST EDITED:	    08/30/2019
 ###
 
 flags=-shell-escape
@@ -23,7 +23,7 @@ else
 endif
 
 CXXFLAGS = -g -Wall -Wextra -O0 -I ./include --std=c++17
-LDFLAGS  = -lc++
+LDFLAGS  = -lc++ -lstdc++fs
 
 include Dependencies.mk
 

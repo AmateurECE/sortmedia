@@ -7,7 +7,7 @@
 //
 // CREATED:         08/27/2019
 //
-// LAST EDITED:     08/27/2019
+// LAST EDITED:     08/29/2019
 ////
 
 #ifndef __ET_INTERFACES__
@@ -23,6 +23,7 @@ namespace SortMedia
     class IOrganizationalSchema;
     class IOrganizationalPolicy;
     class IFile;
+    class IFilesystemAdaptor;
   };
 };
 

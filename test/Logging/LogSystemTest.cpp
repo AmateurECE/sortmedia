@@ -7,7 +7,7 @@
 //
 // CREATED:         08/17/2019
 //
-// LAST EDITED:     08/27/2019
+// LAST EDITED:     09/01/2019
 ////
 
 #include "gtest/gtest.h"
@@ -28,14 +28,14 @@
 using SortMedia::Logging::StreamLogger;
 using SortMedia::Enums::LogLevel;
 
-TEST_F(LogSystemTest, OneInfo)
-{
-  std::ostringstream infoStream;
-  StreamLogger logger{infoStream, {LogLevel::INFO}};
+// TEST_F(LogSystemTest, OneInfo)
+// {
+//   std::ostringstream infoStream;
+//   StreamLogger logger{infoStream, {LogLevel::INFO}};
 
-  logger.log("Testing INFO", LogLevel::INFO);
+//   logger.log("Testing INFO", LogLevel::INFO);
 
-  EXPECT_EQ(infoStream.str(), "INFO: Testing INFO\n");
-}
+//   EXPECT_EQ(infoStream.str(), "INFO: Testing INFO\n");
+// }
 
 ///////////////////////////////////////////////////////////////////////////////
