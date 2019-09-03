@@ -52,8 +52,7 @@ install(TARGETS fsadaptor
     PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
 )
 
-add_subdirectory(test)
 enable_testing()
-add_test(NAME UnitTests COMMAND UnitTests)
+add_subdirectory(test)
 
 ###############################################################################
