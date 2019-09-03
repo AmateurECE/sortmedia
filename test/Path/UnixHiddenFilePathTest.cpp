@@ -14,7 +14,8 @@
 #include "UnixHiddenFilePathTest.h"
 
 UnixHiddenFilePathTest::UnixHiddenFilePathTest()
-  : filename{".test"}, parentPath{"/this/is/a"},
+  : filename{".test"}, rootPath{"/"},
+    parentPath{rootPath + "this/is/a"},
     actualPath{parentPath + "/" + filename},
     path{SortMedia::Path{actualPath}}
 {}
@@ -37,6 +38,11 @@ TEST_F(UnixHiddenFilePathTest, ExtensionEquality)
 TEST_F(UnixHiddenFilePathTest, ParentPathEquality)
 {
   ASSERT_EQ(path.parent_path().string(), parentPath);
+}
+
+TEST_F(UnixHiddenFilePathTest, RootPathEquality)
+{
+  ASSERT_EQ(path.root_path().string(), rootPath);
 }
 
 ///////////////////////////////////////////////////////////////////////////////

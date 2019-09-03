@@ -22,6 +22,7 @@ protected:
 
   const std::string extension;
   const std::string filename;
+  const std::string rootPath;
   const std::string parentPath;
   const std::string actualPath;
   SortMedia::Path path;

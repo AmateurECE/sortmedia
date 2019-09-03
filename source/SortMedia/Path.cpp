@@ -40,6 +40,17 @@ SortMedia::Path SortMedia::Path::extension() const
   return Path{""};
 }
 
+SortMedia::Path SortMedia::Path::root_path() const
+{
+  if (m_components.front() == "."
+      || m_components.front() == "..")
+    {
+      return {};
+    }
+
+  return Path{s_sep};
+}
+
 SortMedia::Path SortMedia::Path::parent_path() const
 {
   return Path{join(m_components.begin(), std::prev(m_components.end()),

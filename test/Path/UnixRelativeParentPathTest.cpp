@@ -40,4 +40,9 @@ TEST_F(UnixRelativeParentPathTest, ParentPathEquality)
   ASSERT_EQ(path.parent_path().string(), parentPath);
 }
 
+TEST_F(UnixRelativeParentPathTest, RootPathEquality)
+{
+  ASSERT_EQ(path.root_path().string(), "");
+}
+
 ///////////////////////////////////////////////////////////////////////////////

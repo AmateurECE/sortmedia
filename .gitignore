@@ -1,5 +1,7 @@
 SortMedia
 UnitTests
+!include/SortMedia
+!source/SortMedia
 *.o
 .venv/
 Pipfile.lock

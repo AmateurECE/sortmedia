@@ -35,9 +35,10 @@ public:
   std::string string() const;
 
   // Decomposition
-  Path filename() const;
   Path extension() const;
+  Path filename() const;
   Path parent_path() const;
+  Path root_path() const;
 
 private:
   std::string join(const std::vector<std::string>::const_iterator& first,

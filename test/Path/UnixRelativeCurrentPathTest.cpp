@@ -40,4 +40,9 @@ TEST_F(UnixRelativeCurrentPathTest, ParentPathEquality)
   ASSERT_EQ(path.parent_path().string(), parentPath);
 }
 
+TEST_F(UnixRelativeCurrentPathTest, RootPathEquality)
+{
+  ASSERT_EQ(path.root_path().string(), "");
+}
+
 ///////////////////////////////////////////////////////////////////////////////
