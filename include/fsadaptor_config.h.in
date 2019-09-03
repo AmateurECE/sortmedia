@@ -1,0 +1,22 @@
+///////////////////////////////////////////////////////////////////////////////
+// NAME:            fsadaptor_config.h
+//
+// AUTHOR:          Ethan D. Twardy <edtwardy@mtu.edu>
+//
+// DESCRIPTION:     Configuration file.
+//
+// CREATED:         09/03/2019
+//
+// LAST EDITED:     09/03/2019
+////
+
+#ifndef __ET_CONFIG__
+#define __ET_CONFIG__
+
+#define FSADAPTOR_VERSION_MAJOR @VERSION_MAJOR@
+#define FSADAPTOR_VERSION_MINOR @VERSION_MINOR@
+#define FSADAPTOR_VERSION_REVISION @VERSION_REV@
+
+#endif /* __ET_CONFIG__ */
+
+///////////////////////////////////////////////////////////////////////////////
