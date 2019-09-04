@@ -96,9 +96,10 @@ FSAdaptor::StandardFilesystemAdaptor
   // Push all paths back into a vector
   std::vector<Path> paths;
   paths.push_back(p);
-  while (paths.front().parent_path().string() != p.root_path().string())
+  while (paths.back().parent_path().string() != p.root_path().string()
+         && paths.back().parent_path().string() != "")
     {
-      paths.push_back(paths.front().parent_path());
+      paths.push_back(paths.back().parent_path());
     }
 
   // Iterate backwards through them, creating a directory where one doesn't
