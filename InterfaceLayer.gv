@@ -1,0 +1,106 @@
+digraph G {
+	node [
+		shape = "record"
+		fontsize = 8
+	]
+	edge [
+		fontsize = 8
+	]
+	
+    main [
+        label = "{function main()}"]
+    ILibraryFile [
+        label = "{interface ILibraryFile\l|"
+                + "+ rename(const std::string&)\l"
+                + "+ remove()\l"
+                + "}"]
+    MusicFile [
+        label = "{class MusicFile\l|"
+                + "+ MusicFile(IMusicTagEditorAdaptor&, const std::string&)\l"
+                + "+ getArtist() const : const std::string&\l"
+                + "+ setArtist(std::string) : bool\l"
+                + "+ getAlbum() const : const std::string&\l"
+                + "+ setAlbum(std::string) : bool\l"
+                + "}"]
+    MovieFile [
+        label = "{class MovieFile\l|"
+        	+ "+ MovieFile(IMovieTagEditorAdaptor&, const std::string&)\l"
+                + "+ getDirector() const : const std::string&\l"
+                + "+ setDirector(std::string) : bool\l"
+                + "}"]
+    LibraryFile [
+        label = "{class LibraryFile\l|"
+        	+ "+ LibraryFile(const std::string& path)\l"
+                + "}"]
+	    IMusicTagEditorAdaptor [
+        label = "{interface IMusicTagEditorAdaptor\l|"
+                + "(Interface TBD)\l"
+                + "}"]
+    IMovieTagEditorAdaptor [
+        label = "{interface IMovieTagEditorAdaptor\l|"
+                + "(Interface TBD)\l"
+                + "}"]
+    IFileLocator [
+        label = "{interface IFileLocator\l|"
+                + "+ listFilesInDirectory(const std::string& directory)"
+                + " : std::vector\<std::string\>\l"
+                + "+ recursivelyListFilesInDirectory(const std::string& "
+                + "directory) : std::vector\<std::string\>\l"
+                + "}"]
+    IFileOperation [
+        label = "{interface IFileOperation\l|"
+                + "+ apply() const : void\l"
+                + "+ revert() const : void\l"
+                + "}"]
+    IOrganizationalSchema [
+        label = "{interface IOrganizationalSchema\l|"
+                + "+ applyToFileByPath(std::string) : void\l"
+                + "- makeOrganizer(std::string)"
+                + " : std::unique_ptr\<IOrganizationalPolicy\>\l"
+                + "}"]
+    OrganizationalSchema [
+        label = "{class OrganizationalSchema\l|"
+                + "+ final override applyToFileByPath(std::string) : void\l"
+                + "- pure virtual makeOrganizer(std::string)"
+                + " : std::unique_ptr\<IOrganizationalPolicy\>\l"
+                + "}"]
+    IOrganizationalPolicy [
+        label = "{interface IOrganizationalPolicy\l|"
+                + "+ then(IOrganizationalPolicy) : IOrganizationalPolicy&\l"
+                + "+ ensure() : std::unique_ptr\<IFileOperation\>\l"
+                + "}"]
+    OrganizationalPolicy [
+        label = "{class OrganizationalPolicy\l|"
+                + "}"]
+    OperationalFailureException [
+        label = "{class OperationalFailureException\l|"
+                + "+ what() const noexcept : const char*\l"
+                + "}"]
+    ILogger [
+	label = "{interface ILogger\l|"
+		+ "}"]
+
+    subgraph TagLib {
+        label = "namespace TagLib"
+        color="lightgrey"
+    }
+
+    LibraryFile -> ILibraryFile [arrowhead="empty",style="dashed"]
+    MusicFile -> LibraryFile [arrowhead="empty",style="dashed"]
+    MovieFile -> LibraryFile [arrowhead="empty",style="dashed"]
+    IMusicTagEditorAdaptor -> MusicFile [arrowhead="odiamond"]
+    IMovieTagEditorAdaptor -> MovieFile [arrowhead="odiamond"]
+    IFileLocator -> MediaSorter [arrowhead="odiamond"]
+    IOrganizationalSchema -> IFileOperation [arrowhead="open"]
+    IOrganizationalSchema -> MediaSorter [arrowhead="odiamond"]
+    OrganizationalSchema -> IOrganizationalSchema
+        [arrowhead="empty",style="dashed"]
+    IFileOperation -> OperationalFailureException [arrowhead="open"]
+    IOrganizationalSchema -> IOrganizationalPolicy [arrowhead="open"]
+    OrganizationalPolicy -> IOrganizationalPolicy
+        [arrowhead="empty",style="dashed"]
+    ILogger -> MediaSorter [arrowhead="odiamond"]
+    IOrganizationalPolicy -> IFileOperation [arrowhead="open"]
+        
+    MediaSorter -> main [arrowhead="diamond"]
+}
