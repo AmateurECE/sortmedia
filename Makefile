@@ -65,6 +65,7 @@ $(Test-objs):
 
 docs:
 	dot -T pdf -o architecture.pdf architecture.gv
+	dot -T pdf -o InterfaceLayer.pdf InterfaceLayer.gv
 	pipenv run pdflatex $(flags) $(TGT) $(dep)
 
 pipenv:

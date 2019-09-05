@@ -22,7 +22,8 @@ namespace SortMedia
     class IFileLocator;
     class IOrganizationalSchema;
     class IOrganizationalPolicy;
-    class IFile;
+
+    class IMusicTagEditorAdaptor;
   };
 };
 

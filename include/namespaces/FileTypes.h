@@ -1,26 +1,27 @@
 ///////////////////////////////////////////////////////////////////////////////
-// NAME:            Adaptors.h
+// NAME:            FileTypes.h
 //
 // AUTHOR:          Ethan D. Twardy <edtwardy@mtu.edu>
 //
-// DESCRIPTION:     Adaptor classes.
+// DESCRIPTION:     Namespace for media file types.
 //
-// CREATED:         08/29/2019
+// CREATED:         09/05/2019
 //
 // LAST EDITED:     09/05/2019
 ////
 
-#ifndef __ET_ADAPTORS__
-#define __ET_ADAPTORS__
+#ifndef __ET_FILETYPES__
+#define __ET_FILETYPES__
 
 namespace SortMedia
 {
-  namespace Adaptors
+  namespace FileTypes
   {
-    class TagLibAdaptor;
+    class LibraryFile;
+    class MusicFile;
   };
 };
 
-#endif // __ET_ADAPTORS__
+#endif // __ET_FILETYPES__
 
 ///////////////////////////////////////////////////////////////////////////////
