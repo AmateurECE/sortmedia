@@ -9,7 +9,7 @@
 //
 // CREATED:         08/29/2019
 //
-// LAST EDITED:     09/03/2019
+// LAST EDITED:     09/04/2019
 ////
 
 #ifndef __ET_IFILESYSTEMADAPTOR__
@@ -17,14 +17,14 @@
 
 #include <FSAdaptor/namespace.h>
 
-#include <iterator>
-#include <vector>
-
 class FSAdaptor::IFilesystemAdaptor
 {
 public:
   virtual ~IFilesystemAdaptor() {};
-  virtual std::iterator_traits<Path> walk(const Path& directory) const = 0;
+
+  // Walk the filesystem recursively at <directory>, insert all discovered
+  // files as Path objects into <walker>
+  virtual void walk(IPathWalker& walker, const Path& directory) const   = 0;
 
   // Tests whether a given path points to an existing, empty file.
   virtual bool isEmpty(const Path& p) const                             = 0;

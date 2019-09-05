@@ -7,7 +7,7 @@
 //
 // CREATED:         09/03/2019
 //
-// LAST EDITED:     09/03/2019
+// LAST EDITED:     09/04/2019
 ////
 
 #ifndef __ET_FSADAPTOR_NAMESPACE__
@@ -16,6 +16,10 @@
 namespace FSAdaptor
 {
   class Path;
+  class IPathWalker;
+  template<template<class...> class Container>
+  class PathWalker;
+
   class IFilesystemAdaptor;
   class StandardFilesystemAdaptor;
 };

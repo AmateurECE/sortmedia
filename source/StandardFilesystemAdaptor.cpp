@@ -7,7 +7,7 @@
 //
 // CREATED:         08/29/2019
 //
-// LAST EDITED:     09/03/2019
+// LAST EDITED:     09/04/2019
 ////
 
 // SortMedia headers
@@ -32,9 +32,9 @@ static std::system_error makeSystemError(int error)
       (const char*)strerror(error)};
 }
 
-std::iterator_traits<FSAdaptor::Path>
+void
 FSAdaptor::StandardFilesystemAdaptor
-::walk(const FSAdaptor::Path& directory) const
+::walk(FSAdaptor::IPathWalker& walker, const FSAdaptor::Path& directory) const
 {
   // TODO: Implement walk  
 }

@@ -7,7 +7,7 @@
 #
 # CREATED:          09/03/2019
 #
-# LAST EDITED:      09/03/2019
+# LAST EDITED:      09/04/2019
 ###
 
 cmake_minimum_required(VERSION 3.15.1)
@@ -29,6 +29,8 @@ set(HEADERS
     include/FSAdaptor/Path.h
     include/FSAdaptor/StandardFilesystemAdaptor.h
     include/FSAdaptor/IFilesystemAdaptor.h
+    include/FSAdaptor/IPathWalker.h
+    include/FSAdaptor/PathWalker.h
     include/FSAdaptor/namespace.h
 )
 

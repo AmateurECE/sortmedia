@@ -8,7 +8,7 @@
 //
 // CREATED:         08/29/2019
 //
-// LAST EDITED:     09/03/2019
+// LAST EDITED:     09/04/2019
 ////
 
 #ifndef __ET_STANDARDFILESYSTEMADAPTOR__
@@ -22,7 +22,7 @@ class FSAdaptor::StandardFilesystemAdaptor
 {
 public:
   ~StandardFilesystemAdaptor() {};
-  virtual std::iterator_traits<Path> walk(const Path& directory)
+  virtual void walk(IPathWalker& walker, const Path& directory)
     const final override;
 
   virtual bool isEmpty(const Path& p) const final override;
