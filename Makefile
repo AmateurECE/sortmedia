@@ -8,7 +8,7 @@
 #
 # CREATED:	    02/03/2019
 #
-# LAST EDITED:	    09/02/2019
+# LAST EDITED:	    09/05/2019
 ###
 
 flags=-shell-escape
@@ -44,8 +44,8 @@ SortMedia: $(SortMedia-obj) $(Main-obj)
 $(Main-obj):
 $(SortMedia-obj):
 
-test: CXXFLAGS += -I ./googletest/googletest/include/
-test: LDFLAGS += -L googletest/googlemock/gtest/ -lgtest_main -lgtest
+test: CXXFLAGS += `pkg-config --cflags gtest_main`
+test: LDFLAGS += `pkg-config --libs gtest_main`
 test: UnitTests
 UnitTests: $(SortMedia-obj) $(Test-objs)
 	$(CXX) $(CXXFLAGS) -o $@ $(SortMedia-obj) $(Test-objs) $(LDFLAGS)
