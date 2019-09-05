@@ -22,9 +22,9 @@ else
     CXX=$(shell xcode-select -p)/usr/bin/gcc
 endif
 
-FSAdaptor-dir=FSAdaptor/build
+FSAdaptor-dir=FSAdaptor
 FSAdaptor-CXXFLAGS = -I $(FSAdaptor-dir)/include
-FSAdaptor-LDFLAGS = -L $(FSAdaptor-dir) -lfsadaptor
+FSAdaptor-LDFLAGS = -L $(FSAdaptor-dir)/build -lfsadaptor
 
 CXXFLAGS = -g -Wall -Wextra -O0 -I ./include --std=c++17 $(FSAdaptor-CXXFLAGS)
 LDFLAGS  = -lc++ $(FSAdaptor-LDFLAGS)
@@ -42,10 +42,10 @@ export PIPENV_VENV_IN_PROJECT=1
 
 all: SortMedia test # TODO: Uncomment docs dependency
 
-libFSAdaptor: $(FSAdaptor-dir)/libfsadaptor.a
+libFSAdaptor: $(FSAdaptor-dir)/build/libfsadaptor.a
 
-$(FSAdaptor-dir)/libfsadaptor.a:
-	mkdir $(FSAdaptor-dir) && cd $(FSAdaptor-dir) \
+$(FSAdaptor-dir)/build/libfsadaptor.a:
+	mkdir $(FSAdaptor-dir)/build && cd $(FSAdaptor-dir)/build \
 		&& cmake .. && make fsadaptor
 
 SortMedia: libFSAdaptor $(SortMedia-obj) $(Main-obj)
@@ -60,6 +60,7 @@ test: UnitTests
 UnitTests: libFSAdaptor $(SortMedia-obj) $(Test-objs)
 	$(CXX) $(CXXFLAGS) -o $@ $(SortMedia-obj) $(Test-objs) $(LDFLAGS)
 
+$(Test-objs): CXXFLAGS += -Wno-unused-parameter
 $(Test-objs):
 
 docs:
@@ -71,7 +72,7 @@ pipenv:
 
 clean:
 	rm -f `find . -name *.o`
-	rm -rf $(FSAdaptor-dir)
+	rm -rf $(FSAdaptor-dir)/build
 	rm -f SortMedia
 	rm -f UnitTests
 

@@ -7,7 +7,7 @@
 //
 // CREATED:         08/07/2019
 //
-// LAST EDITED:     08/27/2019
+// LAST EDITED:     09/05/2019
 ////
 
 #ifndef __ET_IFILELOCATOR__
@@ -15,10 +15,16 @@
 
 #include <namespaces/Interfaces.h>
 
+#include <FSAdaptor/namespace.h>
+
+#include <list>
+
 class SortMedia::Interfaces::IFileLocator
 {
 public:
-  virtual ~IFileLocator() {};
+  virtual ~IFileLocator() {}
+  virtual std::list<FSAdaptor::Path> recursivelyListFilesInDirectory
+  (const FSAdaptor::Path& directory) const = 0;
 };
 
 #endif // __ET_IFILELOCATOR__
