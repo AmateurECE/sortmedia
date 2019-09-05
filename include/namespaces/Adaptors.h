@@ -7,7 +7,7 @@
 //
 // CREATED:         08/29/2019
 //
-// LAST EDITED:     08/29/2019
+// LAST EDITED:     09/05/2019
 ////
 
 #ifndef __ET_ADAPTORS__
@@ -17,7 +17,6 @@ namespace SortMedia
 {
   namespace Adaptors
   {
-    class StandardFilesystemAdaptor;
   };
 };
 
