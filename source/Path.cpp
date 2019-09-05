@@ -7,7 +7,7 @@
 //
 // CREATED:         08/30/2019
 //
-// LAST EDITED:     09/03/2019
+// LAST EDITED:     09/05/2019
 ////
 
 #include <FSAdaptor/Path.h>
@@ -16,6 +16,10 @@
 #include <iterator>
 
 const std::regex FSAdaptor::Path::s_filenameRegex{"(\\..+)$"};
+
+///////////////////////////////////////////////////////////////////////////////
+// API Functions
+////
 
 // Format observers
 std::string FSAdaptor::Path::string() const
@@ -56,6 +60,24 @@ FSAdaptor::Path FSAdaptor::Path::parent_path() const
   return Path{join(m_components.begin(), std::prev(m_components.end()),
                    s_sep)};
 }
+
+// Operators
+FSAdaptor::Path FSAdaptor::Path::operator+(const FSAdaptor::Path& that) const
+{
+  return Path{join(this->m_components.begin(), this->m_components.end(), s_sep)
+      + join(that.m_components.begin(), that.m_components.end(), s_sep)};
+}
+
+FSAdaptor::Path FSAdaptor::Path::operator/(const FSAdaptor::Path& that) const
+{
+  return Path{join(this->m_components.begin(), this->m_components.end(), s_sep)
+      + s_sep
+      + join(that.m_components.begin(), that.m_components.end(), s_sep)};
+}
+
+///////////////////////////////////////////////////////////////////////////////
+// Private Functions
+////
 
 std::string
 FSAdaptor::Path::join(const std::vector<std::string>::const_iterator& first,

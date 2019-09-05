@@ -7,18 +7,26 @@
 //
 // CREATED:         08/29/2019
 //
-// LAST EDITED:     09/04/2019
+// LAST EDITED:     09/05/2019
 ////
+
+// TODO: Port to Windows
+// TODO: Add support for non-english locales
+//  (After making the switch to use std::filesystem)
 
 // SortMedia headers
 #include <FSAdaptor/StandardFilesystemAdaptor.h>
 #include <FSAdaptor/Path.h>
+#include <FSAdaptor/IPathWalker.h>
+#include <FSAdaptor/PathWalker.h>
 
 // LibC++ headers
+#include <list>
 #include <stdexcept>
 #include <system_error>
 
 // LibC headers
+#include <dirent.h>
 #include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -36,7 +44,59 @@ void
 FSAdaptor::StandardFilesystemAdaptor
 ::walk(FSAdaptor::IPathWalker& walker, const FSAdaptor::Path& directory) const
 {
-  // TODO: Implement walk  
+  if (!exists(directory))
+    {
+      throw std::invalid_argument{"path does not exist"};
+    }
+
+  walker.insert(directory);
+  if (isDirectory(directory))
+    {
+      PathWalker<std::list> thisDirectory;
+      listDirectory(thisDirectory, directory);
+      for (auto path : thisDirectory.getContainer())
+        {
+          if (path.string() != directory.string())
+            {
+              walk(walker, path);
+            }
+        }
+    }
+}
+
+void
+FSAdaptor::StandardFilesystemAdaptor
+::listDirectory(FSAdaptor::IPathWalker& walker,
+                const FSAdaptor::Path& directory) const
+{
+  DIR* directoryStream = NULL;
+  struct dirent* result = NULL;
+  struct dirent entry;
+  memset(&entry, 0, sizeof(struct dirent));
+
+  errno = 0;
+  if (NULL == (directoryStream = opendir(directory.string().c_str())))
+    {
+      throw makeSystemError(errno);
+    }
+
+  errno = 0;
+  int readdirError = 0;
+  while (!(readdirError = readdir_r(directoryStream, &entry, &result))
+         && NULL != result)
+    {
+      if (strncmp(entry.d_name, ".", sizeof("."))
+          && strncmp(entry.d_name, "..", sizeof("..")))
+        {
+          walker.insert(directory/Path{entry.d_name});
+        }
+    }
+
+  closedir(directoryStream);
+  if (readdirError)
+    {
+      throw makeSystemError(errno);
+    }
 }
 
 bool
@@ -92,7 +152,6 @@ void
 FSAdaptor::StandardFilesystemAdaptor
 ::createDirectories(const FSAdaptor::Path& p) const
 {
-  // TODO: Implement createDirectories
   // Push all paths back into a vector
   std::vector<Path> paths;
   paths.push_back(p);

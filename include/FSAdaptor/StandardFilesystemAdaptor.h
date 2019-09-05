@@ -37,6 +37,10 @@ public:
   virtual void createDirectory(const Path& p) const final override;
   virtual void createDirectories(const Path& p) const final override;
   virtual Path absolute(const Path& p) const final override;
+
+private:
+  // TODO: Move listDirectory to the public interface
+  void listDirectory(IPathWalker& walker, const Path& directory) const;
 };
 
 #endif // __ET_STANDARDFILESYSTEMADAPTOR__

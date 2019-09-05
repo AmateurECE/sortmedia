@@ -9,7 +9,7 @@
 //
 // CREATED:         08/30/2019
 //
-// LAST EDITED:     09/03/2019
+// LAST EDITED:     09/05/2019
 ////
 
 #ifndef __ET_PATH__
@@ -20,6 +20,9 @@
 #include <regex>
 #include <string>
 #include <vector>
+
+// TODO: Implement operator==
+// TODO: Implement operator<<
 
 class FSAdaptor::Path
 {
@@ -39,6 +42,12 @@ public:
   Path filename() const;
   Path parent_path() const;
   Path root_path() const;
+
+  // Operators
+  // Concatenate two paths (without separator)
+  Path operator+(const Path& that) const;
+  // Concatenate two paths (with separator)
+  Path operator/(const Path& that) const;
 
 private:
   std::string join(const std::vector<std::string>::const_iterator& first,
