@@ -11,6 +11,8 @@
 ###
 
 SortMedia-obj += source/SortMedia/Schemas/OrganizationalSchema.o
+SortMedia-obj += source/SortMedia/Policies/BasicMusicFileNamingPolicy.o
+SortMedia-obj += source/SortMedia/Policies/UnknownFileTypePolicy.o
 SortMedia-obj += source/SortMedia/Policies/OrganizationalPolicy.o
 SortMedia-obj += source/SortMedia/Operations/WarnOperation.o
 SortMedia-obj += source/SortMedia/FileTypes/MusicFile.o

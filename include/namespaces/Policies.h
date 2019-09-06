@@ -18,6 +18,8 @@ namespace SortMedia
   namespace Policies
   {
     class OrganizationalPolicy;
+    class BasicMusicFileNamingPolicy;
+    class UnknownFileTypePolicy;
   };
 };
 
