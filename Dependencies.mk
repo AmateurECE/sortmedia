@@ -7,9 +7,10 @@
 #
 # CREATED:	    08/15/2019
 #
-# LAST EDITED:	    09/05/2019
+# LAST EDITED:	    09/06/2019
 ###
 
+SortMedia-obj += source/SortMedia/Policies/OrganizationalPolicy.o
 SortMedia-obj += source/SortMedia/Operations/WarnOperation.o
 SortMedia-obj += source/SortMedia/FileTypes/MusicFile.o
 SortMedia-obj += source/SortMedia/FileTypes/LibraryFile.o
