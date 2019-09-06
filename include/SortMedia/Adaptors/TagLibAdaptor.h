@@ -17,13 +17,22 @@
 #include <namespaces/Adaptors.h>
 #include <SortMedia/Interfaces/IMusicTagEditorAdaptor.h>
 
+#include <FSAdaptor/namespace.h>
+
+#include <memory>
 #include <string>
+
+// Forward declaration
+namespace TagLib
+{
+  class FileRef;
+}
 
 class SortMedia::Adaptors::TagLibAdaptor
   : public SortMedia::Interfaces::IMusicTagEditorAdaptor
 {
 public:
-  TagLibAdaptor() {}
+  TagLibAdaptor(const FSAdaptor::Path& path);
 
   // Getters
   virtual std::string getArtist() const final override;
@@ -35,13 +44,16 @@ public:
   virtual unsigned int getTrack() const final override;
 
   // Setters
-  virtual void setArtist(const std::string&) const final override;
-  virtual void setAlbum(const std::string&) const final override;
-  virtual void setTitle(const std::string&) const final override;
-  virtual void setComment(const std::string&) const final override;
-  virtual void setGenre(const std::string&) const final override;
-  virtual void setYear(unsigned int) const final override;
-  virtual void setTrack(unsigned int) const final override;
+  virtual void setArtist(const std::string&) final override;
+  virtual void setAlbum(const std::string&) final override;
+  virtual void setTitle(const std::string&) final override;
+  virtual void setComment(const std::string&) final override;
+  virtual void setGenre(const std::string&) final override;
+  virtual void setYear(unsigned int) final override;
+  virtual void setTrack(unsigned int) final override;
+
+private:
+  std::unique_ptr<TagLib::FileRef> m_fileRef;
 };
 
 #endif // __ET_TAGLIBADAPTOR__

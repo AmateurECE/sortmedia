@@ -25,22 +25,22 @@ public:
   virtual ~IMusicTagEditorAdaptor() {}
 
   // Getters
-  virtual std::string getArtist() const  = 0;
-  virtual std::string getAlbum() const   = 0;
-  virtual std::string getTitle() const   = 0;
-  virtual std::string getComment() const = 0;
-  virtual std::string getGenre() const   = 0;
-  virtual unsigned int getYear() const    = 0;
-  virtual unsigned int getTrack() const   = 0;
+  virtual std::string getArtist() const         = 0;
+  virtual std::string getAlbum() const          = 0;
+  virtual std::string getTitle() const          = 0;
+  virtual std::string getComment() const        = 0;
+  virtual std::string getGenre() const          = 0;
+  virtual unsigned int getYear() const          = 0;
+  virtual unsigned int getTrack() const         = 0;
 
   // Setters
-  virtual void setArtist(const std::string&) const  = 0;
-  virtual void setAlbum(const std::string&) const   = 0;
-  virtual void setTitle(const std::string&) const   = 0;
-  virtual void setComment(const std::string&) const = 0;
-  virtual void setGenre(const std::string&) const   = 0;
-  virtual void setYear(unsigned int) const    = 0;
-  virtual void setTrack(unsigned int) const   = 0;
+  virtual void setArtist(const std::string&)    = 0;
+  virtual void setAlbum(const std::string&)     = 0;
+  virtual void setTitle(const std::string&)     = 0;
+  virtual void setComment(const std::string&)   = 0;
+  virtual void setGenre(const std::string&)     = 0;
+  virtual void setYear(unsigned int)            = 0;
+  virtual void setTrack(unsigned int)           = 0;
 };
 
 #endif // __ET_IMUSICTAGEDITORADAPTOR__

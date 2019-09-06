@@ -26,8 +26,13 @@ FSAdaptor-dir=FSAdaptor
 FSAdaptor-CXXFLAGS = -I $(FSAdaptor-dir)/include
 FSAdaptor-LDFLAGS = -L $(FSAdaptor-dir)/build -lfsadaptor
 
-CXXFLAGS = -g -Wall -Wextra -O0 -I ./include --std=c++17 $(FSAdaptor-CXXFLAGS)
-LDFLAGS  = -lc++ $(FSAdaptor-LDFLAGS)
+TagLib-dir=dependencies/taglib-1.11.1/
+TagLib-CXXFLAGS = -I $(TagLib-dir)/include
+TagLib-LDFLAGS = -L $(TagLib-dir) -ltag `pkg-config --libs zlib`
+
+CXXFLAGS = -g -Wall -Wextra -O0 -I ./include --std=c++17 \
+	$(FSAdaptor-CXXFLAGS) $(TagLib-CXXFLAGS)
+LDFLAGS  = -lc++ $(FSAdaptor-LDFLAGS) $(TagLib-LDFLAGS)
 
 include Dependencies.mk
 
