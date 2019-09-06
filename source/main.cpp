@@ -7,7 +7,7 @@
 //
 // CREATED:         08/15/2019
 //
-// LAST EDITED:     08/27/2019
+// LAST EDITED:     09/06/2019
 ////
 
 #include <iostream>
@@ -20,7 +20,7 @@
 
 int main(int argc, char** argv)
 {
-  using LogLevel = SortMedia::Enums::LogLevel;
+  using LogLevel = SortMedia::Logging::LogLevel;
   auto allLevels = {LogLevel::INFO, LogLevel::WARNING, LogLevel::ERROR};
 
   std::unique_ptr<SortMedia::Interfaces::ILogger> logger =

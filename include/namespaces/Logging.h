@@ -1,31 +1,36 @@
 ///////////////////////////////////////////////////////////////////////////////
-// NAME:            Enums.h
+// NAME:            Logging.h
 //
 // AUTHOR:          Ethan D. Twardy <edtwardy@mtu.edu>
 //
-// DESCRIPTION:     Enumerations used by the application.
+// DESCRIPTION:     Namespace for logging entities.
 //
-// CREATED:         08/27/2019
+// CREATED:         09/06/2019
 //
-// LAST EDITED:     08/27/2019
+// LAST EDITED:     09/06/2019
 ////
 
-#ifndef __ET_ENUMS__
-#define __ET_ENUMS__
+#ifndef __ET_LOGGING__
+#define __ET_LOGGING__
+
+#include <stdint.h>
 
 namespace SortMedia
 {
-  namespace Enums
+  namespace Logging
   {
     enum LogLevel : uint8_t
       {
         INFO,
         WARNING,
         ERROR
-      };  
+      };
+
+    class NullLogger;
+    class StreamLogger;
   };
 };
 
-#endif // __ET_ENUMS__
+#endif // __ET_LOGGING__
 
 ///////////////////////////////////////////////////////////////////////////////

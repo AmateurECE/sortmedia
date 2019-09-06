@@ -8,7 +8,7 @@
 //
 // CREATED:         08/18/2019
 //
-// LAST EDITED:     08/27/2019
+// LAST EDITED:     09/06/2019
 ////
 
 #ifndef __ET_NULLLOGGER__
@@ -17,6 +17,8 @@
 #include <namespaces/SortMedia.h>
 #include <SortMedia/Interfaces/ILogger.h>
 
+#include <memory>
+
 class SortMedia::Logging::NullLogger : public SortMedia::Interfaces::ILogger
 {
 public:
@@ -24,8 +26,13 @@ public:
   virtual ~NullLogger() = default;
   NullLogger(const NullLogger&) = delete;
   const NullLogger& operator=(const NullLogger&) = delete;
-  virtual void log(const std::string& message, Enums::LogLevel logLevel)
+  virtual void log(const std::string& message, LogLevel logLevel)
     final override;
+  virtual Interfaces::ILogger&
+  appendLogger(std::unique_ptr<Interfaces::ILogger>) final override;
+
+private:
+  std::unique_ptr<Interfaces::ILogger> m_nextLogger;
 };
 
 #endif // __ET_NULLLOGGER__

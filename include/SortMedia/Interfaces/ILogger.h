@@ -7,7 +7,7 @@
 //
 // CREATED:         08/17/2019
 //
-// LAST EDITED:     08/27/2019
+// LAST EDITED:     09/06/2019
 ////
 
 #ifndef __ET_ILOGGER__
@@ -16,14 +16,16 @@
 #include <string>
 
 #include <namespaces/Interfaces.h>
-#include <namespaces/Enums.h>
+#include <namespaces/Logging.h>
+
+#include <memory>
 
 class SortMedia::Interfaces::ILogger
 {
 public:
   virtual ~ILogger() {};
-  virtual void log(const std::string& message,
-                   SortMedia::Enums::LogLevel level) = 0;
+  virtual void log(const std::string& message, Logging::LogLevel level) = 0;
+  virtual ILogger& appendLogger(std::unique_ptr<ILogger>) = 0;
 };
 
 #endif // __ET_ILOGGER__

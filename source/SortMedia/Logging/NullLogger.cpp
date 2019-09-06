@@ -7,18 +7,30 @@
 //
 // CREATED:         08/18/2019
 //
-// LAST EDITED:     08/27/2019
+// LAST EDITED:     09/06/2019
 ////
 
 #include <SortMedia/Logging/NullLogger.h>
 
 SortMedia::Logging::NullLogger::NullLogger()
-{
-}
+  : m_nextLogger(nullptr)
+{}
 
 void SortMedia::Logging::NullLogger
-::log(const std::string& message, Enums::LogLevel logLevel)
+::log(const std::string& message, LogLevel logLevel)
 {
+  if (m_nextLogger)
+    {
+      m_nextLogger->log(message, logLevel);
+    }
+}
+
+SortMedia::Interfaces::ILogger&
+SortMedia::Logging::NullLogger
+::appendLogger(std::unique_ptr<SortMedia::Interfaces::ILogger> logger)
+{
+  m_nextLogger = std::move(logger);
+  return *m_nextLogger;
 }
 
 ///////////////////////////////////////////////////////////////////////////////

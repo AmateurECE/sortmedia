@@ -8,7 +8,7 @@
 //
 // CREATED:         08/15/2019
 //
-// LAST EDITED:     08/27/2019
+// LAST EDITED:     09/06/2019
 ////
 
 #include <SortMedia/MediaSorter.h>
@@ -26,7 +26,7 @@ SortMedia::MediaSorter::~MediaSorter()
 
 int SortMedia::MediaSorter::sortDirectory(const std::string& directory)
 {
-  logger.log("Sorting " + directory, Enums::LogLevel::INFO);
+  logger.log("Sorting " + directory, Logging::LogLevel::INFO);
   return 0;
 }
 

@@ -7,12 +7,12 @@
 //
 // CREATED:         09/05/2019
 //
-// LAST EDITED:     09/05/2019
+// LAST EDITED:     09/06/2019
 ////
 
+#include <namespaces/Logging.h>
 #include <SortMedia/Operations/WarnOperation.h>
 #include <SortMedia/Interfaces/ILogger.h>
-#include <namespaces/Enums.h>
 
 SortMedia::Operations::WarnOperation
 ::WarnOperation(Interfaces::ILogger& logger, const std::string& message)
@@ -22,7 +22,7 @@ SortMedia::Operations::WarnOperation
 void
 SortMedia::Operations::WarnOperation::apply()
 {
-  m_logger.log(m_message, Enums::LogLevel::WARNING);
+  m_logger.log(m_message, Logging::LogLevel::WARNING);
 }
 
 void

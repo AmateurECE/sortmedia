@@ -7,7 +7,7 @@
 //
 // CREATED:         08/17/2019
 //
-// LAST EDITED:     09/01/2019
+// LAST EDITED:     09/06/2019
 ////
 
 #include "gtest/gtest.h"
@@ -26,7 +26,7 @@
 // NoListener: Log a message that does not have a corresponding logger.
 
 using SortMedia::Logging::StreamLogger;
-using SortMedia::Enums::LogLevel;
+using SortMedia::Logging::LogLevel;
 
 // TEST_F(LogSystemTest, OneInfo)
 // {
