@@ -7,7 +7,7 @@
 //
 // CREATED:         08/27/2019
 //
-// LAST EDITED:     08/27/2019
+// LAST EDITED:     09/05/2019
 ////
 
 #ifndef __ET_IORGANIZATIONALPOLICY__
@@ -17,6 +17,7 @@ class SortMedia::Interfaces::IOrganizationalPolicy
 {
 public:
   virtual ~IOrganizationalPolicy() {};
+  virtual std::unique_ptr<IFileOperation[]> ensure() = 0;
 };
 
 #endif // __ET_IORGANIZATIONALPOLICY__

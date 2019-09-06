@@ -8,7 +8,7 @@
 #
 # CREATED:	    02/03/2019
 #
-# LAST EDITED:	    09/05/2019
+# LAST EDITED:	    09/06/2019
 ###
 
 flags=-shell-escape
@@ -25,6 +25,8 @@ endif
 FSAdaptor-dir=FSAdaptor
 FSAdaptor-CXXFLAGS = -I $(FSAdaptor-dir)/include
 FSAdaptor-LDFLAGS = -L $(FSAdaptor-dir)/build -lfsadaptor
+
+# TODO: Include TagLib dependency as source
 
 TagLib-dir=dependencies/taglib-1.11.1/
 TagLib-CXXFLAGS = -I $(TagLib-dir)/include

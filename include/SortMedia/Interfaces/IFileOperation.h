@@ -7,7 +7,7 @@
 //
 // CREATED:         08/07/2019
 //
-// LAST EDITED:     08/27/2019
+// LAST EDITED:     09/05/2019
 ////
 
 #ifndef __ET_IFILEOPERATION__
@@ -18,7 +18,9 @@
 class SortMedia::Interfaces::IFileOperation
 {
 public:
-  virtual ~IFileOperation() {};
+  virtual ~IFileOperation() {}
+  virtual void apply() = 0;
+  virtual void revert() = 0;
 };
 
 #endif // __ET_IFILEOPERATION__
