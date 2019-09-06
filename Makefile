@@ -27,6 +27,7 @@ FSAdaptor-CXXFLAGS = -I $(FSAdaptor-dir)/include
 FSAdaptor-LDFLAGS = -L $(FSAdaptor-dir)/build -lfsadaptor
 
 # TODO: Include TagLib dependency as source
+# TODO: Compile SortMedia to static library first
 
 TagLib-dir=dependencies/taglib-1.11.1/
 TagLib-CXXFLAGS = -I $(TagLib-dir)/include
@@ -38,7 +39,7 @@ LDFLAGS  = -lc++ $(FSAdaptor-LDFLAGS) $(TagLib-LDFLAGS)
 
 include Dependencies.mk
 
-Main-obj = source/main.o
+Main-obj = source/main.o source/ArgumentParser.o
 
 # Force pipenv to put the package cache here
 export PIPENV_CACHE_DIR=$(PWD)

@@ -13,6 +13,8 @@
 #include <iostream>
 #include <memory>
 
+#include <ArgumentParser.h>
+
 #include <SortMedia/MediaSorter.h>
 #include <SortMedia/Logging/StreamLogger.h>
 #include <SortMedia/Factories/FileLocatorFactory.h>
@@ -20,6 +22,17 @@
 
 int main(int argc, char** argv)
 {
+  CommandLine::ArgumentParser parser;
+  try
+    {
+      parser = CommandLine::ArgumentParser{argc, argv};
+    }
+  catch (std::invalid_argument& e)
+    {
+      std::cerr << parser.getUsage() << std::endl;
+      return 1;
+    }
+
   using LogLevel = SortMedia::Logging::LogLevel;
   auto allLevels = {LogLevel::INFO, LogLevel::WARNING, LogLevel::ERROR};
 
@@ -33,7 +46,9 @@ int main(int argc, char** argv)
   auto locator = locatorFactory.makeFileLocator();
 
   SortMedia::MediaSorter sorter{*logger, *schema, *locator};
-  sorter.sortDirectory("./Music");
+  std::string theLibrary
+    = parser.getArgument<std::string>(CommandLine::ArgumentKey::DIRECTORY);
+  sorter.sortDirectory(theLibrary);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
