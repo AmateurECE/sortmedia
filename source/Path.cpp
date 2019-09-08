@@ -88,6 +88,58 @@ std::ostream& operator<<(std::ostream& out, const FSAdaptor::Path& that)
   return out;
 }
 
+FSAdaptor::Path& FSAdaptor::Path::operator+=(const Path& that)
+{
+  auto it = that.cbegin();
+  m_components.back() += (*it).string();
+  for (it = std::next(it); it != that.cend(); ++it)
+    {
+      m_components.push_back((*it).string());
+    }
+  return *this;
+}
+
+FSAdaptor::Path& FSAdaptor::Path::operator/=(const Path& that)
+{
+  if (m_components.back() == "")
+    {
+      m_components.back() = (*that.cbegin()).string();
+    }
+  else
+    {
+      m_components.push_back((*that.cbegin()).string());
+    }
+
+  for (auto it = std::next(that.cbegin()); it != that.cend(); ++it)
+    {
+      m_components.push_back((*it).string());
+    }
+  return *this;
+}
+
+bool FSAdaptor::Path::operator==(const Path& that) const
+{
+  if (m_components.size() != that.m_components.size())
+    {
+      return false;
+    }
+
+  for (size_t i = 0; i < m_components.size(); ++i)
+    {
+      if (m_components[i] != that.m_components[i])
+        {
+          return false;
+        }
+    }
+
+  return true;
+}
+
+bool FSAdaptor::Path::operator!=(const Path& that) const
+{
+  return !operator==(that);
+}
+
 // Iterators
 FSAdaptor::Path::const_iterator FSAdaptor::Path::cbegin() const
 {

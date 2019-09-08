@@ -14,22 +14,21 @@
 
 FSAdaptor::PathConstIter
 ::PathConstIter(std::vector<std::string>::const_iterator iter)
-  : m_iterator{iter}, m_element{*iter}
+  : m_iterator{iter}
 {}
 
 FSAdaptor::PathConstIter::PathConstIter(const PathConstIter& that)
-  : m_iterator{that.m_iterator}, m_element{that.m_element}
+  : m_iterator{that.m_iterator}
 {}
 
-const FSAdaptor::Path& FSAdaptor::PathConstIter::operator*() const
+FSAdaptor::Path FSAdaptor::PathConstIter::operator*() const
 {
-  return m_element;
+  return Path{*m_iterator};
 }
 
 FSAdaptor::PathConstIter& FSAdaptor::PathConstIter::operator++()
 {
   m_iterator++;
-  m_element = Path{*m_iterator};
   return *this;
 }
 
@@ -44,7 +43,6 @@ FSAdaptor::PathConstIter&
 FSAdaptor::PathConstIter::operator=(const PathConstIter& that)
 {
   m_iterator = that.m_iterator;
-  m_element = Path{that.m_element};
   return *this;
 }
 

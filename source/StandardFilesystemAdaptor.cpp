@@ -151,22 +151,13 @@ void
 FSAdaptor::StandardFilesystemAdaptor
 ::createDirectories(const FSAdaptor::Path& p) const
 {
-  // Push all paths back into a vector
-  std::vector<Path> paths;
-  paths.push_back(p);
-  while (paths.back().parent_path().string() != p.root_path().string()
-         && paths.back().parent_path().string() != "")
+  Path stack;
+  for (auto it = p.cbegin(); it != p.cend(); ++it)
     {
-      paths.push_back(paths.back().parent_path());
-    }
-
-  // Iterate backwards through them, creating a directory where one doesn't
-  //   already exist.
-  for (auto i = paths.rbegin(); i != paths.rend(); ++i)
-    {
-      if (!exists(*i))
+      stack /= *it;
+      if (!exists(stack))
         {
-          createDirectory(*i);
+          createDirectory(stack);
         }
     }
 }

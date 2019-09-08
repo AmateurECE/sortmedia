@@ -54,13 +54,13 @@ public:
   // Operators
   // Concatenate two paths (without separator)
   Path operator+(const Path& that) const;
-  Path operator+=(const Path& that) const; // TODO: Implement operator+=
+  Path& operator+=(const Path& that);
   // Concatenate two paths (with separator)
   Path operator/(const Path& that) const;
-  Path operator/=(const Path& that) const; // TODO: Implement operator/=
+  Path& operator/=(const Path& that);
   // Equality
-  bool operator==(const Path& that) const; // TODO: Implement operator==
-  bool operator!=(const Path& that) const; // TODO: Implement operator!=
+  bool operator==(const Path& that) const;
+  bool operator!=(const Path& that) const;
 
   // Iterators
   typedef PathConstIter const_iterator;
@@ -83,7 +83,7 @@ private:
 std::ostream& operator<<(std::ostream& out, const FSAdaptor::Path& path);
 
 class FSAdaptor::PathConstIter
-  : public virtual std::iterator<std::input_iterator_tag, const Path>
+  : public virtual std::iterator<std::input_iterator_tag, Path>
 {
 public:
   PathConstIter() = delete;
@@ -95,11 +95,10 @@ public:
   PathConstIter operator++(int);
   bool operator==(const PathConstIter& that) const;
   bool operator!=(const PathConstIter& that) const;
-  const Path& operator*() const;
+  Path operator*() const;
 
 private:
   std::vector<std::string>::const_iterator m_iterator;
-  Path m_element;
 };
 
 #endif // __ET_PATH__
