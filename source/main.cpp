@@ -42,7 +42,7 @@ int main(int argc, char** argv)
   SortMedia::Factories::OrganizationalSchemaFactory schemaFactory;
   SortMedia::Factories::FileLocatorFactory locatorFactory;
 
-  auto schema = schemaFactory.makeOrganizationalSchema();
+  auto schema = schemaFactory.makeOrganizationalSchema(*logger);
   auto locator = locatorFactory.makeFileLocator();
 
   SortMedia::MediaSorter sorter{*logger, *schema, *locator};

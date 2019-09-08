@@ -7,13 +7,16 @@
 //
 // CREATED:         09/05/2019
 //
-// LAST EDITED:     09/05/2019
+// LAST EDITED:     09/07/2019
 ////
 
 #include <SortMedia/FileLocators/AnyFileLocator.h>
 
 #include <FSAdaptor/Path.h>
 #include <FSAdaptor/PathWalker.h>
+
+const FSAdaptor::StandardFilesystemAdaptor
+SortMedia::FileLocators::AnyFileLocator::s_stdAdaptor;
 
 SortMedia::FileLocators::AnyFileLocator
 ::AnyFileLocator(const FSAdaptor::IFilesystemAdaptor& adaptor)

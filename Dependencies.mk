@@ -10,6 +10,7 @@
 # LAST EDITED:	    09/06/2019
 ###
 
+SortMedia-obj += source/SortMedia/Schemas/BasicMusicOrganizationalSchema.o
 SortMedia-obj += source/SortMedia/Schemas/OrganizationalSchema.o
 SortMedia-obj += source/SortMedia/Policies/BasicMusicFileNamingPolicy.o
 SortMedia-obj += source/SortMedia/Policies/UnknownFileTypePolicy.o

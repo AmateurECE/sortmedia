@@ -7,12 +7,13 @@
 //
 // CREATED:         08/27/2019
 //
-// LAST EDITED:     09/06/2019
+// LAST EDITED:     09/07/2019
 ////
 
 #include <SortMedia/Logging/StreamLogger.h>
 
 #include <array>
+#include <ostream>
 
 SortMedia::Logging::StreamLogger
 ::StreamLogger(std::ostream& out,
@@ -27,7 +28,8 @@ void SortMedia::Logging::StreamLogger
     {
       if (level == logLevel)
         {
-          m_stream << message;
+          // TODO: Remove un-portable newline
+          m_stream << message << '\n';
           break;
         }
     }

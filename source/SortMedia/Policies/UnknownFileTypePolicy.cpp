@@ -7,7 +7,7 @@
 //
 // CREATED:         09/06/2019
 //
-// LAST EDITED:     09/06/2019
+// LAST EDITED:     09/07/2019
 ////
 
 #include <SortMedia/Operations/WarnOperation.h>
@@ -33,7 +33,7 @@ SortMedia::Policies::UnknownFileTypePolicy::getOperations() const
   char message[128];
   memset(&message, 0, sizeof(message));
   snprintf(message, sizeof(message) - 1,
-           "No rule to organize file\"%s\"",
+           "No rule to organize file \"%s\"",
            m_path.filename().string().c_str());
 
   std::list<std::unique_ptr<Interfaces::IFileOperation>> policy;

@@ -8,7 +8,7 @@
 //
 // CREATED:         09/05/2019
 //
-// LAST EDITED:     09/05/2019
+// LAST EDITED:     09/07/2019
 ////
 
 #ifndef __ET_ANYFILELOCATOR__
@@ -26,13 +26,13 @@ class SortMedia::FileLocators::AnyFileLocator
   : public SortMedia::Interfaces::IFileLocator
 {
 public:
-  AnyFileLocator(const FSAdaptor::IFilesystemAdaptor& adaptor
-                 = FSAdaptor::StandardFilesystemAdaptor{});
+  AnyFileLocator(const FSAdaptor::IFilesystemAdaptor& adaptor = s_stdAdaptor);
   virtual std::list<FSAdaptor::Path> recursivelyListFilesInDirectory
   (const FSAdaptor::Path& directory) const final override;
 
 private:
   const FSAdaptor::IFilesystemAdaptor& m_adaptor;
+  static const FSAdaptor::StandardFilesystemAdaptor s_stdAdaptor;
 };
 
 #endif // __ET_ANYFILELOCATOR__

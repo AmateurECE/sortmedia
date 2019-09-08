@@ -15,13 +15,15 @@
 #include <SortMedia/Policies/UnknownFileTypePolicy.h>
 #include <SortMedia/Policies/BasicMusicFileNamingPolicy.h>
 
-SortMedia::Schemas::BasicMusicOrganizationalPolicy
-::BasicMusicOrganizationalPolicy(const ILogger& logger)
+#include <FSAdaptor/Path.h>
+
+SortMedia::Schemas::BasicMusicOrganizationalSchema
+::BasicMusicOrganizationalSchema(Interfaces::ILogger& logger)
   : m_logger(logger)
 {}
 
-std::unique_ptr<Interfaces::IOrganizationalPolicy>
-SortMedia::Schemas::BasicMusicOrganizationalPolicy
+std::unique_ptr<SortMedia::Interfaces::IOrganizationalPolicy>
+SortMedia::Schemas::BasicMusicOrganizationalSchema
 ::makeOrganizer(const FSAdaptor::Path& path) const
 {
   std::unique_ptr<Interfaces::IOrganizationalPolicy> policy;
@@ -29,11 +31,12 @@ SortMedia::Schemas::BasicMusicOrganizationalPolicy
       || path.extension().string() == ".m4a"
       || path.extension().string() == ".mp3")
     {
-      policy = std::make_unique<BasicMusicFileNamingPolicy>(path);
+      policy = std::make_unique<Policies::BasicMusicFileNamingPolicy>(path);
     }
   else
     {
-      policy = std::make_unique<UnknownFileTypePolicy>(path, m_logger);
+      policy = std::make_unique<Policies::UnknownFileTypePolicy>
+        (path, m_logger);
     }
 
   return policy;

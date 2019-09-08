@@ -7,12 +7,13 @@
 //
 // CREATED:         08/27/2019
 //
-// LAST EDITED:     08/27/2019
+// LAST EDITED:     09/06/2019
 ////
 
 #ifndef __ET_ORGANIZATIONALSCHEMAFACTORY__
 #define __ET_ORGANIZATIONALSCHEMAFACTORY__
 
+#include <namespaces/Interfaces.h>
 #include <namespaces/Factories.h>
 #include <SortMedia/Interfaces/IOrganizationalSchema.h>
 
@@ -23,7 +24,7 @@ class SortMedia::Factories::OrganizationalSchemaFactory
 public:
   OrganizationalSchemaFactory();
   std::unique_ptr<Interfaces::IOrganizationalSchema>
-  makeOrganizationalSchema() const;
+  makeOrganizationalSchema(Interfaces::ILogger& logger) const;
 };
 
 #endif // __ET_ORGANIZATIONALSCHEMAFACTORY__

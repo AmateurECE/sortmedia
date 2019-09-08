@@ -18,23 +18,24 @@
 #define __ET_BASICMUSICORGANIZATIONALSCHEMA__
 
 #include <namespaces/Interfaces.h>
-#include <SortMedia/Schemas/OrganizationalPolicy.h>
+#include <namespaces/Schemas.h>
+#include <SortMedia/Schemas/OrganizationalSchema.h>
 
 #include <FSAdaptor/namespace.h>
 
 #include <memory>
 
-class SortMedia::Schemas::BasicMusicOrganizationalPolicy
-  : public SortMedia::Schemas::OrganizationalPolicy
+class SortMedia::Schemas::BasicMusicOrganizationalSchema
+  : public SortMedia::Schemas::OrganizationalSchema
 {
 public:
-  BasicMusicOrganizationalPolicy(const ILogger& logger);
+  BasicMusicOrganizationalSchema(Interfaces::ILogger& logger);
 
 private:
   virtual std::unique_ptr<Interfaces::IOrganizationalPolicy>
   makeOrganizer(const FSAdaptor::Path& path) const final override;
 
-  const ILogger& m_logger;
+  Interfaces::ILogger& m_logger;
 };
 
 #endif // __ET_BASICMUSICORGANIZATIONALSCHEMA__

@@ -22,7 +22,7 @@ CommandLine::ArgumentParser::ArgumentParser()
 
 CommandLine::ArgumentParser::ArgumentParser(int argc, char** argv)
 {
-  if (argc != s_expectedNumberOfArguments - 1)
+  if (argc != s_expectedNumberOfArguments + 1)
     {
       char errorMessage[128];
       memset(errorMessage, 0, sizeof(errorMessage));

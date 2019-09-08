@@ -9,14 +9,14 @@
 //
 // CREATED:         08/15/2019
 //
-// LAST EDITED:     08/27/2019
+// LAST EDITED:     09/06/2019
 ////
 
 #ifndef __ET_MEDIASORTER__
 #define __ET_MEDIASORTER__
 
 #include <namespaces/SortMedia.h>
-#include <SortMedia/Interfaces/ILogger.h>
+#include <namespaces/Interfaces.h>
 
 #include <string>
 
@@ -30,9 +30,9 @@ public:
   int sortDirectory(const std::string& directory);
 
 private:
-  Interfaces::ILogger& logger;
-  Interfaces::IOrganizationalSchema& schema;
-  Interfaces::IFileLocator& locator;
+  Interfaces::ILogger& m_logger;
+  Interfaces::IOrganizationalSchema& m_schema;
+  Interfaces::IFileLocator& m_locator;
 };
 
 #endif // __ET_MEDIASORTER__
