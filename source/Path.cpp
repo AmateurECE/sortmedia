@@ -24,7 +24,15 @@ const std::regex FSAdaptor::Path::s_filenameRegex{"(\\..+)$"};
 // Format observers
 std::string FSAdaptor::Path::string() const
 {
-  return join(m_components.begin(), m_components.end(), s_sep);
+  if (m_components[0] == "/")
+    {
+      return "/" + join(std::next(m_components.begin()),
+                        m_components.end(), s_sep);
+    }
+  else
+    {
+      return join(m_components.begin(), m_components.end(), s_sep);
+    }
 }
 
 // Decomposition
@@ -46,13 +54,12 @@ FSAdaptor::Path FSAdaptor::Path::extension() const
 
 FSAdaptor::Path FSAdaptor::Path::root_path() const
 {
-  if (m_components.front() == "."
-      || m_components.front() == "..")
+  if (m_components.front() == "/")
     {
-      return {};
+      return Path{"/"};
     }
 
-  return Path{s_sep};
+  return {};
 }
 
 FSAdaptor::Path FSAdaptor::Path::parent_path() const
@@ -75,9 +82,56 @@ FSAdaptor::Path FSAdaptor::Path::operator/(const FSAdaptor::Path& that) const
       + join(that.m_components.begin(), that.m_components.end(), s_sep)};
 }
 
+std::ostream& operator<<(std::ostream& out, const FSAdaptor::Path& that)
+{
+  out << that.string();
+  return out;
+}
+
+// Iterators
+FSAdaptor::Path::const_iterator FSAdaptor::Path::cbegin() const
+{
+  return const_iterator{m_components.cbegin()};
+}
+
+FSAdaptor::Path::const_iterator FSAdaptor::Path::cend() const
+{
+  return const_iterator{m_components.cend()};
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 // Private Functions
 ////
+
+std::string FSAdaptor::Path::normalizePath(std::string path)
+  const
+{
+  // 1. If the path is empty, stop (normal form of empty path is empty path)
+  if (path == "") return path;
+
+  // 2. Replace each directory-separator (which may consist of multiple
+  //    slashes) with a single path::preferred_separator.
+  static const std::regex multSep{std::string{s_sep} + "+"};
+  path = std::regex_replace(path, multSep, "/");
+
+  // 4. Remove each dot and any immediately following directory-separator.
+  static const std::regex dotAtBegin{"^\\./"};
+  path = std::regex_replace(path, dotAtBegin, "");
+  static const std::regex dotInMiddle{"/\\./"};
+  path = std::regex_replace(path, dotInMiddle, "/");
+
+  // TODO: Implement tests and rest of normalizePath
+  // 5. Remove each non-dot-dot filename immediately followed by a
+  //    directory-separator and a dot-dot, along with any immediately following
+  //    directory-separator.
+  // 6. If there is root-directory, remove all dot-dots and any
+  //    directory-separators immediately following them.
+  // 7. If the last filename is dot-dot, remove any trailing
+  //    directory-separator.
+  // 8. If the path is empty, add a dot (normal form of ./ is .)
+
+  return path;
+}
 
 std::string
 FSAdaptor::Path::join(const std::vector<std::string>::const_iterator& first,

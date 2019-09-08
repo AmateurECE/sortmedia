@@ -7,7 +7,7 @@
 #
 # CREATED:          09/03/2019
 #
-# LAST EDITED:      09/04/2019
+# LAST EDITED:      09/08/2019
 ###
 
 cmake_minimum_required(VERSION 3.15.1)
@@ -25,6 +25,8 @@ configure_file(
     "${PROJECT_BINARY_DIR}/include/fsadaptor_config.h"
 )
 
+# TODO: Ensure that the library can be installed correctly.
+
 set(HEADERS
     include/FSAdaptor/Path.h
     include/FSAdaptor/StandardFilesystemAdaptor.h
@@ -35,6 +37,7 @@ set(HEADERS
 )
 
 add_library(fsadaptor STATIC
+    source/PathConstIter.cpp
     source/Path.cpp
     source/StandardFilesystemAdaptor.cpp
     "${HEADERS}"

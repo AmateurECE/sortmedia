@@ -22,9 +22,6 @@
 #include <string>
 #include <vector>
 
-// TODO: Implement operator==
-// TODO: Implement operator<<
-
 class FSAdaptor::Path
 {
 public:
@@ -32,8 +29,13 @@ public:
   Path() : Path{""} {}
   template<typename S>
   Path(const S& source)
-    : m_components{split(*s_sep, std::string{source})}
-  {}
+    : m_components{split(*s_sep, normalizePath(std::string{source}))}
+  {
+    if (m_components.size() > 1 && m_components[0] == "")
+      {
+        m_components[0] = "/";
+      }
+  }
 
   // Format observers
   std::string string() const;
@@ -44,14 +46,24 @@ public:
   Path parent_path() const;
   Path root_path() const;
 
+  // Queries
+  bool has_root_path() const; // TODO: Implement has_root_path
+  bool has_filename() const; // TODO: Implement has_filename
+  bool has_extension() const; // TODO: Implement has_extension
+
   // Operators
   // Concatenate two paths (without separator)
   Path operator+(const Path& that) const;
+  Path operator+=(const Path& that) const; // TODO: Implement operator+=
   // Concatenate two paths (with separator)
   Path operator/(const Path& that) const;
+  Path operator/=(const Path& that) const; // TODO: Implement operator/=
+  // Equality
+  bool operator==(const Path& that) const; // TODO: Implement operator==
+  bool operator!=(const Path& that) const; // TODO: Implement operator!=
 
   // Iterators
-  typedef std::vector<std::string>::const_iterator const_iterator;
+  typedef PathConstIter const_iterator;
   const_iterator cbegin() const;
   const_iterator cend() const;
 
@@ -61,10 +73,33 @@ private:
                    const char *const delimiter) const;
   std::vector<std::string> split(char delimiter,
                                  const std::string& input) const;
+  std::string normalizePath(std::string path) const;
   
   std::vector<std::string> m_components;
   static const std::regex s_filenameRegex;
   static const constexpr char* s_sep = "/";
+};
+
+std::ostream& operator<<(std::ostream& out, const FSAdaptor::Path& path);
+
+class FSAdaptor::PathConstIter
+  : public virtual std::iterator<std::input_iterator_tag, const Path>
+{
+public:
+  PathConstIter() = delete;
+  ~PathConstIter() {}
+  PathConstIter(std::vector<std::string>::const_iterator);
+  PathConstIter(const PathConstIter&);
+  PathConstIter& operator=(const PathConstIter& that);
+  PathConstIter& operator++();
+  PathConstIter operator++(int);
+  bool operator==(const PathConstIter& that) const;
+  bool operator!=(const PathConstIter& that) const;
+  const Path& operator*() const;
+
+private:
+  std::vector<std::string>::const_iterator m_iterator;
+  Path m_element;
 };
 
 #endif // __ET_PATH__

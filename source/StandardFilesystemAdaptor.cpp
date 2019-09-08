@@ -7,12 +7,11 @@
 //
 // CREATED:         08/29/2019
 //
-// LAST EDITED:     09/05/2019
+// LAST EDITED:     09/08/2019
 ////
 
-// TODO: Port to Windows
+// TODO: Switch to using std::filesystem::path
 // TODO: Add support for non-english locales
-//  (After making the switch to use std::filesystem)
 
 // SortMedia headers
 #include <FSAdaptor/StandardFilesystemAdaptor.h>
