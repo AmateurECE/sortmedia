@@ -11,7 +11,7 @@
 //
 // CREATED:         09/06/2019
 //
-// LAST EDITED:     09/06/2019
+// LAST EDITED:     09/08/2019
 ////
 
 #ifndef __ET_BASICMUSICORGANIZATIONALSCHEMA__
@@ -29,13 +29,17 @@ class SortMedia::Schemas::BasicMusicOrganizationalSchema
   : public SortMedia::Schemas::OrganizationalSchema
 {
 public:
-  BasicMusicOrganizationalSchema(Interfaces::ILogger& logger);
+  BasicMusicOrganizationalSchema(Interfaces::ILogger& logger,
+                                 const FSAdaptor::IFilesystemAdaptor& adaptor
+                                 = s_stdAdaptor);
 
 private:
   virtual std::unique_ptr<Interfaces::IOrganizationalPolicy>
   makeOrganizer(const FSAdaptor::Path& path) const final override;
 
   Interfaces::ILogger& m_logger;
+  const FSAdaptor::IFilesystemAdaptor& m_adaptor;
+  static const FSAdaptor::IFilesystemAdaptor& s_stdAdaptor;
 };
 
 #endif // __ET_BASICMUSICORGANIZATIONALSCHEMA__

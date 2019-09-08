@@ -7,7 +7,7 @@
 //
 // CREATED:         09/05/2019
 //
-// LAST EDITED:     09/06/2019
+// LAST EDITED:     09/08/2019
 ////
 
 #ifndef __ET_POLICIES__
@@ -20,6 +20,7 @@ namespace SortMedia
     class OrganizationalPolicy;
     class BasicMusicFileNamingPolicy;
     class UnknownFileTypePolicy;
+    class DoNothingPolicy;
   };
 };
 
