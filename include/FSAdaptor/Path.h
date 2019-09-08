@@ -76,7 +76,6 @@ private:
   std::string normalizePath(std::string path) const;
   
   std::vector<std::string> m_components;
-  static const std::regex s_filenameRegex;
   static const constexpr char* s_sep = "/";
 };
 

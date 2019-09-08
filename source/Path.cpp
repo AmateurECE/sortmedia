@@ -15,8 +15,6 @@
 #include <sstream>
 #include <iterator>
 
-const std::regex FSAdaptor::Path::s_filenameRegex{"(\\..+)$"};
-
 ///////////////////////////////////////////////////////////////////////////////
 // API Functions
 ////
@@ -43,9 +41,10 @@ FSAdaptor::Path FSAdaptor::Path::filename() const
 
 FSAdaptor::Path FSAdaptor::Path::extension() const
 {
+  static const std::regex extensionRegex{"(\\.[^.]+)$"};
   std::smatch results;
   if (m_components.back()[0] != '.' // Extension of hidden files is ""
-      && std::regex_search(m_components.back(), results, s_filenameRegex))
+      && std::regex_search(m_components.back(), results, extensionRegex))
     {
       return Path{results[0].str()};
     }
