@@ -9,7 +9,7 @@
 //
 // CREATED:         08/30/2019
 //
-// LAST EDITED:     09/05/2019
+// LAST EDITED:     09/08/2019
 ////
 
 #ifndef __ET_PATH__
@@ -17,6 +17,7 @@
 
 #include <FSAdaptor/namespace.h>
 
+#include <iterator>
 #include <regex>
 #include <string>
 #include <vector>
@@ -48,6 +49,11 @@ public:
   Path operator+(const Path& that) const;
   // Concatenate two paths (with separator)
   Path operator/(const Path& that) const;
+
+  // Iterators
+  typedef std::vector<std::string>::const_iterator const_iterator;
+  const_iterator cbegin() const;
+  const_iterator cend() const;
 
 private:
   std::string join(const std::vector<std::string>::const_iterator& first,
