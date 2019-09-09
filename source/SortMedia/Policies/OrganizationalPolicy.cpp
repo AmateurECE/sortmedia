@@ -7,7 +7,7 @@
 //
 // CREATED:         09/06/2019
 //
-// LAST EDITED:     09/06/2019
+// LAST EDITED:     09/09/2019
 ////
 
 #include <SortMedia/Policies/OrganizationalPolicy.h>
@@ -18,7 +18,18 @@ SortMedia::Policies::OrganizationalPolicy::OrganizationalPolicy()
 
 void SortMedia::Policies::OrganizationalPolicy::verify()
 {
-  m_prerequisites = getPrerequisites();
+  viable();
+  m_preconditions = getPreconditions();
+  for (auto& i : m_preconditions)
+    {
+      i->verify();
+    }
+
+  m_postconditions = getPostconditions();
+  for (auto& i : m_postconditions)
+    {
+      i->verify();
+    }
 }
 
 std::list<std::unique_ptr<SortMedia::Interfaces::IFileOperation>>
@@ -28,7 +39,7 @@ SortMedia::Policies::OrganizationalPolicy
   std::list<std::unique_ptr<Interfaces::IFileOperation>> operations
     = getOperations();
 
-  for (auto& i : m_prerequisites)
+  for (auto& i : m_preconditions)
     {
       std::list<std::unique_ptr<Interfaces::IFileOperation>> prereqOps
         = i->administer();
@@ -41,7 +52,41 @@ SortMedia::Policies::OrganizationalPolicy
         }
     }
 
+  for (auto& i : m_postconditions)
+    {
+      std::list<std::unique_ptr<Interfaces::IFileOperation>> postreqOps
+        = i->administer();
+      while (postreqOps.size() > 0)
+        {
+          std::unique_ptr<Interfaces::IFileOperation> nextOp
+            = std::move(postreqOps.front());
+          operations.push_back(std::move(nextOp));
+          postreqOps.pop_front();
+        }
+    }
+
   return operations;
+}
+
+void SortMedia::Policies::OrganizationalPolicy::viable() const
+{}
+
+std::list<std::unique_ptr<SortMedia::Interfaces::IOrganizationalPolicy>>
+SortMedia::Policies::OrganizationalPolicy::getPreconditions()
+{
+  return {};
+}
+
+std::list<std::unique_ptr<SortMedia::Interfaces::IOrganizationalPolicy>>
+SortMedia::Policies::OrganizationalPolicy::getPostconditions()
+{
+  return {};
+}
+
+std::list<std::unique_ptr<SortMedia::Interfaces::IFileOperation>>
+SortMedia::Policies::OrganizationalPolicy::getOperations() const
+{
+  return {};
 }
 
 ///////////////////////////////////////////////////////////////////////////////

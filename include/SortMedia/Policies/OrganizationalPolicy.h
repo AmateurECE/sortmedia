@@ -8,7 +8,7 @@
 //
 // CREATED:         09/06/2019
 //
-// LAST EDITED:     09/06/2019
+// LAST EDITED:     09/09/2019
 ////
 
 #ifndef __ET_ORGANIZATIONALPOLICY__
@@ -38,10 +38,13 @@ private:
   template<class T>
   using IFList = std::list<std::unique_ptr<T>>;
 
-  virtual IFList<Interfaces::IOrganizationalPolicy> getPrerequisites() = 0;
-  virtual IFList<Interfaces::IFileOperation> getOperations() const = 0;
+  virtual void viable() const;
+  virtual IFList<Interfaces::IOrganizationalPolicy> getPreconditions();
+  virtual IFList<Interfaces::IOrganizationalPolicy> getPostconditions();
+  virtual IFList<Interfaces::IFileOperation> getOperations() const;
 
-  IFList<Interfaces::IOrganizationalPolicy> m_prerequisites;
+  IFList<Interfaces::IOrganizationalPolicy> m_preconditions;
+  IFList<Interfaces::IOrganizationalPolicy> m_postconditions;
 };
 
 #endif // __ET_ORGANIZATIONALPOLICY__

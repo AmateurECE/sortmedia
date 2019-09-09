@@ -33,13 +33,6 @@ public:
   BasicMusicFileNamingPolicy(FileTypes::MusicFile path);
 
 private:
-  template<class T>
-  using IFList = std::list<std::unique_ptr<T>>;
-
-  virtual IFList<Interfaces::IOrganizationalPolicy> getPrerequisites()
-    final override;
-  virtual IFList<Interfaces::IFileOperation> getOperations()
-    const final override;
 
   FileTypes::MusicFile m_musicFile;
 };

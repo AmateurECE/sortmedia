@@ -8,7 +8,7 @@
 //
 // CREATED:         09/06/2019
 //
-// LAST EDITED:     09/06/2019
+// LAST EDITED:     09/09/2019
 ////
 
 #ifndef __ET_UNKNOWNFILETYPEPOLICY__
@@ -34,8 +34,6 @@ private:
   template<class T>
   using IFList = std::list<std::unique_ptr<T>>;
 
-  virtual IFList<Interfaces::IOrganizationalPolicy> getPrerequisites()
-    final override;
   virtual IFList<Interfaces::IFileOperation> getOperations()
     const final override;
 

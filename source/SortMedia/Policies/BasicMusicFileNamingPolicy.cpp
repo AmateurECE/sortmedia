@@ -18,16 +18,4 @@ SortMedia::Policies::BasicMusicFileNamingPolicy
   : m_musicFile{std::move(path)}
 {}
 
-std::list<std::unique_ptr<SortMedia::Interfaces::IOrganizationalPolicy>>
-SortMedia::Policies::BasicMusicFileNamingPolicy::getPrerequisites()
-{
-  return {};
-}
-
-std::list<std::unique_ptr<SortMedia::Interfaces::IFileOperation>>
-SortMedia::Policies::BasicMusicFileNamingPolicy::getOperations() const
-{
-  return {};
-}
-
 ///////////////////////////////////////////////////////////////////////////////

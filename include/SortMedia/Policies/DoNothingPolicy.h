@@ -7,7 +7,7 @@
 //
 // CREATED:         09/08/2019
 //
-// LAST EDITED:     09/08/2019
+// LAST EDITED:     09/09/2019
 ////
 
 #ifndef __ET_DONOTHINGPOLICY__
@@ -26,15 +26,6 @@ class SortMedia::Policies::DoNothingPolicy
 {
 public:
   DoNothingPolicy() {}
-
-private:
-  template<class T>
-  using IFList = std::list<std::unique_ptr<T>>;
-
-  virtual IFList<Interfaces::IOrganizationalPolicy> getPrerequisites()
-    final override { return {}; }
-  virtual IFList<Interfaces::IFileOperation> getOperations()
-    const final override { return {}; }
 };
 
 #endif // __ET_DONOTHINGPOLICY__

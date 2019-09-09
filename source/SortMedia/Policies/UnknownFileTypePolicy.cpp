@@ -7,7 +7,7 @@
 //
 // CREATED:         09/06/2019
 //
-// LAST EDITED:     09/07/2019
+// LAST EDITED:     09/09/2019
 ////
 
 #include <SortMedia/Operations/WarnOperation.h>
@@ -20,12 +20,6 @@ SortMedia::Policies::UnknownFileTypePolicy
                         Interfaces::ILogger& logger)
   : m_logger{logger}, m_path{path}
 {}
-
-std::list<std::unique_ptr<SortMedia::Interfaces::IOrganizationalPolicy>>
-SortMedia::Policies::UnknownFileTypePolicy::getPrerequisites()
-{
-  return {};
-}
 
 std::list<std::unique_ptr<SortMedia::Interfaces::IFileOperation>>
 SortMedia::Policies::UnknownFileTypePolicy::getOperations() const
