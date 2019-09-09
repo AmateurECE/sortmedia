@@ -21,6 +21,7 @@ namespace SortMedia
     class BasicMusicFileNaming;
     class UnknownFileType;
     class DoNothing;
+    class DeleteDirectoryIfEmpty;
 
     class VerificationError;
   };

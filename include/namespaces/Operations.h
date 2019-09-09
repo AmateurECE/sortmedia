@@ -18,6 +18,7 @@ namespace SortMedia
   namespace Operations
   {
     class Warn;
+    class DeleteDirectoryIfEmpty;
   };
 };
 
