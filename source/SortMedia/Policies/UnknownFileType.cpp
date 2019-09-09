@@ -10,7 +10,7 @@
 // LAST EDITED:     09/09/2019
 ////
 
-#include <SortMedia/Operations/WarnOperation.h>
+#include <SortMedia/Operations/Warn.h>
 #include <SortMedia/Policies/UnknownFileType.h>
 
 #include <FSAdaptor/Path.h>
@@ -31,7 +31,7 @@ SortMedia::Policies::UnknownFileType::getOperations() const
            m_path.filename().string().c_str());
 
   std::list<std::unique_ptr<Interfaces::IFileOperation>> policy;
-  policy.push_back(std::make_unique<Operations::WarnOperation>
+  policy.push_back(std::make_unique<Operations::Warn>
                    (m_logger, std::string{message}));
   return policy;
 }

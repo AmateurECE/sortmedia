@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////////
-// NAME:            WarnOperation.h
+// NAME:            Warn.h
 //
 // AUTHOR:          Ethan D. Twardy <edtwardy@mtu.edu>
 //
@@ -7,7 +7,7 @@
 //
 // CREATED:         09/05/2019
 //
-// LAST EDITED:     09/08/2019
+// LAST EDITED:     09/09/2019
 ////
 
 #ifndef __ET_WARNOPERATION__
@@ -19,11 +19,11 @@
 
 #include <string>
 
-class SortMedia::Operations::WarnOperation
+class SortMedia::Operations::Warn
   : public SortMedia::Interfaces::IFileOperation
 {
 public:
-  WarnOperation(Interfaces::ILogger& logger, std::string message);
+  Warn(Interfaces::ILogger& logger, std::string message);
   virtual void apply() final override;
   virtual void revert() final override;
 

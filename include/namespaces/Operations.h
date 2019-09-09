@@ -7,7 +7,7 @@
 //
 // CREATED:         09/05/2019
 //
-// LAST EDITED:     09/05/2019
+// LAST EDITED:     09/09/2019
 ////
 
 #ifndef __ET_OPERATIONS__
@@ -17,7 +17,7 @@ namespace SortMedia
 {
   namespace Operations
   {
-    class WarnOperation;
+    class Warn;
   };
 };
 

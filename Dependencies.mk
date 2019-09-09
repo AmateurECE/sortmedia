@@ -18,7 +18,7 @@ SortMedia-obj += source/SortMedia/Policies/BasicMusicFileNaming.o
 SortMedia-obj += source/SortMedia/Policies/UnknownFileType.o
 SortMedia-obj += source/SortMedia/Policies/OrganizationalBase.o
 
-SortMedia-obj += source/SortMedia/Operations/WarnOperation.o
+SortMedia-obj += source/SortMedia/Operations/Warn.o
 SortMedia-obj += source/SortMedia/FileTypes/MusicFile.o
 SortMedia-obj += source/SortMedia/FileTypes/LibraryFile.o
 SortMedia-obj += source/SortMedia/Adaptors/TagLibAdaptor.o
