@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////////
-// NAME:            PolicyVerificationError.h
+// NAME:            VerificationError.h
 //
 // AUTHOR:          Ethan D. Twardy <edtwardy@mtu.edu>
 //
@@ -8,7 +8,7 @@
 //
 // CREATED:         09/08/2019
 //
-// LAST EDITED:     09/08/2019
+// LAST EDITED:     09/09/2019
 ////
 
 #ifndef __ET_POLICYVERIFICATIONERROR__
@@ -19,11 +19,11 @@
 #include <exception>
 #include <string>
 
-class SortMedia::Policies::PolicyVerificationError
+class SortMedia::Policies::VerificationError
   : public std::exception
 {
 public:
-  PolicyVerificationError(const std::string& message);
+  VerificationError(const std::string& message);
   const char* what() const noexcept;
 
 private:

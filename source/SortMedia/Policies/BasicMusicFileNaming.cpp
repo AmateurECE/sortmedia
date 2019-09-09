@@ -1,9 +1,9 @@
 ///////////////////////////////////////////////////////////////////////////////
-// NAME:            BasicMusicFileNamingPolicy.cpp
+// NAME:            BasicMusicFileNaming.cpp
 //
 // AUTHOR:          Ethan D. Twardy <edtwardy@mtu.edu>
 //
-// DESCRIPTION:     Implementation of the BasicMusicFileNamingPolicy
+// DESCRIPTION:     Implementation of the BasicMusicFileNaming
 //
 // CREATED:         09/06/2019
 //
@@ -11,10 +11,10 @@
 ////
 
 #include <SortMedia/Interfaces/IFileOperation.h>
-#include <SortMedia/Policies/BasicMusicFileNamingPolicy.h>
+#include <SortMedia/Policies/BasicMusicFileNaming.h>
 
-SortMedia::Policies::BasicMusicFileNamingPolicy
-::BasicMusicFileNamingPolicy(FileTypes::MusicFile path)
+SortMedia::Policies::BasicMusicFileNaming
+::BasicMusicFileNaming(FileTypes::MusicFile path)
   : m_musicFile{std::move(path)}
 {}
 

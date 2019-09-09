@@ -13,10 +13,10 @@
 SortMedia-obj += source/SortMedia/Schemas/BasicMusicOrganizationalSchema.o
 SortMedia-obj += source/SortMedia/Schemas/OrganizationalSchema.o
 
-SortMedia-obj += source/SortMedia/Policies/PolicyVerificationError.o
-SortMedia-obj += source/SortMedia/Policies/BasicMusicFileNamingPolicy.o
-SortMedia-obj += source/SortMedia/Policies/UnknownFileTypePolicy.o
-SortMedia-obj += source/SortMedia/Policies/OrganizationalPolicy.o
+SortMedia-obj += source/SortMedia/Policies/VerificationError.o
+SortMedia-obj += source/SortMedia/Policies/BasicMusicFileNaming.o
+SortMedia-obj += source/SortMedia/Policies/UnknownFileType.o
+SortMedia-obj += source/SortMedia/Policies/OrganizationalBase.o
 
 SortMedia-obj += source/SortMedia/Operations/WarnOperation.o
 SortMedia-obj += source/SortMedia/FileTypes/MusicFile.o

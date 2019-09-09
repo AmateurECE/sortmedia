@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////////
-// NAME:            DoNothingPolicy.h
+// NAME:            DoNothing.h
 //
 // AUTHOR:          Ethan D. Twardy <edtwardy@mtu.edu>
 //
@@ -15,17 +15,17 @@
 
 #include <namespaces/Interfaces.h>
 #include <namespaces/Policies.h>
-#include <SortMedia/Policies/OrganizationalPolicy.h>
+#include <SortMedia/Policies/OrganizationalBase.h>
 #include <SortMedia/Interfaces/IFileOperation.h>
 
 #include <list>
 #include <memory>
 
-class SortMedia::Policies::DoNothingPolicy
-  : public OrganizationalPolicy
+class SortMedia::Policies::DoNothing
+  : public OrganizationalBase
 {
 public:
-  DoNothingPolicy() {}
+  DoNothing() {}
 };
 
 #endif // __ET_DONOTHINGPOLICY__

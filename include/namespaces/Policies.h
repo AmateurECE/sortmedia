@@ -13,18 +13,16 @@
 #ifndef __ET_POLICIES__
 #define __ET_POLICIES__
 
-// TODO: Remove Policy from these names
-
 namespace SortMedia
 {
   namespace Policies
   {
-    class OrganizationalPolicy;
-    class BasicMusicFileNamingPolicy;
-    class UnknownFileTypePolicy;
-    class DoNothingPolicy;
+    class OrganizationalBase;
+    class BasicMusicFileNaming;
+    class UnknownFileType;
+    class DoNothing;
 
-    class PolicyVerificationError;
+    class VerificationError;
   };
 };
 

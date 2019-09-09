@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////////
-// NAME:            UnknownFileTypePolicy.cpp
+// NAME:            UnknownFileType.cpp
 //
 // AUTHOR:          Ethan D. Twardy <edtwardy@mtu.edu>
 //
@@ -11,18 +11,18 @@
 ////
 
 #include <SortMedia/Operations/WarnOperation.h>
-#include <SortMedia/Policies/UnknownFileTypePolicy.h>
+#include <SortMedia/Policies/UnknownFileType.h>
 
 #include <FSAdaptor/Path.h>
 
-SortMedia::Policies::UnknownFileTypePolicy
-::UnknownFileTypePolicy(const FSAdaptor::Path& path,
+SortMedia::Policies::UnknownFileType
+::UnknownFileType(const FSAdaptor::Path& path,
                         Interfaces::ILogger& logger)
   : m_logger{logger}, m_path{path}
 {}
 
 std::list<std::unique_ptr<SortMedia::Interfaces::IFileOperation>>
-SortMedia::Policies::UnknownFileTypePolicy::getOperations() const
+SortMedia::Policies::UnknownFileType::getOperations() const
 {
   char message[128];
   memset(&message, 0, sizeof(message));

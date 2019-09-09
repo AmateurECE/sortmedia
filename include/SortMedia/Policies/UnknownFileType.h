@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////////
-// NAME:            UnknownFileTypePolicy.h
+// NAME:            UnknownFileType.h
 //
 // AUTHOR:          Ethan D. Twardy <edtwardy@mtu.edu>
 //
@@ -16,18 +16,18 @@
 
 #include <namespaces/Policies.h>
 #include <namespaces/Interfaces.h>
-#include <SortMedia/Policies/OrganizationalPolicy.h>
+#include <SortMedia/Policies/OrganizationalBase.h>
 
 #include <FSAdaptor/namespace.h>
 
 #include <list>
 #include <memory>
 
-class SortMedia::Policies::UnknownFileTypePolicy
-  : public OrganizationalPolicy
+class SortMedia::Policies::UnknownFileType
+  : public OrganizationalBase
 {
 public:
-  UnknownFileTypePolicy(const FSAdaptor::Path& path,
+  UnknownFileType(const FSAdaptor::Path& path,
                         Interfaces::ILogger& logger);
 
 private:

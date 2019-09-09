@@ -1,10 +1,10 @@
 ///////////////////////////////////////////////////////////////////////////////
-// NAME:            OrganizationalPolicy.h
+// NAME:            OrganizationalBase.h
 //
 // AUTHOR:          Ethan D. Twardy <edtwardy@mtu.edu>
 //
 // DESCRIPTION:     Abstract base class implementing a template for all
-//                  OrganizationalPolicy derived classes.
+//                  OrganizationalBase derived classes.
 //
 // CREATED:         09/06/2019
 //
@@ -21,11 +21,11 @@
 #include <list>
 #include <memory>
 
-class SortMedia::Policies::OrganizationalPolicy
+class SortMedia::Policies::OrganizationalBase
   : public SortMedia::Interfaces::IOrganizationalPolicy
 {
 public:
-  OrganizationalPolicy();
+  OrganizationalBase();
 
   // Ensures that the policy can take effect
   virtual void verify() final override;

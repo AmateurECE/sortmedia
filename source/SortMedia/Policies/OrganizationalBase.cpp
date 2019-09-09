@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////////
-// NAME:            OrganizationalPolicy.cpp
+// NAME:            OrganizationalBase.cpp
 //
 // AUTHOR:          Ethan D. Twardy <edtwardy@mtu.edu>
 //
@@ -10,13 +10,13 @@
 // LAST EDITED:     09/09/2019
 ////
 
-#include <SortMedia/Policies/OrganizationalPolicy.h>
+#include <SortMedia/Policies/OrganizationalBase.h>
 #include <SortMedia/Interfaces/IFileOperation.h>
 
-SortMedia::Policies::OrganizationalPolicy::OrganizationalPolicy()
+SortMedia::Policies::OrganizationalBase::OrganizationalBase()
 {}
 
-void SortMedia::Policies::OrganizationalPolicy::verify()
+void SortMedia::Policies::OrganizationalBase::verify()
 {
   viable();
   m_preconditions = getPreconditions();
@@ -33,7 +33,7 @@ void SortMedia::Policies::OrganizationalPolicy::verify()
 }
 
 std::list<std::unique_ptr<SortMedia::Interfaces::IFileOperation>>
-SortMedia::Policies::OrganizationalPolicy
+SortMedia::Policies::OrganizationalBase
 ::administer() const
 {
   std::list<std::unique_ptr<Interfaces::IFileOperation>> operations
@@ -68,23 +68,23 @@ SortMedia::Policies::OrganizationalPolicy
   return operations;
 }
 
-void SortMedia::Policies::OrganizationalPolicy::viable() const
+void SortMedia::Policies::OrganizationalBase::viable() const
 {}
 
 std::list<std::unique_ptr<SortMedia::Interfaces::IOrganizationalPolicy>>
-SortMedia::Policies::OrganizationalPolicy::getPreconditions()
+SortMedia::Policies::OrganizationalBase::getPreconditions()
 {
   return {};
 }
 
 std::list<std::unique_ptr<SortMedia::Interfaces::IOrganizationalPolicy>>
-SortMedia::Policies::OrganizationalPolicy::getPostconditions()
+SortMedia::Policies::OrganizationalBase::getPostconditions()
 {
   return {};
 }
 
 std::list<std::unique_ptr<SortMedia::Interfaces::IFileOperation>>
-SortMedia::Policies::OrganizationalPolicy::getOperations() const
+SortMedia::Policies::OrganizationalBase::getOperations() const
 {
   return {};
 }

@@ -14,9 +14,9 @@
 
 #include <SortMedia/Adaptors/TagLibAdaptor.h>
 #include <SortMedia/FileTypes/MusicFile.h>
-#include <SortMedia/Policies/BasicMusicFileNamingPolicy.h>
-#include <SortMedia/Policies/DoNothingPolicy.h>
-#include <SortMedia/Policies/UnknownFileTypePolicy.h>
+#include <SortMedia/Policies/BasicMusicFileNaming.h>
+#include <SortMedia/Policies/DoNothing.h>
+#include <SortMedia/Policies/UnknownFileType.h>
 
 #include <FSAdaptor/IFilesystemAdaptor.h>
 #include <FSAdaptor/StandardFilesystemAdaptor.h>
@@ -41,21 +41,21 @@ SortMedia::Schemas::BasicMusicOrganizationalSchema
 
   if (m_adaptor.isDirectory(path))
     {
-      policy = std::make_unique<Policies::DoNothingPolicy>();
+      policy = std::make_unique<Policies::DoNothing>();
     }
 
   else if (extension == ".flac"
       || extension == ".m4a"
       || extension == ".mp3")
     {
-      policy = std::make_unique<Policies::BasicMusicFileNamingPolicy>
+      policy = std::make_unique<Policies::BasicMusicFileNaming>
         (FileTypes::MusicFile{path,
             std::make_unique<Adaptors::TagLibAdaptor>(path)});
     }
 
   else
     {
-      policy = std::make_unique<Policies::UnknownFileTypePolicy>
+      policy = std::make_unique<Policies::UnknownFileType>
         (path, m_logger);
     }
 

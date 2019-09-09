@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////////
-// NAME:            BasicMusicFileNamingPolicy.h
+// NAME:            BasicMusicFileNaming.h
 //
 // AUTHOR:          Ethan D. Twardy <edtwardy@mtu.edu>
 //
@@ -19,18 +19,18 @@
 #include <namespaces/Interfaces.h>
 #include <namespaces/Policies.h>
 #include <SortMedia/FileTypes/MusicFile.h>
-#include <SortMedia/Policies/OrganizationalPolicy.h>
+#include <SortMedia/Policies/OrganizationalBase.h>
 
 #include <FSAdaptor/namespace.h>
 
 #include <list>
 #include <memory>
 
-class SortMedia::Policies::BasicMusicFileNamingPolicy
-  : public OrganizationalPolicy
+class SortMedia::Policies::BasicMusicFileNaming
+  : public OrganizationalBase
 {
 public:
-  BasicMusicFileNamingPolicy(FileTypes::MusicFile path);
+  BasicMusicFileNaming(FileTypes::MusicFile path);
 
 private:
 
