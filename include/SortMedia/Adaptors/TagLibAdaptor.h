@@ -8,7 +8,7 @@
 //
 // CREATED:         09/05/2019
 //
-// LAST EDITED:     09/05/2019
+// LAST EDITED:     09/09/2019
 ////
 
 #ifndef __ET_TAGLIBADAPTOR__
@@ -22,11 +22,7 @@
 #include <memory>
 #include <string>
 
-// Forward declaration
-namespace TagLib
-{
-  class FileRef;
-}
+#include <taglib/fileref.h>
 
 class SortMedia::Adaptors::TagLibAdaptor
   : public SortMedia::Interfaces::IMusicTagEditorAdaptor

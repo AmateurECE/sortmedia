@@ -7,7 +7,7 @@
 //
 // CREATED:         09/05/2019
 //
-// LAST EDITED:     09/05/2019
+// LAST EDITED:     09/09/2019
 ////
 
 #ifndef __ET_MUSICFILE__
@@ -16,6 +16,7 @@
 #include <namespaces/Interfaces.h>
 #include <namespaces/Adaptors.h>
 #include <namespaces/FileTypes.h>
+#include <SortMedia/Interfaces/IMusicTagEditorAdaptor.h>
 #include <SortMedia/FileTypes/LibraryFile.h>
 
 #include <FSAdaptor/namespace.h>
@@ -30,6 +31,10 @@ public:
             std::unique_ptr<Interfaces::IMusicTagEditorAdaptor> tagAdaptor,
             const FSAdaptor::IFilesystemAdaptor& fsAdaptor
             = FSAdaptor::StandardFilesystemAdaptor{});
+  MusicFile(const MusicFile&) = delete;
+  MusicFile(MusicFile&&);
+  MusicFile& operator=(const MusicFile&) = delete;
+
   Interfaces::IMusicTagEditorAdaptor& getTagEditor();
 
 private:

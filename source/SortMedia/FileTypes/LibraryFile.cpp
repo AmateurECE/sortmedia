@@ -7,7 +7,7 @@
 //
 // CREATED:         09/05/2019
 //
-// LAST EDITED:     09/05/2019
+// LAST EDITED:     09/09/2019
 ////
 
 #include <SortMedia/FileTypes/LibraryFile.h>
@@ -15,9 +15,14 @@
 #include <FSAdaptor/Path.h>
 
 SortMedia::FileTypes::LibraryFile
-::LibraryFile(const FSAdaptor::Path& path,
+::LibraryFile(FSAdaptor::Path path,
               const FSAdaptor::IFilesystemAdaptor& adaptor)
-  : m_path(std::make_unique<FSAdaptor::Path>(path)), m_adaptor(adaptor)
+  : m_path{std::make_unique<FSAdaptor::Path>(path)}, m_adaptor(adaptor)
+{}
+
+SortMedia::FileTypes::LibraryFile
+::LibraryFile(LibraryFile&& that)
+  : m_path{std::move(that.m_path)}, m_adaptor{that.m_adaptor}
 {}
 
 void SortMedia::FileTypes::LibraryFile::rename(const FSAdaptor::Path& path)

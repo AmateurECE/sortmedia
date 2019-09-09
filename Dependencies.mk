@@ -7,14 +7,17 @@
 #
 # CREATED:	    08/15/2019
 #
-# LAST EDITED:	    09/06/2019
+# LAST EDITED:	    09/09/2019
 ###
 
 SortMedia-obj += source/SortMedia/Schemas/BasicMusicOrganizationalSchema.o
 SortMedia-obj += source/SortMedia/Schemas/OrganizationalSchema.o
+
+SortMedia-obj += source/SortMedia/Policies/PolicyVerificationError.o
 SortMedia-obj += source/SortMedia/Policies/BasicMusicFileNamingPolicy.o
 SortMedia-obj += source/SortMedia/Policies/UnknownFileTypePolicy.o
 SortMedia-obj += source/SortMedia/Policies/OrganizationalPolicy.o
+
 SortMedia-obj += source/SortMedia/Operations/WarnOperation.o
 SortMedia-obj += source/SortMedia/FileTypes/MusicFile.o
 SortMedia-obj += source/SortMedia/FileTypes/LibraryFile.o

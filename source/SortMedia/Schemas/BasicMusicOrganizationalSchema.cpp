@@ -7,11 +7,13 @@
 //
 // CREATED:         09/06/2019
 //
-// LAST EDITED:     09/08/2019
+// LAST EDITED:     09/09/2019
 ////
 
 #include <SortMedia/Schemas/BasicMusicOrganizationalSchema.h>
 
+#include <SortMedia/Adaptors/TagLibAdaptor.h>
+#include <SortMedia/FileTypes/MusicFile.h>
 #include <SortMedia/Policies/BasicMusicFileNamingPolicy.h>
 #include <SortMedia/Policies/DoNothingPolicy.h>
 #include <SortMedia/Policies/UnknownFileTypePolicy.h>
@@ -41,12 +43,16 @@ SortMedia::Schemas::BasicMusicOrganizationalSchema
     {
       policy = std::make_unique<Policies::DoNothingPolicy>();
     }
+
   else if (extension == ".flac"
       || extension == ".m4a"
       || extension == ".mp3")
     {
-      policy = std::make_unique<Policies::BasicMusicFileNamingPolicy>(path);
+      policy = std::make_unique<Policies::BasicMusicFileNamingPolicy>
+        (FileTypes::MusicFile{path,
+            std::make_unique<Adaptors::TagLibAdaptor>(path)});
     }
+
   else
     {
       policy = std::make_unique<Policies::UnknownFileTypePolicy>

@@ -10,7 +10,7 @@
 //
 // CREATED:         09/06/2019
 //
-// LAST EDITED:     09/06/2019
+// LAST EDITED:     09/09/2019
 ////
 
 #ifndef __ET_BASICMUSICFILENAMINGPOLICY__
@@ -18,6 +18,7 @@
 
 #include <namespaces/Interfaces.h>
 #include <namespaces/Policies.h>
+#include <SortMedia/FileTypes/MusicFile.h>
 #include <SortMedia/Policies/OrganizationalPolicy.h>
 
 #include <FSAdaptor/namespace.h>
@@ -29,7 +30,7 @@ class SortMedia::Policies::BasicMusicFileNamingPolicy
   : public OrganizationalPolicy
 {
 public:
-  BasicMusicFileNamingPolicy(const FSAdaptor::Path& path);
+  BasicMusicFileNamingPolicy(FileTypes::MusicFile path);
 
 private:
   template<class T>
@@ -40,7 +41,7 @@ private:
   virtual IFList<Interfaces::IFileOperation> getOperations()
     const final override;
 
-  const FSAdaptor::Path& m_path;
+  FileTypes::MusicFile m_musicFile;
 };
 
 #endif // __ET_BASICMUSICFILENAMINGPOLICY__
