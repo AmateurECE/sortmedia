@@ -33,7 +33,7 @@ void SortMedia::Operations::DeleteDirectoryIfEmpty::apply()
     {
       FSAdaptor::PathWalker<std::list> walker;
       m_adaptor.walk(walker, m_directory);
-      if (0 == walker.getContainer().size())
+      if (1 == walker.getContainer().size())
         {
           m_adaptor.remove(m_directory);
         }
