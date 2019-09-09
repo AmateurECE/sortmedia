@@ -7,7 +7,7 @@
 //
 // CREATED:         08/15/2019
 //
-// LAST EDITED:     09/06/2019
+// LAST EDITED:     09/08/2019
 ////
 
 #ifndef __ET_LOGGER__
@@ -33,6 +33,8 @@ public:
     final override;
 
 private:
+  const char* getMessagePrefix(LogLevel level) const;
+
   std::ostream& m_stream;
   std::unique_ptr<Interfaces::ILogger> m_nextLogger;
   std::initializer_list<LogLevel> m_levels;

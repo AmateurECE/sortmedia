@@ -7,7 +7,7 @@
 //
 // CREATED:         09/05/2019
 //
-// LAST EDITED:     09/06/2019
+// LAST EDITED:     09/08/2019
 ////
 
 #include <namespaces/Logging.h>
@@ -15,7 +15,7 @@
 #include <SortMedia/Interfaces/ILogger.h>
 
 SortMedia::Operations::WarnOperation
-::WarnOperation(Interfaces::ILogger& logger, const std::string& message)
+::WarnOperation(Interfaces::ILogger& logger, std::string message)
   : m_logger(logger), m_message(message)
 {}
 

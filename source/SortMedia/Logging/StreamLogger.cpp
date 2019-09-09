@@ -7,7 +7,7 @@
 //
 // CREATED:         08/27/2019
 //
-// LAST EDITED:     09/07/2019
+// LAST EDITED:     09/08/2019
 ////
 
 #include <SortMedia/Logging/StreamLogger.h>
@@ -29,7 +29,7 @@ void SortMedia::Logging::StreamLogger
       if (level == logLevel)
         {
           // TODO: Remove un-portable newline
-          m_stream << message << '\n';
+          m_stream << getMessagePrefix(logLevel) << message << '\n';
           break;
         }
     }
@@ -46,6 +46,38 @@ SortMedia::Logging::StreamLogger
 {
   m_nextLogger = std::move(logger);
   return *m_nextLogger;
+}
+
+const char*
+SortMedia::Logging::StreamLogger
+::getMessagePrefix(LogLevel level) const
+{
+#define RED     "\033[31;1m"
+#define GREEN   "\033[32;1m"
+#define YELLOW  "\033[33;1m"
+#define NONE    "\033[0m"
+
+  static const char* infoPrefix = GREEN   "INFO    " NONE;
+  static const char* warnPrefix = YELLOW  "WARNING " NONE;
+  static const char* errorPrefix = RED    "ERROR   " NONE;
+
+#undef RED
+#undef GREEN
+#undef YELLOW
+#undef NONE
+
+  switch (level)
+    {
+    case ERROR:
+      return errorPrefix;
+
+    case WARNING:
+      return warnPrefix;
+
+    case INFO:
+    default:
+      return infoPrefix;
+    }
 }
 
 ///////////////////////////////////////////////////////////////////////////////

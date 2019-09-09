@@ -7,7 +7,7 @@
 //
 // CREATED:         09/05/2019
 //
-// LAST EDITED:     09/05/2019
+// LAST EDITED:     09/08/2019
 ////
 
 #ifndef __ET_WARNOPERATION__
@@ -23,13 +23,13 @@ class SortMedia::Operations::WarnOperation
   : public SortMedia::Interfaces::IFileOperation
 {
 public:
-  WarnOperation(Interfaces::ILogger& logger, const std::string& message);
+  WarnOperation(Interfaces::ILogger& logger, std::string message);
   virtual void apply() final override;
   virtual void revert() final override;
 
 private:
   Interfaces::ILogger& m_logger;
-  const std::string& m_message;
+  std::string m_message;
 };
 
 #endif // __ET_WARNOPERATION__
