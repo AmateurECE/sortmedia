@@ -7,7 +7,7 @@
 //
 // CREATED:         09/05/2019
 //
-// LAST EDITED:     09/07/2019
+// LAST EDITED:     09/10/2019
 ////
 
 #include <SortMedia/FileLocators/AnyFileLocator.h>
@@ -30,6 +30,7 @@ SortMedia::FileLocators::AnyFileLocator
   FSAdaptor::PathWalker<std::list> pathWalker;
   m_adaptor.walk(pathWalker, directory);
 
+  // TODO: Add Unit test to ensure paths are absolute.
   return std::list<FSAdaptor::Path>{pathWalker.getContainer()};
 }
 

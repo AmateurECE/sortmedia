@@ -7,7 +7,7 @@
 //
 // CREATED:         09/09/2019
 //
-// LAST EDITED:     09/09/2019
+// LAST EDITED:     09/10/2019
 ////
 
 #include <SortMedia/Operations/DeleteDirectoryIfEmpty.h>
@@ -24,6 +24,7 @@ SortMedia::Policies::DeleteDirectoryIfEmpty::getOperations() const
   std::list<std::unique_ptr<Interfaces::IFileOperation>> operations;
   operations.push_back(std::make_unique<Operations::DeleteDirectoryIfEmpty>
                        (m_directory));
+  // TODO: Also delete parent directory, if empty.
   return operations;
 }
 
