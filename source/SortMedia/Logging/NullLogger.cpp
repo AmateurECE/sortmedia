@@ -7,7 +7,7 @@
 //
 // CREATED:         08/18/2019
 //
-// LAST EDITED:     09/06/2019
+// LAST EDITED:     09/10/2019
 ////
 
 #include <SortMedia/Logging/NullLogger.h>
@@ -27,7 +27,7 @@ void SortMedia::Logging::NullLogger
 
 SortMedia::Interfaces::ILogger&
 SortMedia::Logging::NullLogger
-::appendLogger(std::unique_ptr<SortMedia::Interfaces::ILogger> logger)
+::appendLogger(std::unique_ptr<SortMedia::Interfaces::ILogger>&& logger)
 {
   m_nextLogger = std::move(logger);
   return *m_nextLogger;

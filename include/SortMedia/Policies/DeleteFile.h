@@ -24,7 +24,7 @@ class SortMedia::Policies::DeleteFile
   : public OrganizationalBase
 {
 public:
-  DeleteFile(FileTypes::LibraryFile file);
+  DeleteFile(const FileTypes::LibraryFile& file);
 
 private:
   template<class T>

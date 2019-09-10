@@ -7,7 +7,7 @@
 //
 // CREATED:         08/27/2019
 //
-// LAST EDITED:     09/08/2019
+// LAST EDITED:     09/10/2019
 ////
 
 #include <SortMedia/Logging/StreamLogger.h>
@@ -42,7 +42,7 @@ void SortMedia::Logging::StreamLogger
 
 SortMedia::Interfaces::ILogger&
 SortMedia::Logging::StreamLogger
-::appendLogger(std::unique_ptr<Interfaces::ILogger> logger)
+::appendLogger(std::unique_ptr<Interfaces::ILogger>&& logger)
 {
   m_nextLogger = std::move(logger);
   return *m_nextLogger;

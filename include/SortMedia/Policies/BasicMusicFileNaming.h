@@ -10,7 +10,7 @@
 //
 // CREATED:         09/06/2019
 //
-// LAST EDITED:     09/09/2019
+// LAST EDITED:     09/10/2019
 ////
 
 #ifndef __ET_BASICMUSICFILENAMINGPOLICY__
@@ -30,7 +30,7 @@ class SortMedia::Policies::BasicMusicFileNaming
   : public OrganizationalBase
 {
 public:
-  BasicMusicFileNaming(FileTypes::MusicFile path);
+  BasicMusicFileNaming(FileTypes::MusicFile&& path);
 
 private:
 

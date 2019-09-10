@@ -7,7 +7,7 @@
 //
 // CREATED:         09/05/2019
 //
-// LAST EDITED:     09/09/2019
+// LAST EDITED:     09/10/2019
 ////
 
 #ifndef __ET_MUSICFILE__
@@ -28,9 +28,8 @@ class SortMedia::FileTypes::MusicFile
 {
 public:
   MusicFile(const FSAdaptor::Path& path,
-            std::unique_ptr<Interfaces::IMusicTagEditorAdaptor> tagAdaptor,
-            const FSAdaptor::IFilesystemAdaptor& fsAdaptor
-            = FSAdaptor::StandardFilesystemAdaptor{});
+            std::unique_ptr<Interfaces::IMusicTagEditorAdaptor>&& tagAdaptor,
+            const FSAdaptor::IFilesystemAdaptor& fsAdaptor = s_stdAdaptor);
   MusicFile(const MusicFile&) = delete;
   MusicFile(MusicFile&&);
   MusicFile& operator=(const MusicFile&) = delete;
@@ -39,6 +38,7 @@ public:
 
 private:
   std::unique_ptr<Interfaces::IMusicTagEditorAdaptor> m_tagAdaptor;
+  static const FSAdaptor::IFilesystemAdaptor& s_stdAdaptor;
 };
 
 #endif // __ET_MUSICFILE__

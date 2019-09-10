@@ -8,7 +8,7 @@
 //
 // CREATED:         08/18/2019
 //
-// LAST EDITED:     09/06/2019
+// LAST EDITED:     09/10/2019
 ////
 
 #ifndef __ET_NULLLOGGER__
@@ -29,7 +29,7 @@ public:
   virtual void log(const std::string& message, LogLevel logLevel)
     final override;
   virtual Interfaces::ILogger&
-  appendLogger(std::unique_ptr<Interfaces::ILogger>) final override;
+  appendLogger(std::unique_ptr<Interfaces::ILogger>&&) final override;
 
 private:
   std::unique_ptr<Interfaces::ILogger> m_nextLogger;

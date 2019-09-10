@@ -7,7 +7,7 @@
 //
 // CREATED:         08/17/2019
 //
-// LAST EDITED:     09/06/2019
+// LAST EDITED:     09/10/2019
 ////
 
 #ifndef __ET_ILOGGER__
@@ -25,7 +25,7 @@ class SortMedia::Interfaces::ILogger
 public:
   virtual ~ILogger() {};
   virtual void log(const std::string& message, Logging::LogLevel level) = 0;
-  virtual ILogger& appendLogger(std::unique_ptr<ILogger>) = 0;
+  virtual ILogger& appendLogger(std::unique_ptr<ILogger>&&) = 0;
 };
 
 #endif // __ET_ILOGGER__

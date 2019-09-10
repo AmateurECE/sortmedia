@@ -15,8 +15,8 @@
 #include <SortMedia/Policies/DeleteFile.h>
 
 SortMedia::Policies::DeleteFile
-::DeleteFile(FileTypes::LibraryFile file)
-  : m_file{std::move(file)}
+::DeleteFile(const FileTypes::LibraryFile& file)
+  : m_file{file}
 {}
 
 std::list<std::unique_ptr<SortMedia::Interfaces::IFileOperation>>

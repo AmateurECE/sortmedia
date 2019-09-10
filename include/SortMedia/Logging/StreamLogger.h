@@ -7,7 +7,7 @@
 //
 // CREATED:         08/15/2019
 //
-// LAST EDITED:     09/08/2019
+// LAST EDITED:     09/10/2019
 ////
 
 #ifndef __ET_LOGGER__
@@ -27,7 +27,7 @@ public:
                std::initializer_list<LogLevel> logLevels);
   const StreamLogger& operator=(const StreamLogger&) = delete;
 
-  virtual Interfaces::ILogger& appendLogger(std::unique_ptr<ILogger> logger)
+  virtual Interfaces::ILogger& appendLogger(std::unique_ptr<ILogger>&& logger)
     final override;
   virtual void log(const std::string& message, LogLevel level)
     final override;
