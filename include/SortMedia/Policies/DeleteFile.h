@@ -30,6 +30,8 @@ private:
   template<class T>
   using IFList = std::list<std::unique_ptr<T>>;
 
+  virtual IFList<Interfaces::IOrganizationalPolicy> getPostconditions()
+    final override;
   virtual IFList<Interfaces::IFileOperation> getOperations()
     const final override;
 
