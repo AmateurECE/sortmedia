@@ -23,7 +23,8 @@ std::list<std::unique_ptr<SortMedia::Interfaces::IFileOperation>>
 SortMedia::Policies::DeleteFile::getOperations() const
 {
   std::list<std::unique_ptr<Interfaces::IFileOperation>> operations;
-  // TODO: Insert Operations::DeleteFile instance
+  operations.push_back(std::make_unique<Operations::DeleteFile>
+                       (m_file));
   return operations;
 }
 
