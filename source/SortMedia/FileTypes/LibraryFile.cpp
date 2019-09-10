@@ -13,6 +13,11 @@
 #include <SortMedia/FileTypes/LibraryFile.h>
 
 #include <FSAdaptor/Path.h>
+#include <FSAdaptor/StandardFilesystemAdaptor.h>
+
+const FSAdaptor::IFilesystemAdaptor&
+SortMedia::FileTypes::LibraryFile::s_stdAdaptor
+= FSAdaptor::StandardFilesystemAdaptor{};
 
 SortMedia::FileTypes::LibraryFile
 ::LibraryFile(const FSAdaptor::Path& path,

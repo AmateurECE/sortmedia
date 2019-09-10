@@ -7,7 +7,7 @@
 //
 // CREATED:         09/06/2019
 //
-// LAST EDITED:     09/09/2019
+// LAST EDITED:     09/10/2019
 ////
 
 #include <SortMedia/Schemas/BasicMusicOrganizationalSchema.h>
@@ -15,6 +15,7 @@
 #include <SortMedia/Adaptors/TagLibAdaptor.h>
 #include <SortMedia/FileTypes/MusicFile.h>
 #include <SortMedia/Policies/BasicMusicFileNaming.h>
+#include <SortMedia/Policies/DeleteFile.h>
 #include <SortMedia/Policies/DoNothing.h>
 #include <SortMedia/Policies/UnknownFileType.h>
 
@@ -51,6 +52,15 @@ SortMedia::Schemas::BasicMusicOrganizationalSchema
       policy = std::make_unique<Policies::BasicMusicFileNaming>
         (FileTypes::MusicFile{path,
             std::make_unique<Adaptors::TagLibAdaptor>(path)});
+    }
+
+  else if (extension == ".cue"
+           || extension == ".log"
+           || extension == ".txt"
+           || extension == ".m3u")
+    {
+      policy = std::make_unique<Policies::DeleteFile>
+        (FileTypes::LibraryFile{path});
     }
 
   else
