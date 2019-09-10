@@ -23,8 +23,6 @@ namespace SortMedia
     class DoNothing;
     class DeleteDirectoryIfEmpty;
     class DeleteFile;
-
-    class VerificationError;
   };
 };
 
