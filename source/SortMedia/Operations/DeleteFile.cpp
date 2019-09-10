@@ -11,6 +11,7 @@
 ////
 
 #include <SortMedia/Operations/DeleteFile.h>
+#include <SortMedia/Exceptions/OperationalError.h>
 
 SortMedia::Operations::DeleteFile::DeleteFile(FileTypes::LibraryFile file)
   : m_file{std::move(file)}
@@ -23,7 +24,7 @@ void SortMedia::Operations::DeleteFile::apply()
 
 void SortMedia::Operations::DeleteFile::revert()
 {
-  // TODO: Throw exception here
+  throw Exceptions::OperationalError("This exception cannot be reverted.");
 }
 
 ///////////////////////////////////////////////////////////////////////////////
