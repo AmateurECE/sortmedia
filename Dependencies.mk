@@ -27,6 +27,8 @@ SortMedia-obj += source/SortMedia/FileTypes/MusicFile.o
 SortMedia-obj += source/SortMedia/FileTypes/LibraryFile.o
 
 SortMedia-obj += source/SortMedia/Exceptions/PolicyVerificationError.o
+SortMedia-obj += source/SortMedia/Exceptions/OperationalError.o
+
 SortMedia-obj += source/SortMedia/Adaptors/TagLibAdaptor.o
 SortMedia-obj += source/SortMedia/FileLocators/AnyFileLocator.o
 
