@@ -7,7 +7,7 @@
 //
 // CREATED:         09/05/2019
 //
-// LAST EDITED:     09/09/2019
+// LAST EDITED:     09/10/2019
 ////
 
 #ifndef __ET_POLICIES__
@@ -22,6 +22,7 @@ namespace SortMedia
     class UnknownFileType;
     class DoNothing;
     class DeleteDirectoryIfEmpty;
+    class DeleteFile;
 
     class VerificationError;
   };
