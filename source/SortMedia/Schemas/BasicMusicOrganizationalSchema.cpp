@@ -15,6 +15,7 @@
 #include <SortMedia/Adaptors/TagLibAdaptor.h>
 #include <SortMedia/FileTypes/MusicFile.h>
 #include <SortMedia/Policies/BasicMusicFileNaming.h>
+#include <SortMedia/Policies/DeleteDirectoryIfEmpty.h>
 #include <SortMedia/Policies/DeleteFile.h>
 #include <SortMedia/Policies/DoNothing.h>
 #include <SortMedia/Policies/UnknownFileType.h>
@@ -42,7 +43,7 @@ SortMedia::Schemas::BasicMusicOrganizationalSchema
 
   if (m_adaptor.isDirectory(path))
     {
-      policy = std::make_unique<Policies::DoNothing>();
+      policy = std::make_unique<Policies::DeleteDirectoryIfEmpty>(path);
     }
 
   else if (extension == ".flac"
