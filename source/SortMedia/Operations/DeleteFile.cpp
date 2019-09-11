@@ -7,18 +7,22 @@
 //
 // CREATED:         09/10/2019
 //
-// LAST EDITED:     09/10/2019
+// LAST EDITED:     09/11/2019
 ////
 
-#include <SortMedia/Operations/DeleteFile.h>
 #include <SortMedia/Exceptions/OperationalError.h>
+#include <SortMedia/Interfaces/ILogger.h>
+#include <SortMedia/Operations/DeleteFile.h>
 
-SortMedia::Operations::DeleteFile::DeleteFile(FileTypes::LibraryFile file)
-  : m_file{std::move(file)}
+SortMedia::Operations::DeleteFile
+::DeleteFile(FileTypes::LibraryFile file, Interfaces::ILogger& logger)
+  : m_file{std::move(file)}, m_logger{logger}
 {}
 
 void SortMedia::Operations::DeleteFile::apply()
 {
+  m_logger.log("Deleting file " + m_file.getPath().string(),
+               Logging::LogLevel::INFO);
   m_file.remove();
 }
 

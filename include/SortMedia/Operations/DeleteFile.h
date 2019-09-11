@@ -7,7 +7,7 @@
 //
 // CREATED:         09/10/2019
 //
-// LAST EDITED:     09/10/2019
+// LAST EDITED:     09/11/2019
 ////
 
 #ifndef __ET_OPERATIONS_DELETEFILE__
@@ -21,13 +21,15 @@ class SortMedia::Operations::DeleteFile
   : public Interfaces::IFileOperation
 {
 public:
-  DeleteFile(FileTypes::LibraryFile file);
+  // TODO: Take file as reference (lvalue or rvalue?)
+  DeleteFile(FileTypes::LibraryFile file, Interfaces::ILogger& logger);
 
   virtual void apply() final override;
   virtual void revert() final override;
 
 private:
   FileTypes::LibraryFile m_file;
+  Interfaces::ILogger& m_logger;
 };
 
 #endif /* __ET_OPERATIONS_DELETEFILE__ */

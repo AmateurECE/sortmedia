@@ -8,12 +8,13 @@
 //
 // CREATED:         09/09/2019
 //
-// LAST EDITED:     09/09/2019
+// LAST EDITED:     09/11/2019
 ////
 
 #ifndef __ET_POLICIES_DELETEDIRECTORYIFEMPTY__
 #define __ET_POLICIES_DELETEDIRECTORYIFEMPTY__
 
+#include <namespaces/Interfaces.h>
 #include <namespaces/Policies.h>
 #include <SortMedia/Policies/OrganizationalBase.h>
 
@@ -26,7 +27,8 @@ class SortMedia::Policies::DeleteDirectoryIfEmpty
   : public OrganizationalBase
 {
 public:
-  DeleteDirectoryIfEmpty(FSAdaptor::Path directory);
+  DeleteDirectoryIfEmpty(FSAdaptor::Path directory,
+                         Interfaces::ILogger& logger);
 
 private:
   template<class T>
@@ -36,6 +38,7 @@ private:
     const final override;
   
   FSAdaptor::Path m_directory;
+  Interfaces::ILogger& m_logger;
 };
 
 #endif // __ET_POLICIES_DELETEDIRECTORYIFEMPTY__

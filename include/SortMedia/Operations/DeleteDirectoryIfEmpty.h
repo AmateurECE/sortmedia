@@ -8,7 +8,7 @@
 //
 // CREATED:         09/09/2019
 //
-// LAST EDITED:     09/09/2019
+// LAST EDITED:     09/11/2019
 ////
 
 #ifndef __ET_OPERATIONS_DELETEDIRECTORYIFEMPTY__
@@ -24,13 +24,16 @@ class SortMedia::Operations::DeleteDirectoryIfEmpty
   : public Interfaces::IFileOperation
 {
 public:
+  // TODO: Take directory as lvalue reference
   DeleteDirectoryIfEmpty(FSAdaptor::Path directory,
+                         Interfaces::ILogger& logger,
                          const FSAdaptor::IFilesystemAdaptor& = s_stdAdaptor);
   virtual void apply() final override;
   virtual void revert() final override;
 
 private:
   FSAdaptor::Path m_directory;
+  Interfaces::ILogger& m_logger;
   const FSAdaptor::IFilesystemAdaptor& m_adaptor;
   static const FSAdaptor::IFilesystemAdaptor& s_stdAdaptor;
 };

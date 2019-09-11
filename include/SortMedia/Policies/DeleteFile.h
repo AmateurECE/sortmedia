@@ -7,12 +7,13 @@
 //
 // CREATED:         09/10/2019
 //
-// LAST EDITED:     09/10/2019
+// LAST EDITED:     09/11/2019
 ////
 
 #ifndef __ET_DELETEFILE__
 #define __ET_DELETEFILE__
 
+#include <namespaces/Interfaces.h>
 #include <namespaces/Policies.h>
 #include <SortMedia/Policies/OrganizationalBase.h>
 #include <SortMedia/FileTypes/LibraryFile.h>
@@ -24,7 +25,8 @@ class SortMedia::Policies::DeleteFile
   : public OrganizationalBase
 {
 public:
-  DeleteFile(const FileTypes::LibraryFile& file);
+  // TODO: Take file as rvalue reference
+  DeleteFile(const FileTypes::LibraryFile& file, Interfaces::ILogger& logger);
 
 private:
   template<class T>
@@ -36,6 +38,7 @@ private:
     const final override;
 
   FileTypes::LibraryFile m_file;
+  Interfaces::ILogger& m_logger;
 };
 
 #endif // __ET_DELETEFILE__

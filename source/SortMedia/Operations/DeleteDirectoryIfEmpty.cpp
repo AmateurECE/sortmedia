@@ -7,9 +7,10 @@
 //
 // CREATED:         09/09/2019
 //
-// LAST EDITED:     09/09/2019
+// LAST EDITED:     09/11/2019
 ////
 
+#include <SortMedia/Interfaces/ILogger.h>
 #include <SortMedia/Operations/DeleteDirectoryIfEmpty.h>
 
 #include <FSAdaptor/PathWalker.h>
@@ -23,8 +24,9 @@ SortMedia::Operations::DeleteDirectoryIfEmpty::s_stdAdaptor
 
 SortMedia::Operations::DeleteDirectoryIfEmpty
 ::DeleteDirectoryIfEmpty(FSAdaptor::Path directory,
+                         Interfaces::ILogger& logger,
                          const FSAdaptor::IFilesystemAdaptor& adaptor)
-  : m_directory{directory}, m_adaptor{adaptor}
+  : m_directory{directory}, m_logger{logger}, m_adaptor{adaptor}
 {}
 
 void SortMedia::Operations::DeleteDirectoryIfEmpty::apply()
@@ -35,6 +37,8 @@ void SortMedia::Operations::DeleteDirectoryIfEmpty::apply()
       m_adaptor.walk(walker, m_directory);
       if (1 == walker.getContainer().size())
         {
+          m_logger.log("Removing directory " + m_directory.string(),
+                       Logging::LogLevel::INFO);
           m_adaptor.remove(m_directory);
         }
     }

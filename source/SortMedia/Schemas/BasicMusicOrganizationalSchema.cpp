@@ -7,7 +7,7 @@
 //
 // CREATED:         09/06/2019
 //
-// LAST EDITED:     09/10/2019
+// LAST EDITED:     09/11/2019
 ////
 
 #include <SortMedia/Schemas/BasicMusicOrganizationalSchema.h>
@@ -43,7 +43,8 @@ SortMedia::Schemas::BasicMusicOrganizationalSchema
 
   if (m_adaptor.isDirectory(path))
     {
-      policy = std::make_unique<Policies::DeleteDirectoryIfEmpty>(path);
+      policy = std::make_unique<Policies::DeleteDirectoryIfEmpty>
+        (path, m_logger);
     }
 
   else if (extension == ".flac"
@@ -61,7 +62,7 @@ SortMedia::Schemas::BasicMusicOrganizationalSchema
            || extension == ".m3u")
     {
       policy = std::make_unique<Policies::DeleteFile>
-        (FileTypes::LibraryFile{path});
+        (FileTypes::LibraryFile{path}, m_logger);
     }
 
   else
