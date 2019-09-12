@@ -7,7 +7,7 @@
 //
 // CREATED:         08/29/2019
 //
-// LAST EDITED:     09/08/2019
+// LAST EDITED:     09/12/2019
 ////
 
 // TODO: Switch to using std::filesystem::path
@@ -35,8 +35,8 @@
 
 static std::system_error makeSystemError(int error)
 {
-  return std::system_error{std::make_error_code(static_cast<std::errc>(error)),
-      (const char*)strerror(error)};
+  return std::system_error{std::make_error_code
+      (static_cast<std::errc>(error))};
 }
 
 void
@@ -216,7 +216,11 @@ void
 FSAdaptor::StandardFilesystemAdaptor
 ::rename(const FSAdaptor::Path& oldPath, const FSAdaptor::Path& newPath) const
 {
-  ::rename(oldPath.string().c_str(), newPath.string().c_str());
+  errno = 0;
+  if (::rename(oldPath.string().c_str(), newPath.string().c_str()))
+    {
+      throw makeSystemError(errno);
+    }
 }
 
 ///////////////////////////////////////////////////////////////////////////////
