@@ -39,6 +39,12 @@ static std::system_error makeSystemError(int error)
       (static_cast<std::errc>(error))};
 }
 
+static std::system_error makeSystemError(int error, const std::string& message)
+{
+  return std::system_error{std::make_error_code(static_cast<std::errc>(error)),
+      message.c_str()};
+}
+
 void
 FSAdaptor::StandardFilesystemAdaptor
 ::walk(FSAdaptor::IPathWalker& walker, const FSAdaptor::Path& directory) const
@@ -123,7 +129,8 @@ FSAdaptor::StandardFilesystemAdaptor
   errno = 0;
   if (stat(p.string().c_str(), &path))
     {
-      throw makeSystemError(errno);
+      throw makeSystemError(errno, "(during stat() on path "
+                            + p.string() + ")");
     }
 
   return S_ISDIR(path.st_mode);
