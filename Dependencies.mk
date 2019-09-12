@@ -7,7 +7,7 @@
 #
 # CREATED:	    08/15/2019
 #
-# LAST EDITED:	    09/10/2019
+# LAST EDITED:	    09/11/2019
 ###
 
 SortMedia-obj += source/SortMedia/Schemas/BasicMusicOrganizationalSchema.o
@@ -19,6 +19,7 @@ SortMedia-obj += source/SortMedia/Policies/BasicMusicFileNaming.o
 SortMedia-obj += source/SortMedia/Policies/UnknownFileType.o
 SortMedia-obj += source/SortMedia/Policies/OrganizationalBase.o
 
+SortMedia-obj += source/SortMedia/Operations/RenameFile.o
 SortMedia-obj += source/SortMedia/Operations/DeleteFile.o
 SortMedia-obj += source/SortMedia/Operations/DeleteDirectoryIfEmpty.o
 SortMedia-obj += source/SortMedia/Operations/Warn.o

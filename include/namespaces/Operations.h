@@ -7,7 +7,7 @@
 //
 // CREATED:         09/05/2019
 //
-// LAST EDITED:     09/10/2019
+// LAST EDITED:     09/11/2019
 ////
 
 #ifndef __ET_OPERATIONS__
@@ -20,6 +20,7 @@ namespace SortMedia
     class Warn;
     class DeleteDirectoryIfEmpty;
     class DeleteFile;
+    class RenameFile;
   };
 };
 
