@@ -19,6 +19,7 @@
 
 #include <FSAdaptor/namespace.h>
 
+#include <list>
 #include <memory>
 
 class SortMedia::Schemas::OrganizationalSchema
@@ -34,6 +35,10 @@ private:
   virtual std::unique_ptr<Interfaces::IOrganizationalPolicy>
   makeOrganizer(const FSAdaptor::Path& path,
                 const FSAdaptor::Path& rootOfLibrary) const = 0;
+
+  template<class T>
+  using IFList = std::list<std::unique_ptr<T>>;
+  void revertOperations(IFList<Interfaces::IFileOperation>& operations) const;
 };
 
 #endif // __ET_ORGANIZATIONALSCHEMA__
