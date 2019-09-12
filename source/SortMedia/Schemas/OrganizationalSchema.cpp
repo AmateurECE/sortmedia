@@ -7,7 +7,7 @@
 //
 // CREATED:         09/06/2019
 //
-// LAST EDITED:     09/11/2019
+// LAST EDITED:     09/12/2019
 ////
 
 #include <SortMedia/Exceptions/ExceptionBase.h>
@@ -22,10 +22,11 @@ SortMedia::Schemas::OrganizationalSchema::OrganizationalSchema()
 
 void
 SortMedia::Schemas::OrganizationalSchema
-::applyToFile(const FSAdaptor::Path& file) const
+::applyToFile(const FSAdaptor::Path& file,
+              const FSAdaptor::Path& rootOfLibrary) const
 {
   std::unique_ptr<Interfaces::IOrganizationalPolicy> organizer
-    = makeOrganizer(file);
+    = makeOrganizer(file, rootOfLibrary);
 
   try
     {

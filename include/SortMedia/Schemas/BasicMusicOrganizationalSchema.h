@@ -11,7 +11,7 @@
 //
 // CREATED:         09/06/2019
 //
-// LAST EDITED:     09/08/2019
+// LAST EDITED:     09/12/2019
 ////
 
 #ifndef __ET_BASICMUSICORGANIZATIONALSCHEMA__
@@ -35,7 +35,8 @@ public:
 
 private:
   virtual std::unique_ptr<Interfaces::IOrganizationalPolicy>
-  makeOrganizer(const FSAdaptor::Path& path) const final override;
+  makeOrganizer(const FSAdaptor::Path& path,
+                const FSAdaptor::Path& rootOfLibrary) const final override;
 
   Interfaces::ILogger& m_logger;
   const FSAdaptor::IFilesystemAdaptor& m_adaptor;

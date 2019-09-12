@@ -7,7 +7,7 @@
 //
 // CREATED:         09/06/2019
 //
-// LAST EDITED:     09/11/2019
+// LAST EDITED:     09/12/2019
 ////
 
 #include <SortMedia/Exceptions/PolicyVerificationError.h>
@@ -21,8 +21,11 @@
 #include <FSAdaptor/Path.h>
 
 SortMedia::Policies::BasicMusicFileNaming
-::BasicMusicFileNaming(FileTypes::MusicFile path, Interfaces::ILogger& logger)
-  : m_musicFile{std::move(path)}, m_logger{logger}
+::BasicMusicFileNaming(FileTypes::MusicFile path,
+                       FSAdaptor::Path rootOfLibrary,
+                       Interfaces::ILogger& logger)
+  : m_musicFile{std::move(path)}, m_rootOfLibrary{rootOfLibrary},
+    m_logger{logger}
 {}
 
 void SortMedia::Policies::BasicMusicFileNaming::viable() const

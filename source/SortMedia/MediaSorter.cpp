@@ -8,7 +8,7 @@
 //
 // CREATED:         08/15/2019
 //
-// LAST EDITED:     09/06/2019
+// LAST EDITED:     09/12/2019
 ////
 
 #include <SortMedia/Interfaces/IFileLocator.h>
@@ -39,7 +39,7 @@ int SortMedia::MediaSorter::sortDirectory(const std::string& directory)
 
   for (auto path : paths)
     {
-      m_schema.applyToFile(path);
+      m_schema.applyToFile(path, directory);
     }
 
   return 0;

@@ -10,7 +10,7 @@
 //
 // CREATED:         09/06/2019
 //
-// LAST EDITED:     09/11/2019
+// LAST EDITED:     09/12/2019
 ////
 
 #ifndef __ET_BASICMUSICFILENAMINGPOLICY__
@@ -21,6 +21,8 @@
 #include <SortMedia/FileTypes/MusicFile.h>
 #include <SortMedia/Policies/OrganizationalBase.h>
 
+#include <FSAdaptor/Path.h>
+
 #include <list>
 #include <memory>
 
@@ -28,7 +30,9 @@ class SortMedia::Policies::BasicMusicFileNaming
   : public OrganizationalBase
 {
 public:
-  BasicMusicFileNaming(FileTypes::MusicFile path, Interfaces::ILogger& logger);
+  BasicMusicFileNaming(FileTypes::MusicFile path,
+                       FSAdaptor::Path rootOfLibrary,
+                       Interfaces::ILogger& logger);
 
 private:
   template<class T>
@@ -41,6 +45,7 @@ private:
     const final override;
 
   FileTypes::MusicFile m_musicFile;
+  FSAdaptor::Path m_rootOfLibrary;
   Interfaces::ILogger& m_logger;
 };
 

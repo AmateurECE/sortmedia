@@ -7,7 +7,7 @@
 //
 // CREATED:         08/07/2019
 //
-// LAST EDITED:     09/06/2019
+// LAST EDITED:     09/12/2019
 ////
 
 #ifndef __ET_IORGANIZATIONALSCHEMA__
@@ -21,7 +21,8 @@ class SortMedia::Interfaces::IOrganizationalSchema
 {
 public:
   virtual ~IOrganizationalSchema() {}
-  virtual void applyToFile(const FSAdaptor::Path& file) const = 0;
+  virtual void applyToFile(const FSAdaptor::Path& file,
+                           const FSAdaptor::Path& rootOfLibrary) const = 0;
 };
 
 #endif // __ET_IORGANIZATIONALSCHEMA__

@@ -7,7 +7,7 @@
 //
 // CREATED:         09/06/2019
 //
-// LAST EDITED:     09/11/2019
+// LAST EDITED:     09/12/2019
 ////
 
 #include <SortMedia/Schemas/BasicMusicOrganizationalSchema.h>
@@ -37,7 +37,8 @@ SortMedia::Schemas::BasicMusicOrganizationalSchema
 
 std::unique_ptr<SortMedia::Interfaces::IOrganizationalPolicy>
 SortMedia::Schemas::BasicMusicOrganizationalSchema
-::makeOrganizer(const FSAdaptor::Path& path) const
+::makeOrganizer(const FSAdaptor::Path& path,
+                const FSAdaptor::Path& rootOfLibrary) const
 {
   std::unique_ptr<Interfaces::IOrganizationalPolicy> policy;
   std::string extension = path.extension().string();
@@ -54,7 +55,8 @@ SortMedia::Schemas::BasicMusicOrganizationalSchema
     {
       policy = std::make_unique<Policies::BasicMusicFileNaming>
         (FileTypes::MusicFile{path,
-            std::make_unique<Adaptors::TagLibAdaptor>(path)}, m_logger);
+            std::make_unique<Adaptors::TagLibAdaptor>(path)},
+          rootOfLibrary, m_logger);
     }
 
   else if (extension == ".cue"

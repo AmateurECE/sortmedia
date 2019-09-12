@@ -7,7 +7,7 @@
 //
 // CREATED:         09/06/2019
 //
-// LAST EDITED:     09/06/2019
+// LAST EDITED:     09/12/2019
 ////
 
 #ifndef __ET_ORGANIZATIONALSCHEMA__
@@ -26,11 +26,14 @@ class SortMedia::Schemas::OrganizationalSchema
 {
 public:
   OrganizationalSchema();
-  virtual void applyToFile(const FSAdaptor::Path& file) const final override;
+  virtual void applyToFile(const FSAdaptor::Path& file,
+                           const FSAdaptor::Path& rootOfLibrary)
+    const final override;
   
 private:
   virtual std::unique_ptr<Interfaces::IOrganizationalPolicy>
-  makeOrganizer(const FSAdaptor::Path& path) const = 0;
+  makeOrganizer(const FSAdaptor::Path& path,
+                const FSAdaptor::Path& rootOfLibrary) const = 0;
 };
 
 #endif // __ET_ORGANIZATIONALSCHEMA__
