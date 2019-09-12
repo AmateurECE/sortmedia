@@ -7,7 +7,7 @@
 //
 // CREATED:         09/05/2019
 //
-// LAST EDITED:     09/10/2019
+// LAST EDITED:     09/11/2019
 ////
 
 #ifndef __ET_MUSICFILE__
@@ -34,7 +34,7 @@ public:
   MusicFile(MusicFile&&);
   MusicFile& operator=(const MusicFile&) = delete;
 
-  Interfaces::IMusicTagEditorAdaptor& getTagEditor();
+  Interfaces::IMusicTagEditorAdaptor& getTagEditor() const;
 
 private:
   std::unique_ptr<Interfaces::IMusicTagEditorAdaptor> m_tagAdaptor;

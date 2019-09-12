@@ -34,8 +34,11 @@ private:
   template<class T>
   using IFList = std::list<std::unique_ptr<T>>;
 
+  virtual void viable() const final override;
   virtual IFList<Interfaces::IOrganizationalPolicy> getPostconditions()
     final override;
+  virtual IFList<Interfaces::IFileOperation> getOperations()
+    const final override;
 
   FileTypes::MusicFile m_musicFile;
   Interfaces::ILogger& m_logger;

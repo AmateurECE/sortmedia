@@ -7,7 +7,7 @@
 //
 // CREATED:         09/05/2019
 //
-// LAST EDITED:     09/05/2019
+// LAST EDITED:     09/11/2019
 ////
 
 #include <SortMedia/Adaptors/TagLibAdaptor.h>
@@ -15,6 +15,7 @@
 #include <FSAdaptor/Path.h>
 
 #include <taglib/fileref.h>
+#include <taglib/tstring.h>
 
 SortMedia::Adaptors::TagLibAdaptor::TagLibAdaptor(const FSAdaptor::Path& path)
   : m_fileRef(std::make_unique<TagLib::FileRef>(path.string().c_str()))
@@ -23,27 +24,52 @@ SortMedia::Adaptors::TagLibAdaptor::TagLibAdaptor(const FSAdaptor::Path& path)
 // Getters
 std::string SortMedia::Adaptors::TagLibAdaptor::getArtist() const
 {
-  return m_fileRef->tag()->artist().to8Bit(true);
+  TagLib::String s = m_fileRef->tag()->artist();
+  if (s == TagLib::String::null)
+    {
+      return "";
+    }
+  return s.to8Bit(true);
 }
 
 std::string SortMedia::Adaptors::TagLibAdaptor::getAlbum() const
 {
-  return m_fileRef->tag()->album().to8Bit(true);
+  TagLib::String s = m_fileRef->tag()->album();
+  if (s == TagLib::String::null)
+    {
+      return "";
+    }
+  return s.to8Bit(true);
 }
 
 std::string SortMedia::Adaptors::TagLibAdaptor::getTitle() const
 {
-  return m_fileRef->tag()->title().to8Bit(true);
+  TagLib::String s = m_fileRef->tag()->title();
+  if (s == TagLib::String::null)
+    {
+      return "";
+    }
+  return s.to8Bit(true);
 }
 
 std::string SortMedia::Adaptors::TagLibAdaptor::getComment() const
 {
-  return m_fileRef->tag()->comment().to8Bit(true);
+  TagLib::String s = m_fileRef->tag()->comment();
+  if (s == TagLib::String::null)
+    {
+      return "";
+    }
+  return s.to8Bit(true);
 }
 
 std::string SortMedia::Adaptors::TagLibAdaptor::getGenre() const
 {
-  return m_fileRef->tag()->genre().to8Bit(true);
+  TagLib::String s = m_fileRef->tag()->genre();
+  if (s == TagLib::String::null)
+    {
+      return "";
+    }
+  return s.to8Bit(true);
 }
 
 unsigned int SortMedia::Adaptors::TagLibAdaptor::getYear() const

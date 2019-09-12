@@ -7,7 +7,7 @@
 //
 // CREATED:         09/05/2019
 //
-// LAST EDITED:     09/10/2019
+// LAST EDITED:     09/11/2019
 ////
 
 #include <SortMedia/FileTypes/MusicFile.h>
@@ -32,7 +32,7 @@ SortMedia::FileTypes::MusicFile::MusicFile(MusicFile&& that)
 {}
 
 SortMedia::Interfaces::IMusicTagEditorAdaptor&
-SortMedia::FileTypes::MusicFile::getTagEditor()
+SortMedia::FileTypes::MusicFile::getTagEditor() const
 {
   return *m_tagAdaptor;
 }
