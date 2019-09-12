@@ -8,7 +8,7 @@
 //
 // CREATED:         09/05/2019
 //
-// LAST EDITED:     09/09/2019
+// LAST EDITED:     09/12/2019
 ////
 
 #ifndef __ET_TAGLIBADAPTOR__
@@ -39,6 +39,14 @@ public:
   virtual unsigned int getYear() const final override;
   virtual unsigned int getTrack() const final override;
 
+  // Getters for extra tags
+  virtual std::string getAlbumArtist() const final override;
+  virtual std::string getDisc() const final override;
+  virtual std::string getTitleSort() const final override;
+  virtual std::string getAlbumSort() const final override;
+  virtual std::string getArtistSort() const final override;
+  virtual std::string getAlbumArtistSort() const final override;
+
   // Setters
   virtual void setArtist(const std::string&) final override;
   virtual void setAlbum(const std::string&) final override;
@@ -48,7 +56,21 @@ public:
   virtual void setYear(unsigned int) final override;
   virtual void setTrack(unsigned int) final override;
 
+  // Setters for extra tags
+  virtual void setAlbumArtist(const std::string&) final override;
+  virtual void setDisc(const std::string&) final override;
+  virtual void setTitleSort(const std::string&) final override;
+  virtual void setAlbumSort(const std::string&) final override;
+  virtual void setArtistSort(const std::string&) final override;
+  virtual void setAlbumArtistSort(const std::string&) final override;
+
 private:
+  template<class extType, class intType>
+  extType getTag(intType (*accessor)(void));
+
+  std::string getTagFromPropertyMap(const std::string&) const;
+  void setTagInPropertyMap(const std::string& key, const std::string& value);
+
   std::unique_ptr<TagLib::FileRef> m_fileRef;
 };
 
