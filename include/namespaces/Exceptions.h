@@ -7,7 +7,7 @@
 //
 // CREATED:         09/10/2019
 //
-// LAST EDITED:     09/10/2019
+// LAST EDITED:     09/12/2019
 ////
 
 #ifndef __ET_EXCEPTIONS__
@@ -17,6 +17,7 @@ namespace SortMedia
 {
   namespace Exceptions
   {
+    // TODO: Replace class defs with typedef?
     class ExceptionBase;
     class PolicyVerificationError;
     class OperationalError;

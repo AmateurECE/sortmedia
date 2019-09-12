@@ -7,7 +7,7 @@
 //
 // CREATED:         09/11/2019
 //
-// LAST EDITED:     09/11/2019
+// LAST EDITED:     09/12/2019
 ////
 
 #ifndef __ET_RENAMEFILE__
@@ -25,15 +25,20 @@ class SortMedia::Operations::RenameFile
 {
 public:
   RenameFile(FileTypes::LibraryFile file, FSAdaptor::Path newName,
+             Interfaces::ILogger& logger,
              const FSAdaptor::IFilesystemAdaptor& adaptor = s_stdAdaptor);
 
   virtual void apply() final override;
   virtual void revert() final override;
 
 private:
+  void doRename(FileTypes::LibraryFile& oldName,
+                const FSAdaptor::Path& newName) const;
+
   FileTypes::LibraryFile m_file;
   FSAdaptor::Path m_newName;
   FSAdaptor::Path m_oldName;
+  Interfaces::ILogger& m_logger;
   const FSAdaptor::IFilesystemAdaptor& m_adaptor;
   static const FSAdaptor::IFilesystemAdaptor& s_stdAdaptor;
 };
