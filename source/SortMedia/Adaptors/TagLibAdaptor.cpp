@@ -28,7 +28,9 @@ SortMedia::Adaptors::TagLibAdaptor::TagLibAdaptor(const FSAdaptor::Path& path)
 std::string SortMedia::Adaptors::TagLibAdaptor
 ::getTagFromPropertyMap(const std::string& tagName) const
 {
-  TagLib::StringList& list = m_fileRef->tag()->properties()[tagName];
+  TagLib::PropertyMap map = m_fileRef->file()->properties();
+  map.removeEmpty();
+  TagLib::StringList& list = map[tagName];
   if (list.isEmpty())
     {
       return "";

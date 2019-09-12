@@ -44,6 +44,8 @@ private:
   virtual IFList<Interfaces::IFileOperation> getOperations()
     const final override;
 
+  std::string getFileArtist() const;
+
   FileTypes::MusicFile m_musicFile;
   FSAdaptor::Path m_rootOfLibrary;
   Interfaces::ILogger& m_logger;
