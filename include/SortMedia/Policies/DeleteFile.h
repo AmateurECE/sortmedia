@@ -10,8 +10,8 @@
 // LAST EDITED:     09/11/2019
 ////
 
-#ifndef __ET_DELETEFILE__
-#define __ET_DELETEFILE__
+#ifndef __ET_POLICIES_DELETEFILE__
+#define __ET_POLICIES_DELETEFILE__
 
 #include <namespaces/Interfaces.h>
 #include <namespaces/Policies.h>
@@ -25,7 +25,7 @@ class SortMedia::Policies::DeleteFile
   : public OrganizationalBase
 {
 public:
-  // TODO: Take file as rvalue reference
+  // TODO: Take file by value.
   DeleteFile(const FileTypes::LibraryFile& file, Interfaces::ILogger& logger);
 
 private:
@@ -41,6 +41,6 @@ private:
   Interfaces::ILogger& m_logger;
 };
 
-#endif // __ET_DELETEFILE__
+#endif // __ET_POLICIES_DELETEFILE__
 
 ///////////////////////////////////////////////////////////////////////////////

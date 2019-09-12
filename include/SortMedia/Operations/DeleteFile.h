@@ -32,6 +32,6 @@ private:
   Interfaces::ILogger& m_logger;
 };
 
-#endif /* __ET_OPERATIONS_DELETEFILE__ */
+#endif // __ET_OPERATIONS_DELETEFILE__
 
 ///////////////////////////////////////////////////////////////////////////////

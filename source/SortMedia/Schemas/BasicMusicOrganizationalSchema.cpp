@@ -28,6 +28,7 @@ const FSAdaptor::IFilesystemAdaptor&
 SortMedia::Schemas::BasicMusicOrganizationalSchema::s_stdAdaptor
 = FSAdaptor::StandardFilesystemAdaptor{};
 
+// TODO: Standardize pos. of logger in ctor arg list
 SortMedia::Schemas::BasicMusicOrganizationalSchema
 ::BasicMusicOrganizationalSchema(Interfaces::ILogger& logger,
                                  const FSAdaptor::IFilesystemAdaptor& adaptor)
@@ -53,7 +54,7 @@ SortMedia::Schemas::BasicMusicOrganizationalSchema
     {
       policy = std::make_unique<Policies::BasicMusicFileNaming>
         (FileTypes::MusicFile{path,
-            std::make_unique<Adaptors::TagLibAdaptor>(path)});
+            std::make_unique<Adaptors::TagLibAdaptor>(path)}, m_logger);
     }
 
   else if (extension == ".cue"
