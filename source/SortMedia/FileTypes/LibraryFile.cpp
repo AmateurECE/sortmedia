@@ -7,7 +7,7 @@
 //
 // CREATED:         09/05/2019
 //
-// LAST EDITED:     09/10/2019
+// LAST EDITED:     09/12/2019
 ////
 
 #include <SortMedia/FileTypes/LibraryFile.h>
@@ -27,6 +27,7 @@ SortMedia::FileTypes::LibraryFile
 
 void SortMedia::FileTypes::LibraryFile::rename(const FSAdaptor::Path& path)
 {
+  m_adaptor.createDirectories(path.parent_path());
   m_adaptor.rename(m_path, path);
   m_path = FSAdaptor::Path{path};
 }

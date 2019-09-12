@@ -14,18 +14,11 @@
 #include <SortMedia/Interfaces/ILogger.h>
 #include <SortMedia/Operations/RenameFile.h>
 
-#include <FSAdaptor/StandardFilesystemAdaptor.h>
-
-const FSAdaptor::IFilesystemAdaptor&
-SortMedia::Operations::RenameFile::s_stdAdaptor
-= FSAdaptor::StandardFilesystemAdaptor{};
-
 SortMedia::Operations::RenameFile
 ::RenameFile(FileTypes::LibraryFile file, FSAdaptor::Path newName,
-             Interfaces::ILogger& logger,
-             const FSAdaptor::IFilesystemAdaptor& adaptor)
+             Interfaces::ILogger& logger)
   : m_file{std::move(file)}, m_newName{std::move(newName)},
-    m_oldName{m_file.getPath()}, m_logger{logger}, m_adaptor{adaptor}
+    m_oldName{m_file.getPath()}, m_logger{logger}
 {}
 
 void SortMedia::Operations::RenameFile
@@ -36,10 +29,9 @@ void SortMedia::Operations::RenameFile
   // Make sure that the directory we are moving to exists (prevent exceptions)
   try
     {
-      m_adaptor.createDirectories(file.getPath().parent_path());
       file.rename(newName);
     }
-  catch (std::system_error& e) // These fns throw system_error.
+  catch (std::system_error& e) // This throws a system_error.
     {
       std::string errorMessage = "Could not rename "
         + file.getPath().string() + " to " + newName.string();

@@ -17,7 +17,6 @@
 #include <SortMedia/FileTypes/LibraryFile.h>
 #include <SortMedia/Interfaces/IFileOperation.h>
 
-#include <FSAdaptor/namespace.h>
 #include <FSAdaptor/Path.h>
 
 class SortMedia::Operations::RenameFile
@@ -25,8 +24,7 @@ class SortMedia::Operations::RenameFile
 {
 public:
   RenameFile(FileTypes::LibraryFile file, FSAdaptor::Path newName,
-             Interfaces::ILogger& logger,
-             const FSAdaptor::IFilesystemAdaptor& adaptor = s_stdAdaptor);
+             Interfaces::ILogger& logger);
 
   virtual void apply() final override;
   virtual void revert() final override;
@@ -39,8 +37,6 @@ private:
   FSAdaptor::Path m_newName;
   FSAdaptor::Path m_oldName;
   Interfaces::ILogger& m_logger;
-  const FSAdaptor::IFilesystemAdaptor& m_adaptor;
-  static const FSAdaptor::IFilesystemAdaptor& s_stdAdaptor;
 };
 
 #endif // __ET_RENAMEFILE__
