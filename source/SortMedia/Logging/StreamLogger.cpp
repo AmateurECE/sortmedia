@@ -7,7 +7,7 @@
 //
 // CREATED:         08/27/2019
 //
-// LAST EDITED:     09/10/2019
+// LAST EDITED:     09/13/2019
 ////
 
 #include <SortMedia/Logging/StreamLogger.h>
@@ -28,7 +28,6 @@ void SortMedia::Logging::StreamLogger
     {
       if (level == logLevel)
         {
-          // TODO: Remove un-portable newline
           m_stream << getMessagePrefix(logLevel) << message << '\n';
           break;
         }

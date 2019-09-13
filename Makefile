@@ -8,7 +8,7 @@
 #
 # CREATED:	    02/03/2019
 #
-# LAST EDITED:	    09/06/2019
+# LAST EDITED:	    09/12/2019
 ###
 
 flags=-shell-escape
@@ -28,6 +28,7 @@ FSAdaptor-LDFLAGS = -L $(FSAdaptor-dir)/build -lfsadaptor
 
 # TODO: Include TagLib dependency as source
 # TODO: Compile SortMedia to static library first
+# TODO: Move to CMake build system
 
 TagLib-dir=dependencies/taglib-1.11.1/
 TagLib-CXXFLAGS = -I $(TagLib-dir)/include

@@ -7,7 +7,7 @@
 //
 // CREATED:         09/05/2019
 //
-// LAST EDITED:     09/12/2019
+// LAST EDITED:     09/13/2019
 ////
 
 #include <SortMedia/Adaptors/TagLibAdaptor.h>
@@ -18,7 +18,7 @@
 #include <taglib/tpropertymap.h>
 #include <taglib/tstring.h>
 
-// TODO: Add dictionary to prevent key repetition?
+// TODO: Make tags static const strings to avoid repetition.
 
 SortMedia::Adaptors::TagLibAdaptor::TagLibAdaptor(const FSAdaptor::Path& path)
   : m_fileRef(std::make_unique<TagLib::FileRef>(path.string().c_str()))
