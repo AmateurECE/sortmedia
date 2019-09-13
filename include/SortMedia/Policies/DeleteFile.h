@@ -7,7 +7,7 @@
 //
 // CREATED:         09/10/2019
 //
-// LAST EDITED:     09/11/2019
+// LAST EDITED:     09/12/2019
 ////
 
 #ifndef __ET_POLICIES_DELETEFILE__
@@ -18,6 +18,8 @@
 #include <SortMedia/Policies/OrganizationalBase.h>
 #include <SortMedia/FileTypes/LibraryFile.h>
 
+#include <FSAdaptor/Path.h>
+
 #include <list>
 #include <memory>
 
@@ -26,7 +28,8 @@ class SortMedia::Policies::DeleteFile
 {
 public:
   // TODO: Take file by value.
-  DeleteFile(const FileTypes::LibraryFile& file, Interfaces::ILogger& logger);
+  DeleteFile(const FileTypes::LibraryFile& file, FSAdaptor::Path rootOfLibrary,
+             Interfaces::ILogger& logger);
 
 private:
   template<class T>
@@ -38,6 +41,7 @@ private:
     const final override;
 
   FileTypes::LibraryFile m_file;
+  FSAdaptor::Path m_rootOfLibrary;
   Interfaces::ILogger& m_logger;
 };
 

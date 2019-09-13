@@ -64,7 +64,8 @@ SortMedia::Policies::BasicMusicFileNaming::getPostconditions()
 {
   std::list<std::unique_ptr<Interfaces::IOrganizationalPolicy>> policies;
   policies.push_back(std::make_unique<DeleteDirectoryIfEmpty>
-                     (m_musicFile.getPath().parent_path(), m_logger));
+                     (m_musicFile.getPath().parent_path(), m_rootOfLibrary,
+                      m_logger));
   return policies;
 }
 

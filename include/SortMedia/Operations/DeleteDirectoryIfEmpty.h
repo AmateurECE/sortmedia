@@ -8,7 +8,7 @@
 //
 // CREATED:         09/09/2019
 //
-// LAST EDITED:     09/11/2019
+// LAST EDITED:     09/12/2019
 ////
 
 #ifndef __ET_OPERATIONS_DELETEDIRECTORYIFEMPTY__
@@ -24,7 +24,7 @@ class SortMedia::Operations::DeleteDirectoryIfEmpty
   : public Interfaces::IFileOperation
 {
 public:
-  // TODO: Take directory as lvalue reference
+  // TODO: Take logger as shared_ptr
   DeleteDirectoryIfEmpty(FSAdaptor::Path directory,
                          Interfaces::ILogger& logger,
                          const FSAdaptor::IFilesystemAdaptor& = s_stdAdaptor);

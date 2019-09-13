@@ -7,7 +7,7 @@
 //
 // CREATED:         09/09/2019
 //
-// LAST EDITED:     09/11/2019
+// LAST EDITED:     09/12/2019
 ////
 
 #include <SortMedia/Interfaces/ILogger.h>
@@ -16,17 +16,34 @@
 
 SortMedia::Policies::DeleteDirectoryIfEmpty
 ::DeleteDirectoryIfEmpty(FSAdaptor::Path directory,
+                         FSAdaptor::Path rootOfLibrary,
                          Interfaces::ILogger& logger)
-  : m_directory{directory}, m_logger{logger}
+  : m_directory{std::move(directory)},
+    m_rootOfLibrary{std::move(rootOfLibrary)}, m_logger{logger}
 {}
 
 std::list<std::unique_ptr<SortMedia::Interfaces::IFileOperation>>
 SortMedia::Policies::DeleteDirectoryIfEmpty::getOperations() const
 {
   std::list<std::unique_ptr<Interfaces::IFileOperation>> operations;
-  operations.push_back(std::make_unique<Operations::DeleteDirectoryIfEmpty>
-                       (m_directory, m_logger));
-  // TODO: Also delete parent directory, if empty.
+  FSAdaptor::Path temp{m_directory};
+
+  // Because "rootPath" != "rootPath/"
+  FSAdaptor::Path rootOtherForm;
+  if (m_rootOfLibrary.string().back() == '/')
+    {
+      rootOtherForm = m_rootOfLibrary.parent_path();
+    }
+  else
+    {
+      rootOtherForm = m_rootOfLibrary / "";
+    }
+
+  do {
+    operations.push_back(std::make_unique<Operations::DeleteDirectoryIfEmpty>
+                         (temp, m_logger));
+    temp = temp.parent_path();
+  } while (temp != m_rootOfLibrary && temp != rootOtherForm);
   return operations;
 }
 

@@ -8,7 +8,7 @@
 //
 // CREATED:         09/09/2019
 //
-// LAST EDITED:     09/11/2019
+// LAST EDITED:     09/12/2019
 ////
 
 #ifndef __ET_POLICIES_DELETEDIRECTORYIFEMPTY__
@@ -28,6 +28,7 @@ class SortMedia::Policies::DeleteDirectoryIfEmpty
 {
 public:
   DeleteDirectoryIfEmpty(FSAdaptor::Path directory,
+                         FSAdaptor::Path rootOfLibrary,
                          Interfaces::ILogger& logger);
 
 private:
@@ -38,6 +39,7 @@ private:
     const final override;
   
   FSAdaptor::Path m_directory;
+  FSAdaptor::Path m_rootOfLibrary;
   Interfaces::ILogger& m_logger;
 };
 

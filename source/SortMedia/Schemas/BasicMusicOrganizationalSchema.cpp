@@ -46,7 +46,7 @@ SortMedia::Schemas::BasicMusicOrganizationalSchema
   if (m_adaptor.isDirectory(path))
     {
       policy = std::make_unique<Policies::DeleteDirectoryIfEmpty>
-        (path, m_logger);
+        (path, rootOfLibrary, m_logger);
     }
 
   else if (extension == ".flac"
@@ -68,7 +68,7 @@ SortMedia::Schemas::BasicMusicOrganizationalSchema
            || extension == ".png")
     {
       policy = std::make_unique<Policies::DeleteFile>
-        (FileTypes::LibraryFile{path}, m_logger);
+        (FileTypes::LibraryFile{path}, rootOfLibrary, m_logger);
     }
 
   else
