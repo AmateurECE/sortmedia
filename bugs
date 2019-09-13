@@ -2,7 +2,6 @@
 ./Makefile: Include TagLib dependency as source | id:1defc870754b56a192852d4c3e7d3ca426c3b282
 ./include/SortMedia/Operations/DeleteDirectoryIfEmpty.h: Take logger as shared_ptr | id:34fbc955c41752e0a147559ffc0b6990be2caa81
 ./source/SortMedia/FileLocators/AnyFileLocator.cpp: Add Unit test to ensure paths are absolute. | id:39a1723a3872c636dc94d38234565d9c826eb557
-./source/SortMedia/Policies/BasicMusicFileNaming.cpp: Add INFO log message with new filename | id:4d04a5a259b0a6ba2a163822e1dc9466b609b436
 ./source/SortMedia/Schemas/BasicMusicOrganizationalSchema.cpp: Standardize pos. of logger in ctor arg list | id:58460c3d9de906e2727f72cc6debc43952fbe230
 ./source/SortMedia/Operations/RenameFile.cpp: Ensure that other operations throw correctly | id:595f30b7bc7d4e502400c18d07575e02b7d121f3
 ./include/namespaces/Exceptions.h: Replace class defs with typedef? | id:7e00b063b8fc65b314230984cad54b6e501f22b6
