@@ -1,0 +1,38 @@
+###############################################################################
+# NAME:             CMakeDefs.txt
+#
+# AUTHOR:           Ethan D. Twardy <edtwardy@mtu.edu>
+#
+# DESCRIPTION:      Contains sources for the CMake build system.
+#
+# CREATED:          09/13/2019
+#
+# LAST EDITED:      09/13/2019
+###
+
+set(SORTMEDIA_SOURCES
+    source/SortMedia/Exceptions/PolicyVerificationError.cpp
+    source/SortMedia/Exceptions/OperationalError.cpp
+    source/SortMedia/Policies/UnknownFileType.cpp
+    source/SortMedia/Policies/DeleteDirectoryIfEmpty.cpp
+    source/SortMedia/Policies/OrganizationalBase.cpp
+    source/SortMedia/Policies/BasicMusicFileNaming.cpp
+    source/SortMedia/Policies/DeleteFile.cpp
+    source/SortMedia/Operations/DeleteDirectoryIfEmpty.cpp
+    source/SortMedia/Operations/Warn.cpp
+    source/SortMedia/Operations/DeleteFile.cpp
+    source/SortMedia/Operations/RenameFile.cpp
+    source/SortMedia/Schemas/BasicMusicOrganizationalSchema.cpp
+    source/SortMedia/Schemas/OrganizationalSchema.cpp
+    source/SortMedia/FileTypes/LibraryFile.cpp
+    source/SortMedia/FileTypes/MusicFile.cpp
+    source/SortMedia/Adaptors/TagLibAdaptor.cpp
+    source/SortMedia/MediaSorter.cpp
+    source/SortMedia/Factories/FileLocatorFactory.cpp
+    source/SortMedia/Factories/OrganizationalSchemaFactory.cpp
+    source/SortMedia/FileLocators/AnyFileLocator.cpp
+    source/SortMedia/Logging/NullLogger.cpp
+    source/SortMedia/Logging/StreamLogger.cpp    
+)
+
+###############################################################################

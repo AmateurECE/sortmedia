@@ -1,14 +1,16 @@
 ./source/SortMedia/Adaptors/TagLibAdaptor.cpp: Make tags static const strings to avoid repetition. | id:0c76e4d95b165d46a821f1393c671749f6d146e9
-./Makefile: Include TagLib dependency as source | id:1defc870754b56a192852d4c3e7d3ca426c3b282
+./CMakeLists.txt: Add TagLib as source | id:1b2b34e10453ab25d4e11bae389ef44d0a6c2ced
+./CMakeLists.txt: Add target to build documentation | id:1e6f74d1c443a9dee588ce16da846146c8986e81
 ./include/SortMedia/Operations/DeleteDirectoryIfEmpty.h: Take logger as shared_ptr | id:34fbc955c41752e0a147559ffc0b6990be2caa81
 ./source/SortMedia/FileLocators/AnyFileLocator.cpp: Add Unit test to ensure paths are absolute. | id:39a1723a3872c636dc94d38234565d9c826eb557
 ./source/SortMedia/Schemas/BasicMusicOrganizationalSchema.cpp: Standardize pos. of logger in ctor arg list | id:58460c3d9de906e2727f72cc6debc43952fbe230
 ./source/SortMedia/Operations/RenameFile.cpp: Ensure that other operations throw correctly | id:595f30b7bc7d4e502400c18d07575e02b7d121f3
-./Makefile: Move to CMake build system | id:7ffdca17d5a6a377020c27dc181d6957e5349ea7
 ./include/SortMedia/Interfaces/IMusicTagEditorAdaptor.h: Add means to manipulate generic key/value tags | id:86c5d6cb828240a6aa62d3953829606ac75cb06a
-./Makefile: Compile SortMedia to static library first | id:94c2f5212e213fa8d3d311e52e26ae9a749063d8
+./CMakeLists.txt: Test install | id:884080ba5c7d3bf7682f8b83a7e9a052b1704ad3
+./CMakeLists.txt: Add pkg-config file | id:8a5b323cba5be05f9bb40760b8d7fce2a33b2405
 ./source/SortMedia/Policies/BasicMusicFileNaming.cpp: Maybe determine number of tracks on the album (for zero-padding)? | id:a3b4094d2344a937c3b9db85c7395e480a0670e3
 ./source/SortMedia/Adaptors/TagLibAdaptor.cpp: Check success of insert? | id:adc589eaab74b970984b8b0fc151d46893143004
 ./include/ArgumentParser.h: The value type in the map must be replaced | id:ae3b66c9c779331d08e93c1493b76e7be2dd7381
-./Makefile: Uncomment docs dependency | id:be41df2159f3e58d9ece4e48681f0dfdec7ab2e3
+./CMakeLists.txt: Link to fsadaptor and taglib internally only | id:bf3739fb1a06cf49aa841ecbe84ef9493087e7c4
 ./include/SortMedia/Policies/DeleteFile.h: Take file by value. | id:ded0ded393ed20c998bb439a86e71534eb5aa542
+./CMakeLists.txt: Fix test rule | id:f33178f27118d7f46f3c2e35028aef6cea1e3a8a
