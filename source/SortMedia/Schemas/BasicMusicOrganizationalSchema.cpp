@@ -62,7 +62,10 @@ SortMedia::Schemas::BasicMusicOrganizationalSchema
   else if (extension == ".cue"
            || extension == ".log"
            || extension == ".txt"
-           || extension == ".m3u")
+           || extension == ".m3u"
+           || extension == ".m3u8"
+           || extension == ".jpg"
+           || extension == ".png")
     {
       policy = std::make_unique<Policies::DeleteFile>
         (FileTypes::LibraryFile{path}, m_logger);

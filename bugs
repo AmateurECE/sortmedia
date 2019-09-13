@@ -1,0 +1,18 @@
+./source/SortMedia/Adaptors/TagLibAdaptor.cpp: Add dictionary to prevent key repetition? | id:023749758810345f88b935ecac79eafce7daa0a1
+./Makefile: Include TagLib dependency as source | id:1defc870754b56a192852d4c3e7d3ca426c3b282
+./source/SortMedia/FileLocators/AnyFileLocator.cpp: Add Unit test to ensure paths are absolute. | id:39a1723a3872c636dc94d38234565d9c826eb557
+./source/SortMedia/Policies/BasicMusicFileNaming.cpp: Add INFO log message with new filename | id:4d04a5a259b0a6ba2a163822e1dc9466b609b436
+./source/SortMedia/Schemas/BasicMusicOrganizationalSchema.cpp: Standardize pos. of logger in ctor arg list | id:58460c3d9de906e2727f72cc6debc43952fbe230
+./source/SortMedia/Operations/RenameFile.cpp: Ensure that other operations throw correctly | id:595f30b7bc7d4e502400c18d07575e02b7d121f3
+./include/namespaces/Exceptions.h: Replace class defs with typedef? | id:7e00b063b8fc65b314230984cad54b6e501f22b6
+./include/SortMedia/Interfaces/IMusicTagEditorAdaptor.h: Add means to manipulate generic key/value tags | id:86c5d6cb828240a6aa62d3953829606ac75cb06a
+./Makefile: Compile SortMedia to static library first | id:94c2f5212e213fa8d3d311e52e26ae9a749063d8
+./source/SortMedia/Policies/BasicMusicFileNaming.cpp: Maybe determine number of tracks on the album (for zero-padding)? | id:a3b4094d2344a937c3b9db85c7395e480a0670e3
+./source/SortMedia/Adaptors/TagLibAdaptor.cpp: Check success of insert? | id:adc589eaab74b970984b8b0fc151d46893143004
+./include/ArgumentParser.h: The value type in the map must be replaced | id:ae3b66c9c779331d08e93c1493b76e7be2dd7381
+./source/SortMedia/Policies/DeleteDirectoryIfEmpty.cpp: Also delete parent directory, if empty. | id:b932658e9c50102434c136db1e8f7dc6d934c055
+./Makefile: Uncomment docs dependency | id:be41df2159f3e58d9ece4e48681f0dfdec7ab2e3
+./include/SortMedia/Operations/DeleteFile.h: Take file as reference (lvalue or rvalue?) | id:cf5c890324535baebe2bd5a7bc1ccb038a6deeae
+./include/SortMedia/Policies/DeleteFile.h: Take file by value. | id:ded0ded393ed20c998bb439a86e71534eb5aa542
+./include/SortMedia/Operations/DeleteDirectoryIfEmpty.h: Take directory as lvalue reference | id:ed68a12d0156d247430f9432cb302c12b49ac7cd
+./source/SortMedia/Logging/StreamLogger.cpp: Remove un-portable newline | id:f4a4ae833db5451576f53363f04d26b291280c77

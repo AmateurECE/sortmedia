@@ -95,7 +95,7 @@ SortMedia::Policies::BasicMusicFileNaming::getOperations() const
   // If not equal to current filename, push a rename operation.
   if (compliantPath != m_musicFile.getPath())
     {
-      // TODO: Maybe add a log message here?
+      // TODO: Add INFO log message with new filename
       operations.push_back(std::make_unique<Operations::RenameFile>
                            (m_musicFile, std::move(compliantPath), m_logger));
     }
