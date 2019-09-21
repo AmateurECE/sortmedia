@@ -7,7 +7,7 @@
 //
 // CREATED:         09/09/2019
 //
-// LAST EDITED:     09/12/2019
+// LAST EDITED:     09/14/2019
 ////
 
 #include <SortMedia/Interfaces/ILogger.h>
@@ -39,11 +39,12 @@ SortMedia::Policies::DeleteDirectoryIfEmpty::getOperations() const
       rootOtherForm = m_rootOfLibrary / "";
     }
 
-  do {
-    operations.push_back(std::make_unique<Operations::DeleteDirectoryIfEmpty>
-                         (temp, m_logger));
-    temp = temp.parent_path();
-  } while (temp != m_rootOfLibrary && temp != rootOtherForm);
+  while (temp != m_rootOfLibrary && temp != rootOtherForm)
+    {
+      operations.push_back(std::make_unique<Operations::DeleteDirectoryIfEmpty>
+                           (temp, m_logger));
+      temp = temp.parent_path();
+    }
   return operations;
 }
 
