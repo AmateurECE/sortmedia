@@ -7,7 +7,7 @@
 //
 // CREATED:         09/06/2019
 //
-// LAST EDITED:     09/12/2019
+// LAST EDITED:     09/25/2019
 ////
 
 #include <SortMedia/Schemas/BasicMusicOrganizationalSchema.h>
@@ -61,11 +61,13 @@ SortMedia::Schemas::BasicMusicOrganizationalSchema
 
   else if (extension == ".cue"
            || extension == ".log"
+           || extension == ".nfo"
            || extension == ".txt"
            || extension == ".m3u"
            || extension == ".m3u8"
            || extension == ".jpg"
-           || extension == ".png")
+           || extension == ".png"
+           || extension == ".bmp")
     {
       policy = std::make_unique<Policies::DeleteFile>
         (FileTypes::LibraryFile{path}, rootOfLibrary, m_logger);
