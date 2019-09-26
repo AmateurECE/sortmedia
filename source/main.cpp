@@ -7,7 +7,7 @@
 //
 // CREATED:         08/15/2019
 //
-// LAST EDITED:     09/06/2019
+// LAST EDITED:     09/26/2019
 ////
 
 #include <iostream>
@@ -34,10 +34,13 @@ int main(int argc, char** argv)
     }
 
   using LogLevel = SortMedia::Logging::LogLevel;
-  auto allLevels = {LogLevel::INFO, LogLevel::WARNING, LogLevel::ERROR};
+  auto outLevels = {LogLevel::INFO};
+  auto errLevels = {LogLevel::WARNING, LogLevel::ERROR};
 
   std::unique_ptr<SortMedia::Interfaces::ILogger> logger =
-    std::make_unique<SortMedia::Logging::StreamLogger>(std::cout, allLevels);
+    std::make_unique<SortMedia::Logging::StreamLogger>(std::cout, outLevels);
+  logger->appendLogger(std::make_unique<SortMedia::Logging::StreamLogger>
+                       (std::cerr, errLevels));
 
   SortMedia::Factories::OrganizationalSchemaFactory schemaFactory;
   SortMedia::Factories::FileLocatorFactory locatorFactory;
