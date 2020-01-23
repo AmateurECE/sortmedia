@@ -7,7 +7,7 @@
 //
 // CREATED:         09/05/2019
 //
-// LAST EDITED:     09/12/2019
+// LAST EDITED:     01/23/2020
 ////
 
 #ifndef __ET_IMUSICTAGEDITORADAPTOR__
@@ -36,6 +36,7 @@ public:
   // Getters for extra tags
   virtual std::string getAlbumArtist() const                = 0;
   virtual std::string getDisc() const                       = 0;
+  virtual unsigned int getTrackTotal() const                = 0;
   virtual std::string getTitleSort() const                  = 0;
   virtual std::string getAlbumSort() const                  = 0;
   virtual std::string getArtistSort() const                 = 0;

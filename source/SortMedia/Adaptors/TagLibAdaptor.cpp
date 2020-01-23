@@ -7,7 +7,7 @@
 //
 // CREATED:         09/05/2019
 //
-// LAST EDITED:     09/13/2019
+// LAST EDITED:     01/23/2020
 ////
 
 #include <SortMedia/Adaptors/TagLibAdaptor.h>
@@ -118,6 +118,17 @@ std::string SortMedia::Adaptors::TagLibAdaptor::getAlbumArtist() const
 std::string SortMedia::Adaptors::TagLibAdaptor::getDisc() const
 {
   return getTagFromPropertyMap("DISCNUMBER");
+}
+
+unsigned int SortMedia::Adaptors::TagLibAdaptor::getTrackTotal() const
+{
+  std::string track = getTagFromPropertyMap("TRACKNUMBER");
+  std::size_t pos = track.find("/");
+  if (pos != std::string::npos)
+    {
+      return std::stoi(track.substr(pos + 1));
+    }
+  return 0;
 }
 
 std::string SortMedia::Adaptors::TagLibAdaptor::getTitleSort() const

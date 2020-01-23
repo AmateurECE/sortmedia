@@ -8,7 +8,6 @@
 ./include/SortMedia/Interfaces/IMusicTagEditorAdaptor.h: Add means to manipulate generic key/value tags | id:86c5d6cb828240a6aa62d3953829606ac75cb06a
 ./CMakeLists.txt: Test install | id:884080ba5c7d3bf7682f8b83a7e9a052b1704ad3
 ./CMakeLists.txt: Add pkg-config file | id:8a5b323cba5be05f9bb40760b8d7fce2a33b2405
-./source/SortMedia/Policies/BasicMusicFileNaming.cpp: Maybe determine number of tracks on the album (for zero-padding)? | id:a3b4094d2344a937c3b9db85c7395e480a0670e3
 ./source/SortMedia/Adaptors/TagLibAdaptor.cpp: Check success of insert? | id:adc589eaab74b970984b8b0fc151d46893143004
 ./include/ArgumentParser.h: The value type in the map must be replaced | id:ae3b66c9c779331d08e93c1493b76e7be2dd7381
 ./CMakeLists.txt: Link to fsadaptor and taglib internally only | id:bf3739fb1a06cf49aa841ecbe84ef9493087e7c4

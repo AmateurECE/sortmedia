@@ -8,7 +8,7 @@
 //
 // CREATED:         09/05/2019
 //
-// LAST EDITED:     09/12/2019
+// LAST EDITED:     01/23/2020
 ////
 
 #ifndef __ET_TAGLIBADAPTOR__
@@ -42,6 +42,7 @@ public:
   // Getters for extra tags
   virtual std::string getAlbumArtist() const final override;
   virtual std::string getDisc() const final override;
+  virtual unsigned int getTrackTotal() const final override;
   virtual std::string getTitleSort() const final override;
   virtual std::string getAlbumSort() const final override;
   virtual std::string getArtistSort() const final override;

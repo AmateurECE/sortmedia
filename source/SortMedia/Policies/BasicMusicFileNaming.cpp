@@ -7,7 +7,7 @@
 //
 // CREATED:         09/06/2019
 //
-// LAST EDITED:     09/12/2019
+// LAST EDITED:     01/23/2020
 ////
 
 #include <SortMedia/Exceptions/PolicyVerificationError.h>
@@ -20,6 +20,8 @@
 #include <SortMedia/Policies/DeleteDirectoryIfEmpty.h>
 
 #include <FSAdaptor/Path.h>
+
+#include <cmath>
 
 SortMedia::Policies::BasicMusicFileNaming
 ::BasicMusicFileNaming(FileTypes::MusicFile path,
@@ -48,6 +50,10 @@ void SortMedia::Policies::BasicMusicFileNaming::viable() const
   else if (tagEditor.getTrack() == 0)
     {
       missingTagName = "track number";
+    }
+  else if (tagEditor.getTrackTotal() == 0)
+    {
+      missingTagName = "track total";
     }
 
   if (missingTagName != "")
@@ -84,9 +90,9 @@ SortMedia::Policies::BasicMusicFileNaming::getOperations() const
   compliantPath /= FSAdaptor::Path{std::regex_replace(tagEditor.getAlbum(),
                                                       r_charFilter, "_")};
 
-  std::string trackNumber = std::to_string(tagEditor.getTrack());
-  static const int trackWidth = 2;
-  // TODO: Maybe determine number of tracks on the album (for zero-padding)?
+  const std::string trackNumber = std::to_string(tagEditor.getTrack());
+  const int trackWidth = std::floor(std::log(tagEditor.getTrackTotal())
+                                    / std::log(10)) + 1;
   compliantPath /= FSAdaptor::Path{std::string(trackWidth
                                                - trackNumber.length(), '0')
       + trackNumber + " " + std::regex_replace(tagEditor.getTitle(),
