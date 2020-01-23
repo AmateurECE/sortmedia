@@ -8,7 +8,7 @@
 //
 // CREATED:         08/15/2019
 //
-// LAST EDITED:     09/12/2019
+// LAST EDITED:     09/26/2019
 ////
 
 #include <SortMedia/Interfaces/IFileLocator.h>
@@ -17,6 +17,7 @@
 #include <SortMedia/MediaSorter.h>
 
 #include <FSAdaptor/Path.h>
+#include <FSAdaptor/StandardFilesystemAdaptor.h>
 
 #include <list>
 
@@ -33,13 +34,15 @@ int SortMedia::MediaSorter::sortDirectory(const std::string& directory)
 {
   m_logger.log("Sorting " + directory, Logging::LogLevel::INFO);
 
-  const FSAdaptor::Path theDirectory{directory};
+  const FSAdaptor::StandardFilesystemAdaptor adaptor;
+  const FSAdaptor::Path theDirectory
+  {adaptor.absolute(FSAdaptor::Path{directory})};
   std::list<FSAdaptor::Path> paths
     = m_locator.recursivelyListFilesInDirectory(theDirectory);
 
   for (auto path : paths)
     {
-      m_schema.applyToFile(path, directory);
+      m_schema.applyToFile(path, theDirectory);
     }
 
   return 0;

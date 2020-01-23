@@ -7,7 +7,7 @@
 //
 // CREATED:         09/05/2019
 //
-// LAST EDITED:     09/10/2019
+// LAST EDITED:     09/26/2019
 ////
 
 #include <SortMedia/FileLocators/AnyFileLocator.h>
@@ -28,7 +28,7 @@ SortMedia::FileLocators::AnyFileLocator
 ::recursivelyListFilesInDirectory(const FSAdaptor::Path& directory) const
 {
   FSAdaptor::PathWalker<std::list> pathWalker;
-  m_adaptor.walk(pathWalker, directory);
+  m_adaptor.walk(pathWalker, m_adaptor.absolute(directory));
 
   // TODO: Add Unit test to ensure paths are absolute.
   return std::list<FSAdaptor::Path>{pathWalker.getContainer()};
