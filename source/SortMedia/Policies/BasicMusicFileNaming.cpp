@@ -7,7 +7,7 @@
 //
 // CREATED:         09/06/2019
 //
-// LAST EDITED:     01/23/2020
+// LAST EDITED:     03/29/2020
 ////
 
 #include <SortMedia/Exceptions/PolicyVerificationError.h>
@@ -91,8 +91,10 @@ SortMedia::Policies::BasicMusicFileNaming::getOperations() const
                                                       r_charFilter, "_")};
 
   const std::string trackNumber = std::to_string(tagEditor.getTrack());
-  const int trackWidth = std::floor(std::log(tagEditor.getTrackTotal())
-                                    / std::log(10)) + 1;
+  int trackWidth = std::floor(std::log(tagEditor.getTrackTotal())
+                              / std::log(10)) + 1;
+  // Ensure that the tracknumber is always at least two digits (e.g. "01")
+  trackWidth = trackWidth < 2 ? 2 : trackWidth;
   compliantPath /= FSAdaptor::Path{std::string(trackWidth
                                                - trackNumber.length(), '0')
       + trackNumber + " " + std::regex_replace(tagEditor.getTitle(),
