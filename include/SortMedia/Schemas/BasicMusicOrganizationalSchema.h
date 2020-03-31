@@ -11,7 +11,7 @@
 //
 // CREATED:         09/06/2019
 //
-// LAST EDITED:     09/12/2019
+// LAST EDITED:     03/31/2020
 ////
 
 #ifndef __ET_BASICMUSICORGANIZATIONALSCHEMA__
@@ -19,6 +19,7 @@
 
 #include <namespaces/Interfaces.h>
 #include <namespaces/Schemas.h>
+#include <SortMedia/Factories/MusicTagEditorAdaptorFactory.h>
 #include <SortMedia/Schemas/OrganizationalSchema.h>
 
 #include <FSAdaptor/namespace.h>
@@ -37,6 +38,8 @@ private:
   virtual std::unique_ptr<Interfaces::IOrganizationalPolicy>
   makeOrganizer(const FSAdaptor::Path& path,
                 const FSAdaptor::Path& rootOfLibrary) const final override;
+
+  const Factories::MusicTagEditorAdaptorFactory m_musicTagEditorAdaptorFactory;
 
   Interfaces::ILogger& m_logger;
   const FSAdaptor::IFilesystemAdaptor& m_adaptor;

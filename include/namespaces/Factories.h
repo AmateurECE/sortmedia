@@ -7,7 +7,7 @@
 //
 // CREATED:         08/27/2019
 //
-// LAST EDITED:     08/27/2019
+// LAST EDITED:     03/31/2020
 ////
 
 #ifndef __ET_FACTORIES__
@@ -19,6 +19,7 @@ namespace SortMedia
   {
     class FileLocatorFactory;
     class OrganizationalSchemaFactory;
+    class MusicTagEditorAdaptorFactory;
   }
 }
 

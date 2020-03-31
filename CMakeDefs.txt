@@ -7,7 +7,7 @@
 #
 # CREATED:          09/13/2019
 #
-# LAST EDITED:      09/13/2019
+# LAST EDITED:      03/31/2020
 ###
 
 set(SORTMEDIA_SOURCES
@@ -27,9 +27,11 @@ set(SORTMEDIA_SOURCES
     source/SortMedia/FileTypes/LibraryFile.cpp
     source/SortMedia/FileTypes/MusicFile.cpp
     source/SortMedia/Adaptors/TagLibAdaptor.cpp
+    source/SortMedia/Adaptors/TagLibFLACAdaptor.cpp
     source/SortMedia/MediaSorter.cpp
     source/SortMedia/Factories/FileLocatorFactory.cpp
     source/SortMedia/Factories/OrganizationalSchemaFactory.cpp
+    source/SortMedia/Factories/MusicTagEditorAdaptorFactory.cpp
     source/SortMedia/FileLocators/AnyFileLocator.cpp
     source/SortMedia/Logging/NullLogger.cpp
     source/SortMedia/Logging/StreamLogger.cpp    

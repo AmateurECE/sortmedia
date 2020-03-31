@@ -7,12 +7,11 @@
 //
 // CREATED:         09/06/2019
 //
-// LAST EDITED:     09/25/2019
+// LAST EDITED:     03/31/2020
 ////
 
 #include <SortMedia/Schemas/BasicMusicOrganizationalSchema.h>
 
-#include <SortMedia/Adaptors/TagLibAdaptor.h>
 #include <SortMedia/FileTypes/MusicFile.h>
 #include <SortMedia/Policies/BasicMusicFileNaming.h>
 #include <SortMedia/Policies/DeleteDirectoryIfEmpty.h>
@@ -32,7 +31,7 @@ SortMedia::Schemas::BasicMusicOrganizationalSchema::s_stdAdaptor
 SortMedia::Schemas::BasicMusicOrganizationalSchema
 ::BasicMusicOrganizationalSchema(Interfaces::ILogger& logger,
                                  const FSAdaptor::IFilesystemAdaptor& adaptor)
-  : m_logger(logger), m_adaptor(adaptor)
+  : m_musicTagEditorAdaptorFactory{}, m_logger(logger), m_adaptor(adaptor)
 {}
 
 std::unique_ptr<SortMedia::Interfaces::IOrganizationalPolicy>
@@ -55,7 +54,7 @@ SortMedia::Schemas::BasicMusicOrganizationalSchema
     {
       policy = std::make_unique<Policies::BasicMusicFileNaming>
         (FileTypes::MusicFile{path,
-            std::make_unique<Adaptors::TagLibAdaptor>(path)},
+            m_musicTagEditorAdaptorFactory.makeMusicTagEditorAdaptor(path)},
           rootOfLibrary, m_logger);
     }
 

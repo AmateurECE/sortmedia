@@ -1,13 +1,7 @@
-SortMedia
-UnitTests
-!include/SortMedia
-!source/SortMedia
-*.o
 .venv/
 Pipfile.lock
 hash-cache/
 http/
-CMakeCache.txt
 googletest/googlemock/libgmock.a
 googletest/googlemock/libgmock_main.a
 googletest/googlemock/gtest/libgtest_main.a

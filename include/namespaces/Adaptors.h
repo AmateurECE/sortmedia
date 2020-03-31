@@ -7,7 +7,7 @@
 //
 // CREATED:         08/29/2019
 //
-// LAST EDITED:     09/05/2019
+// LAST EDITED:     03/31/2020
 ////
 
 #ifndef __ET_ADAPTORS__
@@ -18,6 +18,7 @@ namespace SortMedia
   namespace Adaptors
   {
     class TagLibAdaptor;
+    class TagLibFLACAdaptor;
   };
 };
 

@@ -7,7 +7,7 @@
 //
 // CREATED:         09/05/2019
 //
-// LAST EDITED:     03/30/2020
+// LAST EDITED:     03/31/2020
 ////
 
 #ifndef __ET_IMUSICTAGEDITORADAPTOR__
@@ -33,9 +33,10 @@ public:
       Genre,
       Year,
       Track,
+      TrackTotal,
       AlbumArtist,
       Disc,
-      TrackTotal,
+      DiscTotal,
       TitleSort,
       AlbumSort,
       ArtistSort,
@@ -43,7 +44,7 @@ public:
     };
 
   virtual std::string getTag(Tags) const = 0;
-  virtual void setTag(Tags, std::string) = 0;
+  virtual void setTag(Tags, const std::string&) = 0;
   virtual void setTag(Tags, unsigned int) = 0;
 };
 

@@ -8,7 +8,7 @@
 //
 // CREATED:         09/05/2019
 //
-// LAST EDITED:     03/30/2020
+// LAST EDITED:     03/31/2020
 ////
 
 #ifndef __ET_TAGLIBADAPTOR__
@@ -32,8 +32,12 @@ public:
 
   using Tags = Interfaces::IMusicTagEditorAdaptor::Tags;
   virtual std::string getTag(Tags) const final override;
-  virtual void setTag(Tags, std::string) final override;
+  virtual void setTag(Tags, const std::string&) final override;
   virtual void setTag(Tags, unsigned int) final override;
+
+protected:
+  std::string getTagFromPropertyMap(const std::string&) const;
+  void setTagInPropertyMap(const std::string& key, const std::string& value);
 
 private:
   // Getters
@@ -48,6 +52,7 @@ private:
   // Getters for extra tags
   virtual std::string getAlbumArtist() const;
   virtual std::string getDisc() const;
+  virtual std::string getDiscTotal() const;
   virtual std::string getTrackTotal() const;
   virtual std::string getTitleSort() const;
   virtual std::string getAlbumSort() const;
@@ -66,6 +71,7 @@ private:
   // Setters for extra tags
   virtual void setAlbumArtist(const std::string&);
   virtual void setDisc(const std::string&);
+  virtual void setDiscTotal(const std::string&);
   virtual void setTrackTotal(const std::string&);
   virtual void setTitleSort(const std::string&);
   virtual void setAlbumSort(const std::string&);
@@ -83,6 +89,7 @@ private:
     [Tags::Track]=&TagLibAdaptor::getTrack,
     [Tags::AlbumArtist]=&TagLibAdaptor::getAlbumArtist,
     [Tags::Disc]=&TagLibAdaptor::getDisc,
+    [Tags::DiscTotal]=&TagLibAdaptor::getDiscTotal,
     [Tags::TrackTotal]=&TagLibAdaptor::getTrackTotal,
     [Tags::TitleSort]=&TagLibAdaptor::getTitleSort,
     [Tags::AlbumSort]=&TagLibAdaptor::getAlbumSort,
@@ -101,18 +108,15 @@ private:
     [Tags::Track]=&TagLibAdaptor::setTrack,
     [Tags::AlbumArtist]=&TagLibAdaptor::setAlbumArtist,
     [Tags::Disc]=&TagLibAdaptor::setDisc,
+    // TODO: [Tags::DiscTotal]=&TagLibAdaptor::setDiscTotal,
+    //   This is commented out so that we can test a "logic_error" is thrown
+    //   when attempting to get/set an unsupported key.
     [Tags::TrackTotal]=&TagLibAdaptor::setTrackTotal,
     [Tags::TitleSort]=&TagLibAdaptor::setTitleSort,
     [Tags::AlbumSort]=&TagLibAdaptor::setAlbumSort,
     [Tags::ArtistSort]=&TagLibAdaptor::setArtistSort,
     [Tags::AlbumArtistSort]=&TagLibAdaptor::setAlbumArtistSort
   };
-
-  template<class extType, class intType>
-  extType getTag(intType (*accessor)(void));
-
-  std::string getTagFromPropertyMap(const std::string&) const;
-  void setTagInPropertyMap(const std::string& key, const std::string& value);
 
   std::unique_ptr<TagLib::FileRef> m_fileRef;
 };

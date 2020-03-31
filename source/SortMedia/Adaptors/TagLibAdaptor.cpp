@@ -7,7 +7,7 @@
 //
 // CREATED:         09/05/2019
 //
-// LAST EDITED:     03/30/2020
+// LAST EDITED:     03/31/2020
 ////
 
 #include <SortMedia/Adaptors/TagLibAdaptor.h>
@@ -23,11 +23,33 @@ using Tags = SortMedia::Interfaces::IMusicTagEditorAdaptor::Tags;
 // TODO: Make tags static const strings to avoid repetition.
 
 std::string SortMedia::Adaptors::TagLibAdaptor
-::getTag(Tags) const { return ""; }
+::getTag(Tags tag) const
+{
+  const auto function = getters[tag];
+  if (function == nullptr)
+    {
+      throw std::logic_error{"This feature not yet implemented."};
+    }
+
+  return (this->*function)();
+}
+
 void SortMedia::Adaptors::TagLibAdaptor
-::setTag(Tags, std::string) {}
+::setTag(Tags tag, const std::string& value)
+{
+  const auto function = setters[tag];
+  if (function == nullptr)
+    {
+      throw std::logic_error{"This feature not yet implemented."};
+    }
+  (this->*function)(value);
+}
+
 void SortMedia::Adaptors::TagLibAdaptor
-::setTag(Tags, unsigned int) {}
+::setTag(Tags tag, unsigned int value)
+{
+  setTag(tag, std::to_string(value));
+}
 
 SortMedia::Adaptors::TagLibAdaptor::TagLibAdaptor(const FSAdaptor::Path& path)
   : m_fileRef(std::make_unique<TagLib::FileRef>(path.string().c_str()))
@@ -130,6 +152,17 @@ std::string SortMedia::Adaptors::TagLibAdaptor::getDisc() const
   return getTagFromPropertyMap("DISCNUMBER");
 }
 
+std::string SortMedia::Adaptors::TagLibAdaptor::getDiscTotal() const
+{
+  std::string disc = getTagFromPropertyMap("DISCNUMBER");
+  std::size_t pos = disc.find("/");
+  if (pos != std::string::npos)
+    {
+      return disc.substr(pos + 1);
+    }
+  return "";
+}
+
 std::string SortMedia::Adaptors::TagLibAdaptor::getTrackTotal() const
 {
   std::string track = getTagFromPropertyMap("TRACKNUMBER");
@@ -208,6 +241,13 @@ void SortMedia::Adaptors::TagLibAdaptor
 ::setDisc(const std::string& disc)
 {
   setTagInPropertyMap("DISCNUMBER", disc);
+}
+
+// TODO: Implement setDiscTotal
+void SortMedia::Adaptors::TagLibAdaptor
+::setDiscTotal(const std::string& discTotal)
+{
+  throw std::logic_error{"Function not yet implemented."};
 }
 
 // TODO: Implement setTrackTotal
