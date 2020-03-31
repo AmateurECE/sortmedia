@@ -7,7 +7,7 @@
 //
 // CREATED:         09/06/2019
 //
-// LAST EDITED:     03/30/2020
+// LAST EDITED:     03/31/2020
 ////
 
 #include <SortMedia/Exceptions/PolicyVerificationError.h>
@@ -16,6 +16,7 @@
 #include <SortMedia/Interfaces/IOrganizationalPolicy.h>
 #include <SortMedia/Interfaces/IMusicTagEditorAdaptor.h>
 #include <SortMedia/Operations/RenameFile.h>
+#include <SortMedia/Operations/Warn.h>
 #include <SortMedia/Policies/BasicMusicFileNaming.h>
 #include <SortMedia/Policies/DeleteDirectoryIfEmpty.h>
 
@@ -93,14 +94,27 @@ SortMedia::Policies::BasicMusicFileNaming::getOperations() const
     {std::regex_replace(tagEditor.getTag(Tags::Album),
                         r_charFilter, "_")};
 
+  std::string discNumber = tagEditor.getTag(Tags::Disc);
+  const std::string discTotal = tagEditor.getTag(Tags::DiscTotal);
+  if ("" != discNumber && "" != discTotal)
+    {
+      discNumber = std::string(discTotal.length() - discNumber.length(), '0')
+        + discNumber;
+    }
+  else if ("" != discNumber)
+    {
+      operations.push_back(std::make_unique<Operations::Warn>
+                           (m_logger, "\"" + tagEditor.getTag(Tags::Title)
+                            + "\" has disc number set, but not disc total"));
+      discNumber = "";
+    }
+
   const std::string trackNumber = tagEditor.getTag(Tags::Track);
-  int trackWidth
-    = std::floor(std::log(std::stoi(tagEditor.getTag(Tags::TrackTotal)))
-                 / std::log(10)) + 1;
   // Ensure that the tracknumber is always at least two digits (e.g. "01")
-  trackWidth = trackWidth < 2 ? 2 : trackWidth;
-  compliantPath /= FSAdaptor::Path{std::string(trackWidth
-                                               - trackNumber.length(), '0')
+  const std::string trackTotal = tagEditor.getTag(Tags::TrackTotal);
+  const int trackWidth = trackTotal.length() < 2 ? 2 : trackTotal.length();
+  compliantPath /= FSAdaptor::Path{
+    discNumber + std::string(trackWidth - trackNumber.length(), '0')
       + trackNumber + " " + std::regex_replace(tagEditor.getTag(Tags::Title),
                                                r_charFilter, "_")};
   compliantPath += m_musicFile.getPath().extension();
