@@ -108,9 +108,7 @@ private:
     [Tags::Track]=&TagLibAdaptor::setTrack,
     [Tags::AlbumArtist]=&TagLibAdaptor::setAlbumArtist,
     [Tags::Disc]=&TagLibAdaptor::setDisc,
-    // TODO: [Tags::DiscTotal]=&TagLibAdaptor::setDiscTotal,
-    //   This is commented out so that we can test a "logic_error" is thrown
-    //   when attempting to get/set an unsupported key.
+    [Tags::DiscTotal]=&TagLibAdaptor::setDiscTotal,
     [Tags::TrackTotal]=&TagLibAdaptor::setTrackTotal,
     [Tags::TitleSort]=&TagLibAdaptor::setTitleSort,
     [Tags::AlbumSort]=&TagLibAdaptor::setAlbumSort,

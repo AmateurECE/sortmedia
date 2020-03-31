@@ -7,7 +7,7 @@
 //
 // CREATED:         09/06/2019
 //
-// LAST EDITED:     09/12/2019
+// LAST EDITED:     03/31/2020
 ////
 
 #include <SortMedia/Exceptions/ExceptionBase.h>
@@ -17,6 +17,9 @@
 #include <SortMedia/Schemas/OrganizationalSchema.h>
 
 #include <FSAdaptor/Path.h>
+
+#define str(a) str_Impl(a)
+#define str_Impl(a) #a
 
 SortMedia::Schemas::OrganizationalSchema::OrganizationalSchema()
 {}
@@ -33,7 +36,7 @@ SortMedia::Schemas::OrganizationalSchema
     {
       organizer->verify();
     }
-  catch (Exceptions::ExceptionBase& e)
+  catch (const Exceptions::ExceptionBase& e)
     {
       return;
     }
@@ -51,7 +54,7 @@ SortMedia::Schemas::OrganizationalSchema
           currentOperation->apply();
           completedOperations.push_front(std::move(currentOperation));
         }
-      catch (Exceptions::OperationalError& e)
+      catch (const Exceptions::OperationalError& e)
         {
           revertOperations(completedOperations);
           return;
@@ -71,11 +74,12 @@ void SortMedia::Schemas::OrganizationalSchema
           operations.pop_front();
           currentOperation->revert();
         }
-      catch (Exceptions::OperationalError& e)
+      catch (const Exceptions::OperationalError& e)
         {
           // The point is that we aren't going to catch this.
-          throw "Error: Encountered exception while reverting (due to a"
-            " previous exception). Exiting.";
+          throw std::runtime_error{__FILE__":" str(__LINE__) ":"
+              " Encountered exception while reverting completed operations"
+              " (due to a previous exception). Exiting."};
         }
     }
 }

@@ -7,7 +7,7 @@
 //
 // CREATED:         08/15/2019
 //
-// LAST EDITED:     09/26/2019
+// LAST EDITED:     03/31/2020
 ////
 
 #include <iostream>
@@ -20,19 +20,8 @@
 #include <SortMedia/Factories/FileLocatorFactory.h>
 #include <SortMedia/Factories/OrganizationalSchemaFactory.h>
 
-int main(int argc, char** argv)
+int ApplicationMain(CommandLine::ArgumentParser& parser)
 {
-  CommandLine::ArgumentParser parser;
-  try
-    {
-      parser = CommandLine::ArgumentParser{argc, argv};
-    }
-  catch (std::invalid_argument& e)
-    {
-      std::cerr << parser.getUsage() << std::endl;
-      return 1;
-    }
-
   using LogLevel = SortMedia::Logging::LogLevel;
   auto outLevels = {LogLevel::INFO};
   auto errLevels = {LogLevel::WARNING, LogLevel::ERROR};
@@ -52,6 +41,28 @@ int main(int argc, char** argv)
   std::string theLibrary
     = parser.getArgument<std::string>(CommandLine::ArgumentKey::DIRECTORY);
   sorter.sortDirectory(theLibrary);
+  return 0;
+}
+
+int main(int argc, char** argv)
+{
+  CommandLine::ArgumentParser parser;
+  try { parser = CommandLine::ArgumentParser{argc, argv}; }
+  catch (const std::invalid_argument& e)
+    {
+      std::cerr << parser.getUsage() << std::endl;
+      return 1;
+    }
+
+  try { return ApplicationMain(parser); }
+  // I'm aware that it's typically bad practice to catch std::exception.
+  // However, this is the only way that we can guarantee that a useful message
+  // will be printed to stderr.
+  catch (const std::exception& e)
+    {
+      std::cerr << e.what() << std::endl;
+      return 1;
+    }
 }
 
 ///////////////////////////////////////////////////////////////////////////////

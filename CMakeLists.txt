@@ -7,14 +7,16 @@
 #
 # CREATED:          09/13/2019
 #
-# LAST EDITED:      09/13/2019
+# LAST EDITED:      03/31/2020
 ###
 
 cmake_minimum_required(VERSION 3.15.1)
 
 project(SortMedia DESCRIPTION "Media Sorter")
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -Wall -Wextra -O3 --std=c++17")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -O3 --std=c++17")
+# GCC Flags for Debug build
+# set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -Wall -Wextra -O0 --std=c++17")
 
 # TODO: Add target to build documentation
 # TODO: Fix test rule

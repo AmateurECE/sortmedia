@@ -18,6 +18,9 @@
 #include <taglib/tpropertymap.h>
 #include <taglib/tstring.h>
 
+#define str(a) str_Impl(a)
+#define str_Impl(a) #a
+
 using Tags = SortMedia::Interfaces::IMusicTagEditorAdaptor::Tags;
 
 // TODO: Make tags static const strings to avoid repetition.
@@ -28,7 +31,8 @@ std::string SortMedia::Adaptors::TagLibAdaptor
   const auto function = getters[tag];
   if (function == nullptr)
     {
-      throw std::logic_error{"This feature not yet implemented."};
+      throw std::logic_error{__FILE__":" str(__LINE__) ":"
+          "This implementation does not currently support the requested tag."};
     }
 
   return (this->*function)();
@@ -40,7 +44,8 @@ void SortMedia::Adaptors::TagLibAdaptor
   const auto function = setters[tag];
   if (function == nullptr)
     {
-      throw std::logic_error{"This feature not yet implemented."};
+      throw std::logic_error{__FILE__":" str(__LINE__) ":"
+          "This implementation does not currently support the requested tag."};
     }
   (this->*function)(value);
 }
