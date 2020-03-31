@@ -7,7 +7,7 @@
 //
 // CREATED:         09/06/2019
 //
-// LAST EDITED:     03/29/2020
+// LAST EDITED:     03/30/2020
 ////
 
 #include <SortMedia/Exceptions/PolicyVerificationError.h>
@@ -22,6 +22,8 @@
 #include <FSAdaptor/Path.h>
 
 #include <cmath>
+
+using Tags = SortMedia::Interfaces::IMusicTagEditorAdaptor::Tags;
 
 SortMedia::Policies::BasicMusicFileNaming
 ::BasicMusicFileNaming(FileTypes::MusicFile path,
@@ -39,19 +41,19 @@ void SortMedia::Policies::BasicMusicFileNaming::viable() const
     {
       missingTagName = "artist";
     }
-  else if (tagEditor.getAlbum() == "")
+  else if (tagEditor.getTag(Tags::Album) == "")
     {
       missingTagName = "album";
     }
-  else if (tagEditor.getTitle() == "")
+  else if (tagEditor.getTag(Tags::Title) == "")
     {
       missingTagName = "title";
     }
-  else if (tagEditor.getTrack() == 0)
+  else if (tagEditor.getTag(Tags::Track) == "")
     {
       missingTagName = "track number";
     }
-  else if (tagEditor.getTrackTotal() == 0)
+  else if (tagEditor.getTag(Tags::TrackTotal) == "")
     {
       missingTagName = "track total";
     }
@@ -87,24 +89,26 @@ SortMedia::Policies::BasicMusicFileNaming::getOperations() const
   Interfaces::IMusicTagEditorAdaptor& tagEditor = m_musicFile.getTagEditor();
   compliantPath /= FSAdaptor::Path{std::regex_replace(getFileArtist(),
                                                       r_charFilter, "_")};
-  compliantPath /= FSAdaptor::Path{std::regex_replace(tagEditor.getAlbum(),
-                                                      r_charFilter, "_")};
+  compliantPath /= FSAdaptor::Path
+    {std::regex_replace(tagEditor.getTag(Tags::Album),
+                        r_charFilter, "_")};
 
-  const std::string trackNumber = std::to_string(tagEditor.getTrack());
-  int trackWidth = std::floor(std::log(tagEditor.getTrackTotal())
-                              / std::log(10)) + 1;
+  const std::string trackNumber = tagEditor.getTag(Tags::Track);
+  int trackWidth
+    = std::floor(std::log(std::stoi(tagEditor.getTag(Tags::TrackTotal)))
+                 / std::log(10)) + 1;
   // Ensure that the tracknumber is always at least two digits (e.g. "01")
   trackWidth = trackWidth < 2 ? 2 : trackWidth;
   compliantPath /= FSAdaptor::Path{std::string(trackWidth
                                                - trackNumber.length(), '0')
-      + trackNumber + " " + std::regex_replace(tagEditor.getTitle(),
+      + trackNumber + " " + std::regex_replace(tagEditor.getTag(Tags::Title),
                                                r_charFilter, "_")};
   compliantPath += m_musicFile.getPath().extension();
 
   // If not equal to current filename, push a rename operation.
   if (compliantPath != m_musicFile.getPath())
     {
-      m_logger.log("Renaming \"" + tagEditor.getTitle() + "\"",
+      m_logger.log("Renaming \"" + tagEditor.getTag(Tags::Title) + "\"",
                    Logging::LogLevel::INFO);
       operations.push_back(std::make_unique<Operations::RenameFile>
                            (m_musicFile, std::move(compliantPath), m_logger));
@@ -116,12 +120,12 @@ SortMedia::Policies::BasicMusicFileNaming::getOperations() const
 std::string SortMedia::Policies::BasicMusicFileNaming::getFileArtist() const
 {
   Interfaces::IMusicTagEditorAdaptor& tagEditor = m_musicFile.getTagEditor();
-  std::string artist = tagEditor.getAlbumArtist();
+  std::string artist = tagEditor.getTag(Tags::AlbumArtist);
   if (artist != "")
     {
       return artist;
     }
-  return tagEditor.getArtist();
+  return tagEditor.getTag(Tags::Artist);
 }
 
 ///////////////////////////////////////////////////////////////////////////////

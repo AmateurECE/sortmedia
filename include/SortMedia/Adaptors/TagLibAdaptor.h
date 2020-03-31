@@ -8,7 +8,7 @@
 //
 // CREATED:         09/05/2019
 //
-// LAST EDITED:     01/23/2020
+// LAST EDITED:     03/30/2020
 ////
 
 #ifndef __ET_TAGLIBADAPTOR__
@@ -30,42 +30,84 @@ class SortMedia::Adaptors::TagLibAdaptor
 public:
   TagLibAdaptor(const FSAdaptor::Path& path);
 
-  // Getters
-  virtual std::string getArtist() const final override;
-  virtual std::string getAlbum() const final override;
-  virtual std::string getTitle() const final override;
-  virtual std::string getComment() const final override;
-  virtual std::string getGenre() const final override;
-  virtual unsigned int getYear() const final override;
-  virtual unsigned int getTrack() const final override;
-
-  // Getters for extra tags
-  virtual std::string getAlbumArtist() const final override;
-  virtual std::string getDisc() const final override;
-  virtual unsigned int getTrackTotal() const final override;
-  virtual std::string getTitleSort() const final override;
-  virtual std::string getAlbumSort() const final override;
-  virtual std::string getArtistSort() const final override;
-  virtual std::string getAlbumArtistSort() const final override;
-
-  // Setters
-  virtual void setArtist(const std::string&) final override;
-  virtual void setAlbum(const std::string&) final override;
-  virtual void setTitle(const std::string&) final override;
-  virtual void setComment(const std::string&) final override;
-  virtual void setGenre(const std::string&) final override;
-  virtual void setYear(unsigned int) final override;
-  virtual void setTrack(unsigned int) final override;
-
-  // Setters for extra tags
-  virtual void setAlbumArtist(const std::string&) final override;
-  virtual void setDisc(const std::string&) final override;
-  virtual void setTitleSort(const std::string&) final override;
-  virtual void setAlbumSort(const std::string&) final override;
-  virtual void setArtistSort(const std::string&) final override;
-  virtual void setAlbumArtistSort(const std::string&) final override;
+  using Tags = Interfaces::IMusicTagEditorAdaptor::Tags;
+  virtual std::string getTag(Tags) const final override;
+  virtual void setTag(Tags, std::string) final override;
+  virtual void setTag(Tags, unsigned int) final override;
 
 private:
+  // Getters
+  virtual std::string getArtist() const;
+  virtual std::string getAlbum() const;
+  virtual std::string getTitle() const;
+  virtual std::string getComment() const;
+  virtual std::string getGenre() const;
+  virtual std::string getYear() const;
+  virtual std::string getTrack() const;
+
+  // Getters for extra tags
+  virtual std::string getAlbumArtist() const;
+  virtual std::string getDisc() const;
+  virtual std::string getTrackTotal() const;
+  virtual std::string getTitleSort() const;
+  virtual std::string getAlbumSort() const;
+  virtual std::string getArtistSort() const;
+  virtual std::string getAlbumArtistSort() const;
+
+  // Setters
+  virtual void setArtist(const std::string&);
+  virtual void setAlbum(const std::string&);
+  virtual void setTitle(const std::string&);
+  virtual void setComment(const std::string&);
+  virtual void setGenre(const std::string&);
+  virtual void setYear(const std::string&);
+  virtual void setTrack(const std::string&);
+
+  // Setters for extra tags
+  virtual void setAlbumArtist(const std::string&);
+  virtual void setDisc(const std::string&);
+  virtual void setTrackTotal(const std::string&);
+  virtual void setTitleSort(const std::string&);
+  virtual void setAlbumSort(const std::string&);
+  virtual void setArtistSort(const std::string&);
+  virtual void setAlbumArtistSort(const std::string&);
+
+  typedef std::string (SortMedia::Adaptors::TagLibAdaptor::*getter)() const;
+  static constexpr getter getters[] = {
+    [Tags::Artist]=&TagLibAdaptor::getArtist,
+    [Tags::Album]=&TagLibAdaptor::getAlbum,
+    [Tags::Title]=&TagLibAdaptor::getTitle,
+    [Tags::Comment]=&TagLibAdaptor::getComment,
+    [Tags::Genre]=&TagLibAdaptor::getGenre,
+    [Tags::Year]=&TagLibAdaptor::getYear,
+    [Tags::Track]=&TagLibAdaptor::getTrack,
+    [Tags::AlbumArtist]=&TagLibAdaptor::getAlbumArtist,
+    [Tags::Disc]=&TagLibAdaptor::getDisc,
+    [Tags::TrackTotal]=&TagLibAdaptor::getTrackTotal,
+    [Tags::TitleSort]=&TagLibAdaptor::getTitleSort,
+    [Tags::AlbumSort]=&TagLibAdaptor::getAlbumSort,
+    [Tags::ArtistSort]=&TagLibAdaptor::getArtistSort,
+    [Tags::AlbumArtistSort]=&TagLibAdaptor::getAlbumArtistSort
+  };
+
+  typedef void (SortMedia::Adaptors::TagLibAdaptor::*setter)(const std::string&);
+  static constexpr setter setters[] = {
+    [Tags::Artist]=&TagLibAdaptor::setArtist,
+    [Tags::Album]=&TagLibAdaptor::setAlbum,
+    [Tags::Title]=&TagLibAdaptor::setTitle,
+    [Tags::Comment]=&TagLibAdaptor::setComment,
+    [Tags::Genre]=&TagLibAdaptor::setGenre,
+    [Tags::Year]=&TagLibAdaptor::setYear,
+    [Tags::Track]=&TagLibAdaptor::setTrack,
+    [Tags::AlbumArtist]=&TagLibAdaptor::setAlbumArtist,
+    [Tags::Disc]=&TagLibAdaptor::setDisc,
+    [Tags::TrackTotal]=&TagLibAdaptor::setTrackTotal,
+    [Tags::TitleSort]=&TagLibAdaptor::setTitleSort,
+    [Tags::AlbumSort]=&TagLibAdaptor::setAlbumSort,
+    [Tags::ArtistSort]=&TagLibAdaptor::setArtistSort,
+    [Tags::AlbumArtistSort]=&TagLibAdaptor::setAlbumArtistSort
+  };
+
   template<class extType, class intType>
   extType getTag(intType (*accessor)(void));
 

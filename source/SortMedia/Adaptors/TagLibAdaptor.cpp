@@ -7,7 +7,7 @@
 //
 // CREATED:         09/05/2019
 //
-// LAST EDITED:     01/23/2020
+// LAST EDITED:     03/30/2020
 ////
 
 #include <SortMedia/Adaptors/TagLibAdaptor.h>
@@ -18,7 +18,16 @@
 #include <taglib/tpropertymap.h>
 #include <taglib/tstring.h>
 
+using Tags = SortMedia::Interfaces::IMusicTagEditorAdaptor::Tags;
+
 // TODO: Make tags static const strings to avoid repetition.
+
+std::string SortMedia::Adaptors::TagLibAdaptor
+::getTag(Tags) const { return ""; }
+void SortMedia::Adaptors::TagLibAdaptor
+::setTag(Tags, std::string) {}
+void SortMedia::Adaptors::TagLibAdaptor
+::setTag(Tags, unsigned int) {}
 
 SortMedia::Adaptors::TagLibAdaptor::TagLibAdaptor(const FSAdaptor::Path& path)
   : m_fileRef(std::make_unique<TagLib::FileRef>(path.string().c_str()))
@@ -99,14 +108,15 @@ std::string SortMedia::Adaptors::TagLibAdaptor::getGenre() const
   return s.to8Bit(true);
 }
 
-unsigned int SortMedia::Adaptors::TagLibAdaptor::getYear() const
+// TODO: Allow to return unsigned int
+std::string SortMedia::Adaptors::TagLibAdaptor::getYear() const
 {
-  return m_fileRef->tag()->year();
+  return std::to_string(m_fileRef->tag()->year());
 }
 
-unsigned int SortMedia::Adaptors::TagLibAdaptor::getTrack() const
+std::string SortMedia::Adaptors::TagLibAdaptor::getTrack() const
 {
-  return m_fileRef->tag()->track();
+  return std::to_string(m_fileRef->tag()->track());
 }
 
 // Extra getters
@@ -120,15 +130,15 @@ std::string SortMedia::Adaptors::TagLibAdaptor::getDisc() const
   return getTagFromPropertyMap("DISCNUMBER");
 }
 
-unsigned int SortMedia::Adaptors::TagLibAdaptor::getTrackTotal() const
+std::string SortMedia::Adaptors::TagLibAdaptor::getTrackTotal() const
 {
   std::string track = getTagFromPropertyMap("TRACKNUMBER");
   std::size_t pos = track.find("/");
   if (pos != std::string::npos)
     {
-      return std::stoi(track.substr(pos + 1));
+      return track.substr(pos + 1);
     }
-  return 0;
+  return "";
 }
 
 std::string SortMedia::Adaptors::TagLibAdaptor::getTitleSort() const
@@ -177,14 +187,14 @@ void SortMedia::Adaptors::TagLibAdaptor::setGenre(const std::string& genre)
   m_fileRef->tag()->setGenre(genre);
 }
 
-void SortMedia::Adaptors::TagLibAdaptor::setYear(unsigned int year)
+void SortMedia::Adaptors::TagLibAdaptor::setYear(const std::string& year)
 {
-  m_fileRef->tag()->setYear(year);
+  m_fileRef->tag()->setYear(std::stoi(year));
 }
 
-void SortMedia::Adaptors::TagLibAdaptor::setTrack(unsigned int track)
+void SortMedia::Adaptors::TagLibAdaptor::setTrack(const std::string& track)
 {
-  m_fileRef->tag()->setTrack(track);
+  m_fileRef->tag()->setTrack(std::stoi(track));
 }
 
 // Setters for extra tags
@@ -198,6 +208,13 @@ void SortMedia::Adaptors::TagLibAdaptor
 ::setDisc(const std::string& disc)
 {
   setTagInPropertyMap("DISCNUMBER", disc);
+}
+
+// TODO: Implement setTrackTotal
+void SortMedia::Adaptors::TagLibAdaptor
+::setTrackTotal(const std::string& trackTotal)
+{
+  throw std::logic_error{"Function not yet implemented."};
 }
 
 void SortMedia::Adaptors::TagLibAdaptor

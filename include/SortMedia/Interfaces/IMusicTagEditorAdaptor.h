@@ -7,7 +7,7 @@
 //
 // CREATED:         09/05/2019
 //
-// LAST EDITED:     01/23/2020
+// LAST EDITED:     03/30/2020
 ////
 
 #ifndef __ET_IMUSICTAGEDITORADAPTOR__
@@ -24,40 +24,27 @@ class SortMedia::Interfaces::IMusicTagEditorAdaptor
 public:
   virtual ~IMusicTagEditorAdaptor() {}
 
-  // Getters
-  virtual std::string getArtist() const                     = 0;
-  virtual std::string getAlbum() const                      = 0;
-  virtual std::string getTitle() const                      = 0;
-  virtual std::string getComment() const                    = 0;
-  virtual std::string getGenre() const                      = 0;
-  virtual unsigned int getYear() const                      = 0;
-  virtual unsigned int getTrack() const                     = 0;
+  enum Tags : uint8_t
+    {
+      Artist,
+      Album,
+      Title,
+      Comment,
+      Genre,
+      Year,
+      Track,
+      AlbumArtist,
+      Disc,
+      TrackTotal,
+      TitleSort,
+      AlbumSort,
+      ArtistSort,
+      AlbumArtistSort
+    };
 
-  // Getters for extra tags
-  virtual std::string getAlbumArtist() const                = 0;
-  virtual std::string getDisc() const                       = 0;
-  virtual unsigned int getTrackTotal() const                = 0;
-  virtual std::string getTitleSort() const                  = 0;
-  virtual std::string getAlbumSort() const                  = 0;
-  virtual std::string getArtistSort() const                 = 0;
-  virtual std::string getAlbumArtistSort() const            = 0;
-
-  // Setters
-  virtual void setArtist(const std::string&)                = 0;
-  virtual void setAlbum(const std::string&)                 = 0;
-  virtual void setTitle(const std::string&)                 = 0;
-  virtual void setComment(const std::string&)               = 0;
-  virtual void setGenre(const std::string&)                 = 0;
-  virtual void setYear(unsigned int)                        = 0;
-  virtual void setTrack(unsigned int)                       = 0;
-
-  // Setters for extra tags
-  virtual void setAlbumArtist(const std::string&)           = 0;
-  virtual void setDisc(const std::string&)                  = 0;
-  virtual void setTitleSort(const std::string&)             = 0;
-  virtual void setAlbumSort(const std::string&)             = 0;
-  virtual void setArtistSort(const std::string&)            = 0;
-  virtual void setAlbumArtistSort(const std::string&)       = 0;
+  virtual std::string getTag(Tags) const = 0;
+  virtual void setTag(Tags, std::string) = 0;
+  virtual void setTag(Tags, unsigned int) = 0;
 };
 
 #endif // __ET_IMUSICTAGEDITORADAPTOR__
