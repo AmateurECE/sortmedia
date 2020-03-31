@@ -21,24 +21,28 @@ std::string
 SortMedia::Adaptors::TagLibFLACAdaptor
 ::getDiscTotal() const
 {
-  return "";
+  return getTagFromPropertyMap("TOTALDISCS");
 }
 
 std::string
 SortMedia::Adaptors::TagLibFLACAdaptor
 ::getTrackTotal() const
 {
-  return "";
+  return getTagFromPropertyMap("TOTALTRACKS");
 }
 
 void
 SortMedia::Adaptors::TagLibFLACAdaptor
 ::setDiscTotal(const std::string& total)
-{}
+{
+  setTagInPropertyMap("TOTALDISCS", total);
+}
 
 void
 SortMedia::Adaptors::TagLibFLACAdaptor
 ::setTrackTotal(const std::string& total)
-{}
+{
+  setTagInPropertyMap("TOTALTRACKS", total);
+}
 
 ///////////////////////////////////////////////////////////////////////////////

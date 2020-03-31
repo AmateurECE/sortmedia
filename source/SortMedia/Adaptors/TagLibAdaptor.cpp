@@ -149,12 +149,22 @@ std::string SortMedia::Adaptors::TagLibAdaptor::getAlbumArtist() const
 
 std::string SortMedia::Adaptors::TagLibAdaptor::getDisc() const
 {
-  return getTagFromPropertyMap("DISCNUMBER");
+  const std::string disc = getTagFromPropertyMap("DISCNUMBER");
+  if ("" == disc)
+    {
+      return "";
+    }
+  std::size_t pos = disc.find("/");
+  if (pos != std::string::npos)
+    {
+      return disc.substr(0, pos);
+    }
+  return disc;
 }
 
 std::string SortMedia::Adaptors::TagLibAdaptor::getDiscTotal() const
 {
-  std::string disc = getTagFromPropertyMap("DISCNUMBER");
+  const std::string disc = getTagFromPropertyMap("DISCNUMBER");
   std::size_t pos = disc.find("/");
   if (pos != std::string::npos)
     {
@@ -165,7 +175,7 @@ std::string SortMedia::Adaptors::TagLibAdaptor::getDiscTotal() const
 
 std::string SortMedia::Adaptors::TagLibAdaptor::getTrackTotal() const
 {
-  std::string track = getTagFromPropertyMap("TRACKNUMBER");
+  const std::string track = getTagFromPropertyMap("TRACKNUMBER");
   std::size_t pos = track.find("/");
   if (pos != std::string::npos)
     {
