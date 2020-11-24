@@ -7,12 +7,15 @@
 #
 # CREATED:          09/13/2019
 #
-# LAST EDITED:      03/31/2020
+# LAST EDITED:      11/24/2020
 ###
 
-cmake_minimum_required(VERSION 3.15.1)
+cmake_minimum_required(VERSION 3.13.4)
 
 project(SortMedia DESCRIPTION "Media Sorter")
+
+include(conanbuildinfo.cmake)
+conan_basic_setup()
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -O3 --std=c++17")
 # GCC Flags for Debug build
@@ -22,10 +25,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -O3 --std=c++17")
 # TODO: Fix test rule
 # TODO: Add pkg-config file
 # TODO: Test install
-# TODO: Link to fsadaptor and taglib internally only
-
-# TODO: Add TagLib as source
-# add_subdirectory(dependencies/taglib-1.11.1/)
+# TODO: Link to fsadaptor internally only
 
 include(./CMakeDefs.txt)
 
@@ -37,11 +37,10 @@ add_library(sortmedia STATIC
 
 target_include_directories(sortmedia PRIVATE
     include
-    dependencies/taglib-1.11.1/include
+    ${CONAN_INCLUDE_DIRS}
     dependencies/FSAdaptor/include
 )
 
-link_directories(dependencies/taglib-1.11.1)
 add_executable(SortLibrary
     source/main.cpp
     source/ArgumentParser.cpp
@@ -49,8 +48,7 @@ add_executable(SortLibrary
 target_link_libraries(SortLibrary
     sortmedia
     fsadaptor
-    tag
-    z
+    ${CONAN_LIBS}
 )
 target_include_directories(SortLibrary PRIVATE
     include
@@ -61,6 +59,7 @@ include(GNUInstallDirs)
 
 set_target_properties(sortmedia PROPERTIES PUBLIC_HEADER "${INSTALL_HEADERS}")
 install(TARGETS sortmedia
+        ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
         LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
         PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
 )

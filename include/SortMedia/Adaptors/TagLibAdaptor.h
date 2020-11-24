@@ -8,7 +8,7 @@
 //
 // CREATED:         09/05/2019
 //
-// LAST EDITED:     03/31/2020
+// LAST EDITED:     11/20/2020
 ////
 
 #ifndef __ET_TAGLIBADAPTOR__
@@ -77,44 +77,6 @@ private:
   virtual void setAlbumSort(const std::string&);
   virtual void setArtistSort(const std::string&);
   virtual void setAlbumArtistSort(const std::string&);
-
-  typedef std::string (SortMedia::Adaptors::TagLibAdaptor::*getter)() const;
-  static constexpr getter getters[] = {
-    [Tags::Artist]=&TagLibAdaptor::getArtist,
-    [Tags::Album]=&TagLibAdaptor::getAlbum,
-    [Tags::Title]=&TagLibAdaptor::getTitle,
-    [Tags::Comment]=&TagLibAdaptor::getComment,
-    [Tags::Genre]=&TagLibAdaptor::getGenre,
-    [Tags::Year]=&TagLibAdaptor::getYear,
-    [Tags::Track]=&TagLibAdaptor::getTrack,
-    [Tags::AlbumArtist]=&TagLibAdaptor::getAlbumArtist,
-    [Tags::Disc]=&TagLibAdaptor::getDisc,
-    [Tags::DiscTotal]=&TagLibAdaptor::getDiscTotal,
-    [Tags::TrackTotal]=&TagLibAdaptor::getTrackTotal,
-    [Tags::TitleSort]=&TagLibAdaptor::getTitleSort,
-    [Tags::AlbumSort]=&TagLibAdaptor::getAlbumSort,
-    [Tags::ArtistSort]=&TagLibAdaptor::getArtistSort,
-    [Tags::AlbumArtistSort]=&TagLibAdaptor::getAlbumArtistSort
-  };
-
-  typedef void (SortMedia::Adaptors::TagLibAdaptor::*setter)(const std::string&);
-  static constexpr setter setters[] = {
-    [Tags::Artist]=&TagLibAdaptor::setArtist,
-    [Tags::Album]=&TagLibAdaptor::setAlbum,
-    [Tags::Title]=&TagLibAdaptor::setTitle,
-    [Tags::Comment]=&TagLibAdaptor::setComment,
-    [Tags::Genre]=&TagLibAdaptor::setGenre,
-    [Tags::Year]=&TagLibAdaptor::setYear,
-    [Tags::Track]=&TagLibAdaptor::setTrack,
-    [Tags::AlbumArtist]=&TagLibAdaptor::setAlbumArtist,
-    [Tags::Disc]=&TagLibAdaptor::setDisc,
-    [Tags::DiscTotal]=&TagLibAdaptor::setDiscTotal,
-    [Tags::TrackTotal]=&TagLibAdaptor::setTrackTotal,
-    [Tags::TitleSort]=&TagLibAdaptor::setTitleSort,
-    [Tags::AlbumSort]=&TagLibAdaptor::setAlbumSort,
-    [Tags::ArtistSort]=&TagLibAdaptor::setArtistSort,
-    [Tags::AlbumArtistSort]=&TagLibAdaptor::setAlbumArtistSort
-  };
 
   std::unique_ptr<TagLib::FileRef> m_fileRef;
 };

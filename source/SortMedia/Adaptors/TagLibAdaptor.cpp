@@ -7,7 +7,7 @@
 //
 // CREATED:         09/05/2019
 //
-// LAST EDITED:     03/31/2020
+// LAST EDITED:     11/20/2020
 ////
 
 #include <SortMedia/Adaptors/TagLibAdaptor.h>
@@ -28,26 +28,51 @@ using Tags = SortMedia::Interfaces::IMusicTagEditorAdaptor::Tags;
 std::string SortMedia::Adaptors::TagLibAdaptor
 ::getTag(Tags tag) const
 {
-  const auto function = getters[tag];
-  if (function == nullptr)
-    {
-      throw std::logic_error{__FILE__":" str(__LINE__) ":"
-          "This implementation does not currently support the requested tag."};
-    }
-
-  return (this->*function)();
+  switch (tag) {
+  case Tags::Artist: return getArtist();
+  case Tags::Album: return getAlbum();
+  case Tags::Title: return getTitle();
+  case Tags::Comment: return getComment();
+  case Tags::Genre: return getGenre();
+  case Tags::Year: return getYear();
+  case Tags::Track: return getTrack();
+  case Tags::AlbumArtist: return getAlbumArtist();
+  case Tags::Disc: return getDisc();
+  case Tags::DiscTotal: return getDiscTotal();
+  case Tags::TrackTotal: return getTrackTotal();
+  case Tags::TitleSort: return getTitleSort();
+  case Tags::AlbumSort: return getAlbumSort();
+  case Tags::ArtistSort: return getArtistSort();
+  case Tags::AlbumArtistSort: return getAlbumArtistSort();
+  default:
+    throw std::logic_error{__FILE__":" str(__LINE__) ":"
+        "This implementation does not currently support the requested tag."};
+  }
 }
 
 void SortMedia::Adaptors::TagLibAdaptor
 ::setTag(Tags tag, const std::string& value)
 {
-  const auto function = setters[tag];
-  if (function == nullptr)
-    {
-      throw std::logic_error{__FILE__":" str(__LINE__) ":"
-          "This implementation does not currently support the requested tag."};
-    }
-  (this->*function)(value);
+  switch (tag) {
+  case Tags::Artist: setArtist(value); return;
+  case Tags::Album: setAlbum(value); return;
+  case Tags::Title: setTitle(value); return;
+  case Tags::Comment: setComment(value); return;
+  case Tags::Genre: setGenre(value); return;
+  case Tags::Year: setYear(value); return;
+  case Tags::Track: setTrack(value); return;
+  case Tags::AlbumArtist: setAlbumArtist(value); return;
+  case Tags::Disc: setDisc(value); return;
+  case Tags::DiscTotal: setDiscTotal(value); return;
+  case Tags::TrackTotal: setTrackTotal(value); return;
+  case Tags::TitleSort: setTitleSort(value); return;
+  case Tags::AlbumSort: setAlbumSort(value); return;
+  case Tags::ArtistSort: setArtistSort(value); return;
+  case Tags::AlbumArtistSort: setAlbumArtistSort(value); return;
+  default:
+    throw std::logic_error{__FILE__":" str(__LINE__) ":"
+        "This implementation does not currently support the requested tag."};
+  }
 }
 
 void SortMedia::Adaptors::TagLibAdaptor
