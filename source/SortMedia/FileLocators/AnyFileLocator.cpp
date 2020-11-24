@@ -31,7 +31,7 @@ SortMedia::FileLocators::AnyFileLocator
   m_adaptor.walk(pathWalker, m_adaptor.absolute(directory));
 
   // TODO: Add Unit test to ensure paths are absolute.
-  return std::list<FSAdaptor::Path>{pathWalker.getContainer()};
+  return std::list<FSAdaptor::Path>(pathWalker.getContainer());
 }
 
 ///////////////////////////////////////////////////////////////////////////////
