@@ -7,14 +7,14 @@
 #
 # CREATED:          09/13/2019
 #
-# LAST EDITED:      11/24/2020
+# LAST EDITED:      01/17/2022
 ###
 
 cmake_minimum_required(VERSION 3.13.4)
 
 project(SortMedia DESCRIPTION "Media Sorter")
 
-include(conanbuildinfo.cmake)
+include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 conan_basic_setup()
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -O3 --std=c++17")

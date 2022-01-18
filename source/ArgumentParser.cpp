@@ -7,13 +7,14 @@
 //
 // CREATED:         09/06/2019
 //
-// LAST EDITED:     09/06/2019
+// LAST EDITED:     01/17/2022
 ////
 
 #include <ArgumentParser.h>
 
 #include <cstdio>
 #include <cstring>
+#include <stdexcept>
 
 const std::string CommandLine::ArgumentParser::s_usage =
   std::string{"Usage: SortMedia <rootPathOfLibrary>"};

@@ -1,4 +1,5 @@
 [requires]
-taglib/1.11.1@edtwardy/stable
+taglib/1.12
+
 [generators]
 cmake
