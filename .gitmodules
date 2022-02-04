@@ -1,4 +1,0 @@
-[submodule "FSAdaptor"]
-	path = dependencies/FSAdaptor
-	url = https://github.com/AmateurECE/FSAdaptor
-        ignore = all

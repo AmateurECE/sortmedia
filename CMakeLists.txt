@@ -7,10 +7,10 @@
 #
 # CREATED:          09/13/2019
 #
-# LAST EDITED:      01/17/2022
+# LAST EDITED:      02/04/2022
 ###
 
-cmake_minimum_required(VERSION 3.13.4)
+cmake_minimum_required(VERSION 3.22.2)
 
 project(SortMedia DESCRIPTION "Media Sorter")
 
@@ -29,7 +29,8 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -O3 --std=c++17")
 
 include(./CMakeDefs.txt)
 
-add_subdirectory(dependencies/FSAdaptor)
+find_package(PkgConfig)
+pkg_check_modules(FSADAPTOR REQUIRED libfsadaptor)
 
 add_library(sortmedia STATIC
     "${SORTMEDIA_SOURCES}"
@@ -38,7 +39,7 @@ add_library(sortmedia STATIC
 target_include_directories(sortmedia PRIVATE
     include
     ${CONAN_INCLUDE_DIRS}
-    dependencies/FSAdaptor/include
+    ${FSADAPTOR_INCLUDE_DIRS}
 )
 
 add_executable(SortLibrary
@@ -47,23 +48,17 @@ add_executable(SortLibrary
 )
 target_link_libraries(SortLibrary
     sortmedia
-    fsadaptor
+    ${FSADAPTOR_LIBRARIES}
     ${CONAN_LIBS}
 )
 target_include_directories(SortLibrary PRIVATE
     include
-    dependencies/FSAdaptor/include
+    ${FSADAPTOR_INCLUDE_DIRS}
 )
 
 include(GNUInstallDirs)
 
 set_target_properties(sortmedia PROPERTIES PUBLIC_HEADER "${INSTALL_HEADERS}")
-install(TARGETS sortmedia
-        ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
-        LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-        PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
-)
-
 install(TARGETS SortLibrary
         DESTINATION ${CMAKE_INSTALL_BINDIR}
 )
