@@ -7,16 +7,14 @@
 #
 # CREATED:          09/03/2019
 #
-# LAST EDITED:      09/08/2019
+# LAST EDITED:      02/04/2022
 ###
 
 cmake_minimum_required(VERSION 3.15.1)
 
 project(fsadaptor DESCRIPTION "Filesystem Adaptor")
 
-set(VERSION_MAJOR 0)
-set(VERSION_MINOR 0)
-set(VERSION_REV 1)
+set(VERSION_STRING "0.1.0")
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -Wall -Wextra -O3 --std=c++17")
 
@@ -36,16 +34,16 @@ set(HEADERS
     include/FSAdaptor/namespace.h
 )
 
-add_library(fsadaptor STATIC
+add_library(fsadaptor SHARED
     source/PathConstIter.cpp
     source/Path.cpp
     source/StandardFilesystemAdaptor.cpp
     "${HEADERS}"
 )
 
-list(TRANSFORM HEADERS PREPEND PUBLIC_HEADER)
 set_target_properties(fsadaptor PROPERTIES
-    ${HEADERS}
+    PUBLIC_HEADER "${HEADERS}"
+    SOVERSION "${VERSION_STRING}"
 )
 
 target_include_directories(fsadaptor PRIVATE include)
@@ -54,7 +52,7 @@ include(GNUInstallDirs)
 
 install(TARGETS fsadaptor
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-    PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+    PUBLIC_HEADER DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/FSAdaptor"
 )
 
 enable_testing()
