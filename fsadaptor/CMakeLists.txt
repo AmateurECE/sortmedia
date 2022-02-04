@@ -14,7 +14,7 @@ cmake_minimum_required(VERSION 3.15.1)
 
 project(fsadaptor DESCRIPTION "Filesystem Adaptor")
 
-set(VERSION_STRING "0.1.0")
+set(VERSION_STRING "0.1.1")
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -Wall -Wextra -O3 --std=c++17")
 
@@ -54,6 +54,11 @@ install(TARGETS fsadaptor
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     PUBLIC_HEADER DESTINATION "${CMAKE_INSTALL_INCLUDEDIR}/FSAdaptor"
 )
+
+# pkg-config file
+configure_file(libfsadaptor.pc.in libfsadaptor.pc @ONLY)
+install(FILES ${CMAKE_BINARY_DIR}/libfsadaptor.pc
+  DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/pkgconfig)
 
 enable_testing()
 add_subdirectory(test)
