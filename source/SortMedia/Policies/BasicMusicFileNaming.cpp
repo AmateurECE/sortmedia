@@ -7,7 +7,7 @@
 //
 // CREATED:         09/06/2019
 //
-// LAST EDITED:     03/31/2020
+// LAST EDITED:     02/06/2022
 ////
 
 #include <SortMedia/Exceptions/PolicyVerificationError.h>
@@ -84,7 +84,7 @@ SortMedia::Policies::BasicMusicFileNaming::getOperations() const
   std::list<std::unique_ptr<Interfaces::IFileOperation>> operations;
 
   // Create compliant name
-  static const std::regex r_charFilter{"[^[A-Za-z0-9 \\-._\\[\\]\\(\\)]]"};
+  static const std::regex r_charFilter{"[^A-Za-z0-9 \\-._\\[\\]\\(\\)]"};
   FSAdaptor::Path compliantPath{m_rootOfLibrary};
 
   Interfaces::IMusicTagEditorAdaptor& tagEditor = m_musicFile.getTagEditor();
