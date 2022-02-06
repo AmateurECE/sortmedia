@@ -35,33 +35,33 @@ find_package(PkgConfig)
 pkg_check_modules(FSADAPTOR REQUIRED libfsadaptor)
 
 add_library(sortmedia STATIC
-    "${SORTMEDIA_SOURCES}"
-)
+  "${SORTMEDIA_SOURCES}"
+  )
 
 target_include_directories(sortmedia PRIVATE
   include
   ${CONAN_INCLUDE_DIRS}
   ${FSADAPTOR_INCLUDE_DIRS}
-)
+  )
 
 add_executable(SortLibrary source/main.cpp)
 target_link_libraries(SortLibrary
   sortmedia
   ${FSADAPTOR_LIBRARIES}
   ${CONAN_LIBS}
-)
+  )
 target_include_directories(SortLibrary PRIVATE
   include
   ${PROJECT_BINARY_DIR}
   ${FSADAPTOR_INCLUDE_DIRS}
-)
+  )
 
 include(GNUInstallDirs)
 
 set_target_properties(sortmedia PROPERTIES PUBLIC_HEADER "${INSTALL_HEADERS}")
 install(TARGETS SortLibrary
-        DESTINATION ${CMAKE_INSTALL_BINDIR}
-)
+  DESTINATION ${CMAKE_INSTALL_BINDIR}
+  )
 
 enable_testing()
 add_subdirectory(test)
