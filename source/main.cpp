@@ -7,20 +7,54 @@
 //
 // CREATED:         08/15/2019
 //
-// LAST EDITED:     03/31/2020
+// LAST EDITED:     02/06/2022
 ////
 
+#include <argp.h>
 #include <iostream>
 #include <memory>
 
-#include <ArgumentParser.h>
-
+#include <config.h>
 #include <SortMedia/MediaSorter.h>
 #include <SortMedia/Logging/StreamLogger.h>
 #include <SortMedia/Factories/FileLocatorFactory.h>
 #include <SortMedia/Factories/OrganizationalSchemaFactory.h>
 
-int ApplicationMain(CommandLine::ArgumentParser& parser)
+const char* argp_program_version = "SortLibrary " PROGRAM_VERSION_STRING;
+const char* argp_program_bug_address = "<ethan.twardy@gmail.com>";
+
+static char doc[] =
+    "Sort a music library according to pre-defined organizational policies";
+static char args_doc[] = "DIRECTORY";
+static const int NUMBER_OF_ARGUMENTS = 1;
+
+struct Arguments {
+    const char* directory;
+};
+
+static error_t parse_opt(int key, char* arg, struct argp_state* state) {
+    Arguments* arguments = (Arguments*)state->input;
+    switch (key) {
+    case ARGP_KEY_ARG:
+        if (state->arg_num >= NUMBER_OF_ARGUMENTS) {
+            argp_usage(state);
+        }
+
+        arguments->directory = arg;
+        break;
+    case ARGP_KEY_END:
+        if (state->arg_num < NUMBER_OF_ARGUMENTS) {
+            argp_usage(state);
+        }
+        break;
+    default:
+        return ARGP_ERR_UNKNOWN;
+    }
+
+    return 0;
+}
+
+int ApplicationMain(Arguments& args)
 {
   using LogLevel = SortMedia::Logging::LogLevel;
   auto outLevels = {LogLevel::INFO};
@@ -38,31 +72,17 @@ int ApplicationMain(CommandLine::ArgumentParser& parser)
   auto locator = locatorFactory.makeFileLocator();
 
   SortMedia::MediaSorter sorter{*logger, *schema, *locator};
-  std::string theLibrary
-    = parser.getArgument<std::string>(CommandLine::ArgumentKey::DIRECTORY);
+  std::string theLibrary{args.directory};
   sorter.sortDirectory(theLibrary);
   return 0;
 }
 
+static struct argp argp = { 0, parse_opt, args_doc, doc, 0, 0, 0 };
 int main(int argc, char** argv)
 {
-  CommandLine::ArgumentParser parser;
-  try { parser = CommandLine::ArgumentParser{argc, argv}; }
-  catch (const std::invalid_argument& e)
-    {
-      std::cerr << parser.getUsage() << std::endl;
-      return 1;
-    }
-
-  try { return ApplicationMain(parser); }
-  // I'm aware that it's typically bad practice to catch std::exception.
-  // However, this is the only way that we can guarantee that a useful message
-  // will be printed to stderr.
-  catch (const std::exception& e)
-    {
-      std::cerr << e.what() << std::endl;
-      return 1;
-    }
+    Arguments args = {0};
+    argp_parse(&argp, argc, argv, 0, 0, &args);
+    return ApplicationMain(args);
 }
 
 ///////////////////////////////////////////////////////////////////////////////

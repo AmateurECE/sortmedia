@@ -7,7 +7,7 @@
 #
 # CREATED:          09/13/2019
 #
-# LAST EDITED:      02/04/2022
+# LAST EDITED:      02/06/2022
 ###
 
 cmake_minimum_required(VERSION 3.22.2)
@@ -17,9 +17,11 @@ project(SortMedia DESCRIPTION "Media Sorter")
 include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 conan_basic_setup()
 
+set(VERSION_STRING "0.1.1")
+configure_file("${PROJECT_SOURCE_DIR}/config.h.in"
+  "${PROJECT_BINARY_DIR}/config.h")
+
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -O3 --std=c++17")
-# GCC Flags for Debug build
-# set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -Wall -Wextra -O0 --std=c++17")
 
 # TODO: Add target to build documentation
 # TODO: Fix test rule
@@ -37,23 +39,21 @@ add_library(sortmedia STATIC
 )
 
 target_include_directories(sortmedia PRIVATE
-    include
-    ${CONAN_INCLUDE_DIRS}
-    ${FSADAPTOR_INCLUDE_DIRS}
+  include
+  ${CONAN_INCLUDE_DIRS}
+  ${FSADAPTOR_INCLUDE_DIRS}
 )
 
-add_executable(SortLibrary
-    source/main.cpp
-    source/ArgumentParser.cpp
-)
+add_executable(SortLibrary source/main.cpp)
 target_link_libraries(SortLibrary
-    sortmedia
-    ${FSADAPTOR_LIBRARIES}
-    ${CONAN_LIBS}
+  sortmedia
+  ${FSADAPTOR_LIBRARIES}
+  ${CONAN_LIBS}
 )
 target_include_directories(SortLibrary PRIVATE
-    include
-    ${FSADAPTOR_INCLUDE_DIRS}
+  include
+  ${PROJECT_BINARY_DIR}
+  ${FSADAPTOR_INCLUDE_DIRS}
 )
 
 include(GNUInstallDirs)
