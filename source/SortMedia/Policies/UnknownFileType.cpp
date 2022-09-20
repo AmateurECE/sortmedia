@@ -7,9 +7,10 @@
 //
 // CREATED:         09/06/2019
 //
-// LAST EDITED:     09/09/2019
+// LAST EDITED:     09/20/2022
 ////
 
+#include <cstring>
 #include <SortMedia/Operations/Warn.h>
 #include <SortMedia/Policies/UnknownFileType.h>
 

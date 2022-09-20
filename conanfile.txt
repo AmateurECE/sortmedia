@@ -1,5 +1,6 @@
 [requires]
 taglib/1.12
+fsadaptor/0.1.2@edtwardy/stable
 
 [generators]
 cmake
