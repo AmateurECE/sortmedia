@@ -7,14 +7,14 @@
 #
 # CREATED:          09/03/2019
 #
-# LAST EDITED:      02/04/2022
+# LAST EDITED:      09/20/2022
 ###
 
 cmake_minimum_required(VERSION 3.15.1)
 
 project(fsadaptor DESCRIPTION "Filesystem Adaptor")
 
-set(VERSION_STRING "0.1.1")
+set(VERSION_STRING "0.1.2")
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -Wall -Wextra -O3 --std=c++17")
 
