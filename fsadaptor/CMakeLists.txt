@@ -34,7 +34,7 @@ set(HEADERS
     include/FSAdaptor/namespace.h
 )
 
-add_library(fsadaptor SHARED
+add_library(fsadaptor
     source/PathConstIter.cpp
     source/Path.cpp
     source/StandardFilesystemAdaptor.cpp
