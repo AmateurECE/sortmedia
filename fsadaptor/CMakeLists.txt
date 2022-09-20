@@ -17,6 +17,7 @@ project(fsadaptor DESCRIPTION "Filesystem Adaptor")
 set(VERSION_STRING "0.1.2")
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -Wall -Wextra -O3 --std=c++17")
+add_definitions(-D_GLIBCXX_USE_CXX11_ABI=0)
 
 configure_file(
     "${PROJECT_SOURCE_DIR}/include/fsadaptor_config.h.in"
