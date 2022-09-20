@@ -7,7 +7,7 @@
 //
 // CREATED:         08/29/2019
 //
-// LAST EDITED:     09/12/2019
+// LAST EDITED:     09/20/2022
 ////
 
 // TODO: Switch to using std::filesystem::path
@@ -23,13 +23,13 @@
 #include <list>
 #include <stdexcept>
 #include <system_error>
+#include <cstring>
 
 // LibC headers
 #include <dirent.h>
 #include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string>
 #include <sys/stat.h>
 #include <unistd.h>
 
