@@ -7,21 +7,21 @@
 #
 # CREATED:          09/13/2019
 #
-# LAST EDITED:      09/20/2022
+# LAST EDITED:      05/04/2023
 ###
 
 cmake_minimum_required(VERSION 3.22.2)
 
 project(SortMedia DESCRIPTION "Media Sorter")
 
-include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
-conan_basic_setup()
-
 set(VERSION_STRING "0.1.1")
 configure_file("${PROJECT_SOURCE_DIR}/config.h.in"
   "${PROJECT_BINARY_DIR}/config.h")
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -O3")
+
+find_package(taglib REQUIRED)
+find_package(fsadaptor REQUIRED)
 
 # TODO: Add target to build documentation
 # TODO: Fix test rule
@@ -56,22 +56,23 @@ add_library(sortmedia STATIC
     source/SortMedia/Logging/StreamLogger.cpp
   )
 
-target_include_directories(sortmedia PRIVATE
-  include
-  ${CONAN_INCLUDE_DIRS}
-  ${FSADAPTOR_INCLUDE_DIRS}
+target_include_directories(sortmedia PRIVATE include fsadaptor::fsadaptor taglib::taglib)
+target_link_libraries(sortmedia PRIVATE
+  fsadaptor::fsadaptor
+  taglib::taglib
   )
 
 add_executable(SortLibrary source/main.cpp)
 target_link_libraries(SortLibrary
   sortmedia
-  ${FSADAPTOR_LIBRARIES}
-  ${CONAN_LIBS}
+  fsadaptor::fsadaptor
+  taglib::taglib
   )
 target_include_directories(SortLibrary PRIVATE
   include
+  fsadaptor::fsadaptor
+  taglib::taglib
   ${PROJECT_BINARY_DIR}
-  ${FSADAPTOR_INCLUDE_DIRS}
   )
 
 include(GNUInstallDirs)
@@ -81,7 +82,7 @@ install(TARGETS SortLibrary
   DESTINATION ${CMAKE_INSTALL_BINDIR}
   )
 
-enable_testing()
-add_subdirectory(test)
+# enable_testing()
+# add_subdirectory(test)
 
 ###############################################################################

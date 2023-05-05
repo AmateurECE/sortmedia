@@ -7,7 +7,7 @@
 //
 // CREATED:         09/05/2019
 //
-// LAST EDITED:     03/31/2020
+// LAST EDITED:     05/04/2023
 ////
 
 #ifndef __ET_IMUSICTAGEDITORADAPTOR__
@@ -16,6 +16,7 @@
 #include <namespaces/Interfaces.h>
 
 #include <string>
+#include <cstdint>
 
 // TODO: Add means to manipulate generic key/value tags
 
