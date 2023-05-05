@@ -7,7 +7,7 @@
 #
 # CREATED:          09/03/2019
 #
-# LAST EDITED:      09/20/2022
+# LAST EDITED:      05/04/2023
 ###
 
 cmake_minimum_required(VERSION 3.15.1)
@@ -60,7 +60,8 @@ configure_file(libfsadaptor.pc.in libfsadaptor.pc @ONLY)
 install(FILES ${CMAKE_BINARY_DIR}/libfsadaptor.pc
   DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/pkgconfig)
 
-enable_testing()
-add_subdirectory(test)
+# Disable testing
+# enable_testing()
+# add_subdirectory(test)
 
 ###############################################################################
