@@ -6,8 +6,6 @@
 // DESCRIPTION:     Implementation of an operation that renames a file.
 //
 // CREATED:         09/11/2019
-//
-// LAST EDITED:     09/12/2019
 ////
 
 #include <libsortmedia/Exceptions/OperationalError.h>

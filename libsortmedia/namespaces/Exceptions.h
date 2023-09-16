@@ -6,8 +6,6 @@
 // DESCRIPTION:     Namespace encapsulating all Exception types defined herein.
 //
 // CREATED:         09/10/2019
-//
-// LAST EDITED:     09/13/2019
 ////
 
 #ifndef __ET_EXCEPTIONS__

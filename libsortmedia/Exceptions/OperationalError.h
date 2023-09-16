@@ -7,8 +7,6 @@
 //                  during verification.
 //
 // CREATED:         09/08/2019
-//
-// LAST EDITED:     09/10/2019
 ////
 
 #ifndef __ET_OPERATIONALERROR__

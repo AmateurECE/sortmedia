@@ -6,8 +6,6 @@
 // DESCRIPTION:     Implementation of the Unknown File Type Policy.
 //
 // CREATED:         09/06/2019
-//
-// LAST EDITED:     09/20/2022
 ////
 
 #include <cstring>

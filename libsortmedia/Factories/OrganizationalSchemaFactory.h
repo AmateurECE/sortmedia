@@ -6,8 +6,6 @@
 // DESCRIPTION:     Factory for OrganizationalSchema classes.
 //
 // CREATED:         08/27/2019
-//
-// LAST EDITED:     09/06/2019
 ////
 
 #ifndef __ET_ORGANIZATIONALSCHEMAFACTORY__

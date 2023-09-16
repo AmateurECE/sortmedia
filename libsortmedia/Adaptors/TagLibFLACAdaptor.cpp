@@ -6,8 +6,6 @@
 // DESCRIPTION:     Adaptor class for FLAC files using the TagLib library.
 //
 // CREATED:         03/30/2020
-//
-// LAST EDITED:     03/31/2020
 ////
 
 #include <libsortmedia/Adaptors/TagLibFLACAdaptor.h>

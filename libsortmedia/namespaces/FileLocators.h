@@ -6,8 +6,6 @@
 // DESCRIPTION:     Namespace for FileLocators.
 //
 // CREATED:         09/05/2019
-//
-// LAST EDITED:     09/05/2019
 ////
 
 #ifndef __ET_FILELOCATORS__

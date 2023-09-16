@@ -6,8 +6,6 @@
 // DESCRIPTION:     Class definition for the OrganizationalSchemaFactory.
 //
 // CREATED:         08/27/2019
-//
-// LAST EDITED:     09/06/2019
 ////
 
 #include <libsortmedia/Factories/OrganizationalSchemaFactory.h>

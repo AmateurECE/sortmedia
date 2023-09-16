@@ -6,8 +6,6 @@
 // DESCRIPTION:     Contains testing for the Logging System.
 //
 // CREATED:         08/17/2019
-//
-// LAST EDITED:     09/06/2019
 ////
 
 #include "gtest/gtest.h"

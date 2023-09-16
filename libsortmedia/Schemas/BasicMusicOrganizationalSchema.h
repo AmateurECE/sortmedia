@@ -10,8 +10,6 @@
 //                      * All other files generate a warning.
 //
 // CREATED:         09/06/2019
-//
-// LAST EDITED:     03/31/2020
 ////
 
 #ifndef __ET_BASICMUSICORGANIZATIONALSCHEMA__

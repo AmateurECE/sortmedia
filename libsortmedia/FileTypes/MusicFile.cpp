@@ -6,8 +6,6 @@
 // DESCRIPTION:     Definitions for the MusicFile methods.
 //
 // CREATED:         09/05/2019
-//
-// LAST EDITED:     09/11/2019
 ////
 
 #include <libsortmedia/FileTypes/MusicFile.h>

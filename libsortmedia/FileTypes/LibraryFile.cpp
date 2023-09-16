@@ -6,8 +6,6 @@
 // DESCRIPTION:     Implementation of the LibraryFile class methods.
 //
 // CREATED:         09/05/2019
-//
-// LAST EDITED:     09/12/2019
 ////
 
 #include <libsortmedia/FileTypes/LibraryFile.h>

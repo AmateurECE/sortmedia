@@ -6,8 +6,6 @@
 // DESCRIPTION:     Abstract base class which all Schemas must derive from.
 //
 // CREATED:         09/06/2019
-//
-// LAST EDITED:     09/12/2019
 ////
 
 #ifndef __ET_ORGANIZATIONALSCHEMA__

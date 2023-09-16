@@ -6,8 +6,6 @@
 // DESCRIPTION:     Implementation of the StreamLogger class.
 //
 // CREATED:         08/27/2019
-//
-// LAST EDITED:     09/13/2019
 ////
 
 #include <libsortmedia/Logging/StreamLogger.h>

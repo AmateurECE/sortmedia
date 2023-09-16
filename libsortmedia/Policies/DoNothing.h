@@ -6,8 +6,6 @@
 // DESCRIPTION:     A DoNothing Policy that does...nothing.
 //
 // CREATED:         09/08/2019
-//
-// LAST EDITED:     09/09/2019
 ////
 
 #ifndef __ET_DONOTHINGPOLICY__

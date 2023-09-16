@@ -9,8 +9,6 @@
 //                  where XX is replaced with the track number.
 //
 // CREATED:         09/06/2019
-//
-// LAST EDITED:     09/12/2019
 ////
 
 #ifndef __ET_BASICMUSICFILENAMINGPOLICY__

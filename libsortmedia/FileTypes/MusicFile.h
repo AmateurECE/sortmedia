@@ -6,8 +6,6 @@
 // DESCRIPTION:     Encapsulates operations that a Music file may perform.
 //
 // CREATED:         09/05/2019
-//
-// LAST EDITED:     03/31/2020
 ////
 
 #ifndef __ET_MUSICFILE__

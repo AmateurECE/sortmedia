@@ -6,8 +6,6 @@
 // DESCRIPTION:     The operation that deletes a file.
 //
 // CREATED:         09/10/2019
-//
-// LAST EDITED:     09/11/2019
 ////
 
 #include <libsortmedia/Exceptions/OperationalError.h>

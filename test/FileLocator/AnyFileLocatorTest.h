@@ -6,8 +6,6 @@
 // DESCRIPTION:     Test fixture for class 'AnyFileLocator'
 //
 // CREATED:         08/29/2019
-//
-// LAST EDITED:     08/29/2019
 ////
 
 #ifndef __ET_ANYFILELOCATORTEST__

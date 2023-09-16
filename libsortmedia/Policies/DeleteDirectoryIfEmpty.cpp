@@ -6,8 +6,6 @@
 // DESCRIPTION:     Implemetation of the policy.
 //
 // CREATED:         09/09/2019
-//
-// LAST EDITED:     09/14/2019
 ////
 
 #include <libsortmedia/Interfaces/ILogger.h>

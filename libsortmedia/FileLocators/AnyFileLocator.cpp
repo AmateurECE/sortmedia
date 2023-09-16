@@ -6,8 +6,6 @@
 // DESCRIPTION:     Method definitions for the AnyFileLocator class.
 //
 // CREATED:         09/05/2019
-//
-// LAST EDITED:     09/26/2019
 ////
 
 #include <libsortmedia/FileLocators/AnyFileLocator.h>

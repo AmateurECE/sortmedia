@@ -6,8 +6,6 @@
 // DESCRIPTION:     This operation creates a log warning using the given text.
 //
 // CREATED:         09/05/2019
-//
-// LAST EDITED:     09/09/2019
 ////
 
 #ifndef __ET_WARNOPERATION__

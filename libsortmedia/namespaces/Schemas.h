@@ -6,8 +6,6 @@
 // DESCRIPTION:     A namespace for OrganizationalSchemas.
 //
 // CREATED:         09/05/2019
-//
-// LAST EDITED:     09/06/2019
 ////
 
 #ifndef __ET_SCHEMAS__

@@ -7,8 +7,6 @@
 //                  directory if it is empty at apply-time.
 //
 // CREATED:         09/09/2019
-//
-// LAST EDITED:     09/12/2019
 ////
 
 #ifndef __ET_POLICIES_DELETEDIRECTORYIFEMPTY__

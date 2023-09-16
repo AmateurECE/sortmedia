@@ -6,8 +6,6 @@
 // DESCRIPTION:     Implementation.
 //
 // CREATED:         09/08/2019
-//
-// LAST EDITED:     09/10/2019
 ////
 
 #include <libsortmedia/Exceptions/PolicyVerificationError.h>

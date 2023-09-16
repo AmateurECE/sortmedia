@@ -6,8 +6,6 @@
 // DESCRIPTION:     Class definition for the FileLocatorFactory class.
 //
 // CREATED:         08/27/2019
-//
-// LAST EDITED:     08/27/2019
 ////
 
 #ifndef __ET_FILELOCATORFACTORY__

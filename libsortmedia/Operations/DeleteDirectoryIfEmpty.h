@@ -7,8 +7,6 @@
 //                  apply-time.
 //
 // CREATED:         09/09/2019
-//
-// LAST EDITED:     09/12/2019
 ////
 
 #ifndef __ET_OPERATIONS_DELETEDIRECTORYIFEMPTY__

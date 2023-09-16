@@ -6,8 +6,6 @@
 // DESCRIPTION:     Interface for interacting with Files.
 //
 // CREATED:         08/27/2019
-//
-// LAST EDITED:     08/27/2019
 ////
 
 #ifndef __ET_IFILE__

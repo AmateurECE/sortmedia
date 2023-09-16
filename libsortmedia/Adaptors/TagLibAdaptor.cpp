@@ -6,8 +6,6 @@
 // DESCRIPTION:     Definition of the methods of the TagLibAdaptor class.
 //
 // CREATED:         09/05/2019
-//
-// LAST EDITED:     11/20/2020
 ////
 
 #include <libsortmedia/Adaptors/TagLibAdaptor.h>

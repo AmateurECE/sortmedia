@@ -6,8 +6,6 @@
 // DESCRIPTION:     Base class for exceptions.
 //
 // CREATED:         09/10/2019
-//
-// LAST EDITED:     09/10/2019
 ////
 
 #ifndef __ET_EXCEPTIONBASE__

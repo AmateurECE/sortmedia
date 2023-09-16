@@ -7,8 +7,6 @@
 //                  the TagLib adaptor.
 //
 // CREATED:         03/30/2020
-//
-// LAST EDITED:     03/31/2020
 ////
 
 #ifndef __ET_TAGLIBFLACADAPTOR__

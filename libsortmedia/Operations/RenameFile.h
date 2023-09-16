@@ -6,8 +6,6 @@
 // DESCRIPTION:     Renames a file.
 //
 // CREATED:         09/11/2019
-//
-// LAST EDITED:     09/12/2019
 ////
 
 #ifndef __ET_RENAMEFILE__

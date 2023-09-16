@@ -7,8 +7,6 @@
 //                  to effectively disable logging, for one reason or another.
 //
 // CREATED:         08/18/2019
-//
-// LAST EDITED:     09/10/2019
 ////
 
 #ifndef __ET_NULLLOGGER__

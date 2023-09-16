@@ -6,8 +6,6 @@
 // DESCRIPTION:     Implementation of the Basic Music Organizational Schema.
 //
 // CREATED:         09/06/2019
-//
-// LAST EDITED:     03/31/2020
 ////
 
 #include <libsortmedia/Schemas/BasicMusicOrganizationalSchema.h>

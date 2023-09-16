@@ -7,8 +7,6 @@
 //                  filtering on the input files.
 //
 // CREATED:         09/05/2019
-//
-// LAST EDITED:     09/07/2019
 ////
 
 #ifndef __ET_ANYFILELOCATOR__

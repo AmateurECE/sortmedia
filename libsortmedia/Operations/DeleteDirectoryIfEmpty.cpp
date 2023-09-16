@@ -6,8 +6,6 @@
 // DESCRIPTION:     Implementation of the operation.
 //
 // CREATED:         09/09/2019
-//
-// LAST EDITED:     09/11/2019
 ////
 
 #include <libsortmedia/Interfaces/ILogger.h>

@@ -6,8 +6,6 @@
 // DESCRIPTION:     Test the Logging subsystem.
 //
 // CREATED:         08/18/2019
-//
-// LAST EDITED:     08/31/2019
 ////
 
 #ifndef __ET_LOGSYSTEMTEST__

@@ -6,8 +6,6 @@
 // DESCRIPTION:     Adaptor interface for manipulating tags of music files.
 //
 // CREATED:         09/05/2019
-//
-// LAST EDITED:     05/04/2023
 ////
 
 #ifndef __ET_IMUSICTAGEDITORADAPTOR__

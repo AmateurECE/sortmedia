@@ -6,8 +6,6 @@
 // DESCRIPTION:     Definition for the Warn Operation.
 //
 // CREATED:         09/05/2019
-//
-// LAST EDITED:     09/09/2019
 ////
 
 #include <libsortmedia/namespaces/Logging.h>

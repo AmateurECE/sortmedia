@@ -6,8 +6,6 @@
 // DESCRIPTION:     Factory for descendants of IMusicTagEditorAdaptor.h
 //
 // CREATED:         03/31/2020
-//
-// LAST EDITED:     03/31/2020
 ////
 
 #include <libsortmedia/Factories/MusicTagEditorAdaptorFactory.h>

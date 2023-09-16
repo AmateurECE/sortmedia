@@ -6,8 +6,6 @@
 // DESCRIPTION:     An interface for File Operations.
 //
 // CREATED:         08/07/2019
-//
-// LAST EDITED:     09/05/2019
 ////
 
 #ifndef __ET_IFILEOPERATION__

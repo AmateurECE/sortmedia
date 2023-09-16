@@ -7,8 +7,6 @@
 //                  IMusicTagEditorAdaptor interface.
 //
 // CREATED:         09/05/2019
-//
-// LAST EDITED:     11/20/2020
 ////
 
 #ifndef __ET_TAGLIBADAPTOR__

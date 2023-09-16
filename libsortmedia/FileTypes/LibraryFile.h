@@ -6,8 +6,6 @@
 // DESCRIPTION:     A class representing any file in the library.
 //
 // CREATED:         09/05/2019
-//
-// LAST EDITED:     09/10/2019
 ////
 
 #ifndef __ET_LIBRARYFILE__

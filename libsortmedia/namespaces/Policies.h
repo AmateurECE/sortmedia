@@ -6,8 +6,6 @@
 // DESCRIPTION:     A namespace for OrganizationalPolicies.
 //
 // CREATED:         09/05/2019
-//
-// LAST EDITED:     09/10/2019
 ////
 
 #ifndef __ET_POLICIES__

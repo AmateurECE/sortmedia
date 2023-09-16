@@ -6,8 +6,6 @@
 // DESCRIPTION:     An interface for Organizational Schema classes.
 //
 // CREATED:         08/07/2019
-//
-// LAST EDITED:     09/12/2019
 ////
 
 #ifndef __ET_IORGANIZATIONALSCHEMA__

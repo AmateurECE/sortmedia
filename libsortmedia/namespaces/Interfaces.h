@@ -6,8 +6,6 @@
 // DESCRIPTION:     Interfaces used by the application.
 //
 // CREATED:         08/27/2019
-//
-// LAST EDITED:     09/05/2019
 ////
 
 #ifndef __ET_INTERFACES__

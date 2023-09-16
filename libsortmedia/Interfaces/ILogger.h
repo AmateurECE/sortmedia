@@ -6,8 +6,6 @@
 // DESCRIPTION:     An interface for Logging classes.
 //
 // CREATED:         08/17/2019
-//
-// LAST EDITED:     09/10/2019
 ////
 
 #ifndef __ET_ILOGGER__

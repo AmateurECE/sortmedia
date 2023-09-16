@@ -6,8 +6,6 @@
 // DESCRIPTION:     Namespace for logging entities.
 //
 // CREATED:         09/06/2019
-//
-// LAST EDITED:     09/06/2019
 ////
 
 #ifndef __ET_LOGGING__

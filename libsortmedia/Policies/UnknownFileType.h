@@ -7,8 +7,6 @@
 //                  unknown type is encountered.
 //
 // CREATED:         09/06/2019
-//
-// LAST EDITED:     09/09/2019
 ////
 
 #ifndef __ET_UNKNOWNFILETYPEPOLICY__

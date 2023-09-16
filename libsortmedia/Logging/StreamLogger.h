@@ -6,8 +6,6 @@
 // DESCRIPTION:     Contains class definition for the logger class.
 //
 // CREATED:         08/15/2019
-//
-// LAST EDITED:     09/10/2019
 ////
 
 #ifndef __ET_LOGGER__

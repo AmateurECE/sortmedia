@@ -6,8 +6,6 @@
 // DESCRIPTION:     Policy that deletes a file.
 //
 // CREATED:         09/10/2019
-//
-// LAST EDITED:     09/12/2019
 ////
 
 #ifndef __ET_POLICIES_DELETEFILE__

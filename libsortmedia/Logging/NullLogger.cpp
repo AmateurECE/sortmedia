@@ -6,8 +6,6 @@
 // DESCRIPTION:     Implementation of the Null (no-op) logger.
 //
 // CREATED:         08/18/2019
-//
-// LAST EDITED:     09/10/2019
 ////
 
 #include <libsortmedia/Logging/NullLogger.h>

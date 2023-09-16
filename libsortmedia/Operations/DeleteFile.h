@@ -6,8 +6,6 @@
 // DESCRIPTION:     This operation deletes a file.
 //
 // CREATED:         09/10/2019
-//
-// LAST EDITED:     09/12/2019
 ////
 
 #ifndef __ET_OPERATIONS_DELETEFILE__

@@ -6,8 +6,6 @@
 // DESCRIPTION:     Implementation of the BasicMusicFileNaming
 //
 // CREATED:         09/06/2019
-//
-// LAST EDITED:     02/06/2022
 ////
 
 #include <libsortmedia/Exceptions/PolicyVerificationError.h>
