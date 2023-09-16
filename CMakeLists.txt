@@ -6,13 +6,12 @@
 # DESCRIPTION:      Cmake configuration file.
 #
 # CREATED:          09/13/2019
-#
-# LAST EDITED:      05/04/2023
 ###
 
 cmake_minimum_required(VERSION 3.22.2)
 
 project(SortMedia DESCRIPTION "Media Sorter")
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 set(VERSION_STRING "0.1.1")
 configure_file("${PROJECT_SOURCE_DIR}/config.h.in"
@@ -26,8 +25,7 @@ find_package(fsadaptor REQUIRED)
 # TODO: Add target to build documentation
 # TODO: Fix test rule
 # TODO: Add pkg-config file
-# TODO: Test install
-# TODO: Link to fsadaptor internally only
+# TODO: Install libsortmedia, too.
 
 add_library(sortmedia STATIC
     source/SortMedia/Exceptions/PolicyVerificationError.cpp
@@ -56,33 +54,21 @@ add_library(sortmedia STATIC
     source/SortMedia/Logging/StreamLogger.cpp
   )
 
-target_include_directories(sortmedia PRIVATE include fsadaptor::fsadaptor taglib::taglib)
-target_link_libraries(sortmedia PRIVATE
-  fsadaptor::fsadaptor
-  taglib::taglib
-  )
+target_include_directories(sortmedia PUBLIC include)
+target_link_libraries(sortmedia PUBLIC taglib::taglib fsadaptor::fsadaptor)
 
 add_executable(SortLibrary source/main.cpp)
-target_link_libraries(SortLibrary
-  sortmedia
-  fsadaptor::fsadaptor
-  taglib::taglib
-  )
+target_link_libraries(SortLibrary sortmedia)
 target_include_directories(SortLibrary PRIVATE
   include
-  fsadaptor::fsadaptor
-  taglib::taglib
   ${PROJECT_BINARY_DIR}
   )
 
 include(GNUInstallDirs)
 
-set_target_properties(sortmedia PROPERTIES PUBLIC_HEADER "${INSTALL_HEADERS}")
 install(TARGETS SortLibrary
   DESTINATION ${CMAKE_INSTALL_BINDIR}
   )
 
 # enable_testing()
 # add_subdirectory(test)
-
-###############################################################################

@@ -27,7 +27,6 @@ class SortMedia::FileTypes::MusicFile
   : public SortMedia::FileTypes::LibraryFile
 {
 public:
-  // TODO: Investigate whether it's necessary to take r-value ref to unique_ptr
   MusicFile(const FSAdaptor::Path& path,
             std::unique_ptr<Interfaces::IMusicTagEditorAdaptor>&& tagAdaptor,
             const FSAdaptor::IFilesystemAdaptor& fsAdaptor = s_stdAdaptor);
