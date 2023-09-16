@@ -9,3 +9,4 @@ googletest/googlemock/gtest/libgtest.a
 CMakeUserPresets.json
 build/
 compile_commands.json
+package/

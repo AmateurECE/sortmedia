@@ -9,7 +9,7 @@ the application and library without the `conan install` step.
 
 ```
 $ conan install -of build .
-$ cmake -B build -DCMAKE_BUILD_TYPE=Release -DCMAKE_TOOLCHAIN_FILE=$PWD/build/conan_toolchain.cmake .
+$ cmake -B build -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$DESTDIR/usr -DCMAKE_TOOLCHAIN_FILE=$PWD/build/conan_toolchain.cmake .
 $ cmake --build build
 ```
 

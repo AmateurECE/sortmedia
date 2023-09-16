@@ -22,11 +22,6 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -O3")
 find_package(taglib REQUIRED)
 find_package(fsadaptor REQUIRED)
 
-# TODO: Add target to build documentation
-# TODO: Fix test rule
-# TODO: Add pkg-config file
-# TODO: Install libsortmedia, too.
-
 add_library(sortmedia STATIC
     source/SortMedia/Exceptions/PolicyVerificationError.cpp
     source/SortMedia/Exceptions/OperationalError.cpp
@@ -57,16 +52,16 @@ add_library(sortmedia STATIC
 target_include_directories(sortmedia PUBLIC include)
 target_link_libraries(sortmedia PUBLIC taglib::taglib fsadaptor::fsadaptor)
 
-add_executable(SortLibrary source/main.cpp)
-target_link_libraries(SortLibrary sortmedia)
-target_include_directories(SortLibrary PRIVATE
+add_executable(sortlibrary source/main.cpp)
+target_link_libraries(sortlibrary sortmedia)
+target_include_directories(sortlibrary PRIVATE
   include
   ${PROJECT_BINARY_DIR}
   )
 
 include(GNUInstallDirs)
 
-install(TARGETS SortLibrary
+install(TARGETS sortlibrary
   DESTINATION ${CMAKE_INSTALL_BINDIR}
   )
 
