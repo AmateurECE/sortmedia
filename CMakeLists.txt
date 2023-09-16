@@ -23,41 +23,38 @@ find_package(taglib REQUIRED)
 find_package(fsadaptor REQUIRED)
 
 add_library(sortmedia STATIC
-    source/SortMedia/Exceptions/PolicyVerificationError.cpp
-    source/SortMedia/Exceptions/OperationalError.cpp
-    source/SortMedia/Policies/UnknownFileType.cpp
-    source/SortMedia/Policies/DeleteDirectoryIfEmpty.cpp
-    source/SortMedia/Policies/OrganizationalBase.cpp
-    source/SortMedia/Policies/BasicMusicFileNaming.cpp
-    source/SortMedia/Policies/DeleteFile.cpp
-    source/SortMedia/Operations/DeleteDirectoryIfEmpty.cpp
-    source/SortMedia/Operations/Warn.cpp
-    source/SortMedia/Operations/DeleteFile.cpp
-    source/SortMedia/Operations/RenameFile.cpp
-    source/SortMedia/Schemas/BasicMusicOrganizationalSchema.cpp
-    source/SortMedia/Schemas/OrganizationalSchema.cpp
-    source/SortMedia/FileTypes/LibraryFile.cpp
-    source/SortMedia/FileTypes/MusicFile.cpp
-    source/SortMedia/Adaptors/TagLibAdaptor.cpp
-    source/SortMedia/Adaptors/TagLibFLACAdaptor.cpp
-    source/SortMedia/MediaSorter.cpp
-    source/SortMedia/Factories/FileLocatorFactory.cpp
-    source/SortMedia/Factories/OrganizationalSchemaFactory.cpp
-    source/SortMedia/Factories/MusicTagEditorAdaptorFactory.cpp
-    source/SortMedia/FileLocators/AnyFileLocator.cpp
-    source/SortMedia/Logging/NullLogger.cpp
-    source/SortMedia/Logging/StreamLogger.cpp
+    libsortmedia/Exceptions/PolicyVerificationError.cpp
+    libsortmedia/Exceptions/OperationalError.cpp
+    libsortmedia/Policies/UnknownFileType.cpp
+    libsortmedia/Policies/DeleteDirectoryIfEmpty.cpp
+    libsortmedia/Policies/OrganizationalBase.cpp
+    libsortmedia/Policies/BasicMusicFileNaming.cpp
+    libsortmedia/Policies/DeleteFile.cpp
+    libsortmedia/Operations/DeleteDirectoryIfEmpty.cpp
+    libsortmedia/Operations/Warn.cpp
+    libsortmedia/Operations/DeleteFile.cpp
+    libsortmedia/Operations/RenameFile.cpp
+    libsortmedia/Schemas/BasicMusicOrganizationalSchema.cpp
+    libsortmedia/Schemas/OrganizationalSchema.cpp
+    libsortmedia/FileTypes/LibraryFile.cpp
+    libsortmedia/FileTypes/MusicFile.cpp
+    libsortmedia/Adaptors/TagLibAdaptor.cpp
+    libsortmedia/Adaptors/TagLibFLACAdaptor.cpp
+    libsortmedia/MediaSorter.cpp
+    libsortmedia/Factories/FileLocatorFactory.cpp
+    libsortmedia/Factories/OrganizationalSchemaFactory.cpp
+    libsortmedia/Factories/MusicTagEditorAdaptorFactory.cpp
+    libsortmedia/FileLocators/AnyFileLocator.cpp
+    libsortmedia/Logging/NullLogger.cpp
+    libsortmedia/Logging/StreamLogger.cpp
   )
 
-target_include_directories(sortmedia PUBLIC include)
+target_include_directories(sortmedia PUBLIC ${CMAKE_CURRENT_LIST_DIR})
 target_link_libraries(sortmedia PUBLIC taglib::taglib fsadaptor::fsadaptor)
 
-add_executable(sortlibrary source/main.cpp)
+add_executable(sortlibrary sortlibrary/main.cpp)
 target_link_libraries(sortlibrary sortmedia)
-target_include_directories(sortlibrary PRIVATE
-  include
-  ${PROJECT_BINARY_DIR}
-  )
+target_include_directories(sortlibrary PRIVATE ${PROJECT_BINARY_DIR})
 
 include(GNUInstallDirs)
 

@@ -15,8 +15,8 @@
 #include "../MockFilesystemAdaptor/MockFSAdaptorWalker.h"
 #include "AnyFileLocatorTest.h"
 
-#include <namespaces/Interfaces.h>
-#include <SortMedia/FileLocators/AnyFileLocator.h>
+#include <libsortmedia/namespaces/Interfaces.h>
+#include <libsortmedia/FileLocators/AnyFileLocator.h>
 
 #include <FSAdaptor/Path.h>
 

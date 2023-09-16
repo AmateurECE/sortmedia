@@ -13,7 +13,7 @@
 #include "gtest/gtest.h"
 #include "LogSystemTest.h"
 
-#include <SortMedia/Logging/StreamLogger.h>
+#include <libsortmedia/Logging/StreamLogger.h>
 
 // Cases to test:
 // OneInfo, OneWarning, OneError: Append only one logger of each level
