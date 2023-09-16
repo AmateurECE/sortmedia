@@ -1,13 +1,11 @@
 ///////////////////////////////////////////////////////////////////////////////
-// NAME:            config.h.in
+// NAME:            config.h
 //
 // AUTHOR:          Ethan D. Twardy <ethan.twardy@gmail.com>
 //
 // DESCRIPTION:     Build-time configuration file
 //
 // CREATED:         02/06/2022
-//
-// LAST EDITED:     02/06/2022
 ////
 
 #define PROGRAM_VERSION_STRING "@VERSION_STRING@"

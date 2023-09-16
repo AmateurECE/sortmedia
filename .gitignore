@@ -10,3 +10,4 @@ CMakeUserPresets.json
 build/
 compile_commands.json
 package/
+.cache/

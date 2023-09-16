@@ -6,19 +6,18 @@
 // DESCRIPTION:     Includes the main function of the program.
 //
 // CREATED:         08/15/2019
-//
-// LAST EDITED:     02/06/2022
 ////
 
 #include <argp.h>
 #include <iostream>
 #include <memory>
 
-#include <config.h>
 #include <libsortmedia/MediaSorter.h>
 #include <libsortmedia/Logging/StreamLogger.h>
 #include <libsortmedia/Factories/FileLocatorFactory.h>
 #include <libsortmedia/Factories/OrganizationalSchemaFactory.h>
+
+#include "config.h"
 
 const char* argp_program_version = "SortLibrary " PROGRAM_VERSION_STRING;
 const char* argp_program_bug_address = "<ethan.twardy@gmail.com>";

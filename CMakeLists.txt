@@ -14,7 +14,7 @@ project(SortMedia DESCRIPTION "Media Sorter")
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 set(VERSION_STRING "0.1.1")
-configure_file("${PROJECT_SOURCE_DIR}/config.h.in"
+configure_file("sortlibrary/config.h.in"
   "${PROJECT_BINARY_DIR}/config.h")
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -O3")
