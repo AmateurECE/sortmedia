@@ -3,13 +3,25 @@ dual LGPL and MPL licenses.
 
 # Building
 
-Today, we use Conan for pulling in some dependencies. This is optional. If
-the dependencies are available in the system, it should be possible to build
-the application and library without the `conan install` step.
+This project depends on taglib, which must be located somehow. The CMake build
+script will first attempt to locate taglib as if it were installed by Conan.
+If this fails, the build script will fall back to using `pkg-config`.
+
+## Building with taglib from Conan
 
 ```
 $ conan install -of build .
-$ cmake -B build -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$DESTDIR/usr -DCMAKE_TOOLCHAIN_FILE=$PWD/build/conan_toolchain.cmake .
+$ cmake -B build -G Ninja \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DCMAKE_INSTALL_PREFIX=$DESTDIR/usr \
+    -DCMAKE_TOOLCHAIN_FILE=$PWD/build/conan_toolchain.cmake .
+$ cmake --build build
+```
+
+## Building with taglib from pkg-config
+
+```
+$ cmake -B build -G Ninja -DCMAKE_INSTALL_PREFIX=$DESTDIR/usr
 $ cmake --build build
 ```
 

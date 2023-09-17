@@ -19,7 +19,8 @@ configure_file("sortlibrary/config.h.in"
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -O3")
 
-find_package(taglib REQUIRED)
+include(find_taglib.cmake)
+find_taglib()
 add_subdirectory(fsadaptor)
 
 add_library(sortmedia STATIC
