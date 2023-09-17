@@ -16,7 +16,7 @@
 #include <libsortmedia/namespaces/Interfaces.h>
 #include <libsortmedia/FileLocators/AnyFileLocator.h>
 
-#include <FSAdaptor/Path.h>
+#include <fsadaptor/Path.h>
 
 #include <algorithm>
 #include <list>

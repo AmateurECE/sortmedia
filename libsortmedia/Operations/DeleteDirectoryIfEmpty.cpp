@@ -11,8 +11,8 @@
 #include <libsortmedia/Interfaces/ILogger.h>
 #include <libsortmedia/Operations/DeleteDirectoryIfEmpty.h>
 
-#include <FSAdaptor/PathWalker.h>
-#include <FSAdaptor/StandardFilesystemAdaptor.h>
+#include <fsadaptor/PathWalker.h>
+#include <fsadaptor/StandardFilesystemAdaptor.h>
 
 #include <list>
 

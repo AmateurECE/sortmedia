@@ -20,7 +20,7 @@
 #include <libsortmedia/Factories/MusicTagEditorAdaptorFactory.h>
 #include <libsortmedia/Schemas/OrganizationalSchema.h>
 
-#include <FSAdaptor/namespace.h>
+#include <fsadaptor/namespace.h>
 
 #include <memory>
 

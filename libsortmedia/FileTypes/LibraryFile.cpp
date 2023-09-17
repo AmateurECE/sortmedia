@@ -10,8 +10,8 @@
 
 #include <libsortmedia/FileTypes/LibraryFile.h>
 
-#include <FSAdaptor/Path.h>
-#include <FSAdaptor/StandardFilesystemAdaptor.h>
+#include <fsadaptor/Path.h>
+#include <fsadaptor/StandardFilesystemAdaptor.h>
 
 const FSAdaptor::IFilesystemAdaptor&
 SortMedia::FileTypes::LibraryFile::s_stdAdaptor

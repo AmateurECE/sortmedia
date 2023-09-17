@@ -16,7 +16,7 @@
 #include <libsortmedia/namespaces/Policies.h>
 #include <libsortmedia/Policies/OrganizationalBase.h>
 
-#include <FSAdaptor/Path.h>
+#include <fsadaptor/Path.h>
 
 #include <list>
 #include <memory>

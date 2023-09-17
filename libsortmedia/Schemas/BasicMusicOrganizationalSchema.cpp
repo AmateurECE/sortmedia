@@ -17,9 +17,9 @@
 #include <libsortmedia/Policies/DoNothing.h>
 #include <libsortmedia/Policies/UnknownFileType.h>
 
-#include <FSAdaptor/IFilesystemAdaptor.h>
-#include <FSAdaptor/StandardFilesystemAdaptor.h>
-#include <FSAdaptor/Path.h>
+#include <fsadaptor/IFilesystemAdaptor.h>
+#include <fsadaptor/StandardFilesystemAdaptor.h>
+#include <fsadaptor/Path.h>
 
 const FSAdaptor::IFilesystemAdaptor&
 SortMedia::Schemas::BasicMusicOrganizationalSchema::s_stdAdaptor

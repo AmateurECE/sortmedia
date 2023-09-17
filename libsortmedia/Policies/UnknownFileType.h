@@ -16,7 +16,7 @@
 #include <libsortmedia/namespaces/Interfaces.h>
 #include <libsortmedia/Policies/OrganizationalBase.h>
 
-#include <FSAdaptor/namespace.h>
+#include <fsadaptor/namespace.h>
 
 #include <list>
 #include <memory>

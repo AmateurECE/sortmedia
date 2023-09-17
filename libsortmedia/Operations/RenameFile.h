@@ -15,7 +15,7 @@
 #include <libsortmedia/FileTypes/LibraryFile.h>
 #include <libsortmedia/Interfaces/IFileOperation.h>
 
-#include <FSAdaptor/Path.h>
+#include <fsadaptor/Path.h>
 
 class SortMedia::Operations::RenameFile
   : public Interfaces::IFileOperation

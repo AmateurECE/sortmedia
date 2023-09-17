@@ -15,8 +15,8 @@
 #include <libsortmedia/namespaces/FileLocators.h>
 #include <libsortmedia/Interfaces/IFileLocator.h>
 
-#include <FSAdaptor/namespace.h>
-#include <FSAdaptor/StandardFilesystemAdaptor.h>
+#include <fsadaptor/namespace.h>
+#include <fsadaptor/StandardFilesystemAdaptor.h>
 
 #include <list>
 

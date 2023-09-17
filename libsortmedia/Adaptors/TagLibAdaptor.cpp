@@ -10,7 +10,7 @@
 
 #include <libsortmedia/Adaptors/TagLibAdaptor.h>
 
-#include <FSAdaptor/Path.h>
+#include <fsadaptor/Path.h>
 
 #include <taglib/fileref.h>
 #include <taglib/tpropertymap.h>

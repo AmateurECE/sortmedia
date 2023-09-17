@@ -16,8 +16,8 @@
 #include <libsortmedia/Interfaces/ILogger.h>
 #include <libsortmedia/MediaSorter.h>
 
-#include <FSAdaptor/Path.h>
-#include <FSAdaptor/StandardFilesystemAdaptor.h>
+#include <fsadaptor/Path.h>
+#include <fsadaptor/StandardFilesystemAdaptor.h>
 
 #include <list>
 

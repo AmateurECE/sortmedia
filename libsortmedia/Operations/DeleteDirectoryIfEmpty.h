@@ -15,8 +15,8 @@
 #include <libsortmedia/namespaces/Operations.h>
 #include <libsortmedia/Interfaces/IFileOperation.h>
 
-#include <FSAdaptor/namespace.h>
-#include <FSAdaptor/Path.h>
+#include <fsadaptor/namespace.h>
+#include <fsadaptor/Path.h>
 
 class SortMedia::Operations::DeleteDirectoryIfEmpty
   : public Interfaces::IFileOperation

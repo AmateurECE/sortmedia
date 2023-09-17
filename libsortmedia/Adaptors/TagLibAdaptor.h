@@ -15,7 +15,7 @@
 #include <libsortmedia/namespaces/Adaptors.h>
 #include <libsortmedia/Interfaces/IMusicTagEditorAdaptor.h>
 
-#include <FSAdaptor/namespace.h>
+#include <fsadaptor/namespace.h>
 
 #include <memory>
 #include <string>

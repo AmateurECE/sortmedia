@@ -18,7 +18,7 @@
 #include <libsortmedia/Policies/BasicMusicFileNaming.h>
 #include <libsortmedia/Policies/DeleteDirectoryIfEmpty.h>
 
-#include <FSAdaptor/Path.h>
+#include <fsadaptor/Path.h>
 
 #include <cmath>
 

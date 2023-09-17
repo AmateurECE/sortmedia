@@ -11,7 +11,7 @@
 #ifndef __ET_MUSICTAGEDITORADAPTORFACTORY__
 #define __ET_MUSICTAGEDITORADAPTORFACTORY__
 
-#include <FSAdaptor/Path.h>
+#include <fsadaptor/Path.h>
 
 #include <libsortmedia/namespaces/Factories.h>
 #include <libsortmedia/Interfaces/IMusicTagEditorAdaptor.h>

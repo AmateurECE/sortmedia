@@ -11,8 +11,8 @@
 #include <libsortmedia/FileTypes/MusicFile.h>
 #include <libsortmedia/Interfaces/IMusicTagEditorAdaptor.h>
 
-#include <FSAdaptor/Path.h>
-#include <FSAdaptor/StandardFilesystemAdaptor.h>
+#include <fsadaptor/Path.h>
+#include <fsadaptor/StandardFilesystemAdaptor.h>
 
 const FSAdaptor::IFilesystemAdaptor&
 SortMedia::FileTypes::MusicFile::s_stdAdaptor

@@ -17,7 +17,7 @@
 #include <libsortmedia/Interfaces/IMusicTagEditorAdaptor.h>
 #include <libsortmedia/FileTypes/LibraryFile.h>
 
-#include <FSAdaptor/namespace.h>
+#include <fsadaptor/namespace.h>
 
 // A Music file is a superset of a library file
 // (A Music file behaves like a library file)

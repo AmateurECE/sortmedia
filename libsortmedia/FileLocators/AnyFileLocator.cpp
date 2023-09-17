@@ -10,8 +10,8 @@
 
 #include <libsortmedia/FileLocators/AnyFileLocator.h>
 
-#include <FSAdaptor/Path.h>
-#include <FSAdaptor/PathWalker.h>
+#include <fsadaptor/Path.h>
+#include <fsadaptor/PathWalker.h>
 
 const FSAdaptor::StandardFilesystemAdaptor
 SortMedia::FileLocators::AnyFileLocator::s_stdAdaptor;

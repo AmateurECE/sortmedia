@@ -14,7 +14,7 @@
 #include <libsortmedia/Interfaces/IOrganizationalPolicy.h>
 #include <libsortmedia/Schemas/OrganizationalSchema.h>
 
-#include <FSAdaptor/Path.h>
+#include <fsadaptor/Path.h>
 
 #define str(a) str_Impl(a)
 #define str_Impl(a) #a

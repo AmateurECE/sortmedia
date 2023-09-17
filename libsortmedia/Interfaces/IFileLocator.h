@@ -13,7 +13,7 @@
 
 #include <libsortmedia/namespaces/Interfaces.h>
 
-#include <FSAdaptor/namespace.h>
+#include <fsadaptor/namespace.h>
 
 #include <list>
 

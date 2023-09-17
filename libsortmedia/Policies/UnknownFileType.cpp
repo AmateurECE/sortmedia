@@ -12,7 +12,7 @@
 #include <libsortmedia/Operations/Warn.h>
 #include <libsortmedia/Policies/UnknownFileType.h>
 
-#include <FSAdaptor/Path.h>
+#include <fsadaptor/Path.h>
 
 SortMedia::Policies::UnknownFileType
 ::UnknownFileType(const FSAdaptor::Path& path,

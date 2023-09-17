@@ -19,7 +19,7 @@
 #include <libsortmedia/FileTypes/MusicFile.h>
 #include <libsortmedia/Policies/OrganizationalBase.h>
 
-#include <FSAdaptor/Path.h>
+#include <fsadaptor/Path.h>
 
 #include <list>
 #include <memory>

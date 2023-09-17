@@ -13,9 +13,9 @@
 
 #include <libsortmedia/namespaces/FileTypes.h>
 
-#include <FSAdaptor/namespace.h>
-#include <FSAdaptor/Path.h>
-#include <FSAdaptor/StandardFilesystemAdaptor.h>
+#include <fsadaptor/namespace.h>
+#include <fsadaptor/Path.h>
+#include <fsadaptor/StandardFilesystemAdaptor.h>
 
 #include <memory>
 

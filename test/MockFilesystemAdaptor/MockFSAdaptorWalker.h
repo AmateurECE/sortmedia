@@ -15,9 +15,9 @@
 #ifndef __ET_MOCKFSADAPTORWALKER__
 #define __ET_MOCKFSADAPTORWALKER__
 
-#include <FSAdaptor/IFilesystemAdaptor.h>
-#include <FSAdaptor/IPathWalker.h>
-#include <FSAdaptor/Path.h>
+#include <fsadaptor/IFilesystemAdaptor.h>
+#include <fsadaptor/IPathWalker.h>
+#include <fsadaptor/Path.h>
 
 #include <algorithm>
 #include <fstream>
