@@ -111,7 +111,7 @@ void SortMedia::Adaptors::TagLibAdaptor
 std::string SortMedia::Adaptors::TagLibAdaptor::getArtist() const
 {
   TagLib::String s = m_fileRef->tag()->artist();
-  if (s == TagLib::String::null)
+  if (s.isEmpty())
     {
       return "";
     }
@@ -121,7 +121,7 @@ std::string SortMedia::Adaptors::TagLibAdaptor::getArtist() const
 std::string SortMedia::Adaptors::TagLibAdaptor::getAlbum() const
 {
   TagLib::String s = m_fileRef->tag()->album();
-  if (s == TagLib::String::null)
+  if (s.isEmpty())
     {
       return "";
     }
@@ -131,7 +131,7 @@ std::string SortMedia::Adaptors::TagLibAdaptor::getAlbum() const
 std::string SortMedia::Adaptors::TagLibAdaptor::getTitle() const
 {
   TagLib::String s = m_fileRef->tag()->title();
-  if (s == TagLib::String::null)
+  if (s.isEmpty())
     {
       return "";
     }
@@ -141,7 +141,7 @@ std::string SortMedia::Adaptors::TagLibAdaptor::getTitle() const
 std::string SortMedia::Adaptors::TagLibAdaptor::getComment() const
 {
   TagLib::String s = m_fileRef->tag()->comment();
-  if (s == TagLib::String::null)
+  if (s.isEmpty())
     {
       return "";
     }
@@ -151,7 +151,7 @@ std::string SortMedia::Adaptors::TagLibAdaptor::getComment() const
 std::string SortMedia::Adaptors::TagLibAdaptor::getGenre() const
 {
   TagLib::String s = m_fileRef->tag()->genre();
-  if (s == TagLib::String::null)
+  if (s.isEmpty())
     {
       return "";
     }
