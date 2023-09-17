@@ -27,7 +27,7 @@ set(HEADERS
     namespace.h
 )
 
-add_library(fsadaptor
+add_library(fsadaptor STATIC
     PathConstIter.cpp
     Path.cpp
     StandardFilesystemAdaptor.cpp
