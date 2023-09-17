@@ -283,14 +283,14 @@ void SortMedia::Adaptors::TagLibAdaptor
 
 // TODO: Implement setDiscTotal
 void SortMedia::Adaptors::TagLibAdaptor
-::setDiscTotal(const std::string& discTotal)
+::setDiscTotal(const std::string&)
 {
   throw std::logic_error{"Function not yet implemented."};
 }
 
 // TODO: Implement setTrackTotal
 void SortMedia::Adaptors::TagLibAdaptor
-::setTrackTotal(const std::string& trackTotal)
+::setTrackTotal(const std::string&)
 {
   throw std::logic_error{"Function not yet implemented."};
 }

@@ -46,11 +46,6 @@ public:
   Path parent_path() const;
   Path root_path() const;
 
-  // Queries
-  bool has_root_path() const; // TODO: Implement has_root_path
-  bool has_filename() const; // TODO: Implement has_filename
-  bool has_extension() const; // TODO: Implement has_extension
-
   // Operators
   // Concatenate two paths (without separator)
   Path operator+(const Path& that) const;
