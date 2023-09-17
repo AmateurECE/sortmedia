@@ -10,7 +10,7 @@
 // LAST EDITED:     09/08/2019
 ////
 
-#include <FSAdaptor/Path.h>
+#include <fsadaptor/Path.h>
 
 FSAdaptor::PathConstIter
 ::PathConstIter(std::vector<std::string>::const_iterator iter)

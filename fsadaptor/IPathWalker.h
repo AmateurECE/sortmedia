@@ -13,7 +13,7 @@
 #ifndef __ET_IPATHWALKER__
 #define __ET_IPATHWALKER__
 
-#include <FSAdaptor/namespace.h>
+#include <fsadaptor/namespace.h>
 
 class FSAdaptor::IPathWalker
 {

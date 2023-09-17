@@ -14,10 +14,10 @@
 // TODO: Add support for non-english locales
 
 // SortMedia headers
-#include <FSAdaptor/StandardFilesystemAdaptor.h>
-#include <FSAdaptor/Path.h>
-#include <FSAdaptor/IPathWalker.h>
-#include <FSAdaptor/PathWalker.h>
+#include <fsadaptor/StandardFilesystemAdaptor.h>
+#include <fsadaptor/Path.h>
+#include <fsadaptor/IPathWalker.h>
+#include <fsadaptor/PathWalker.h>
 
 // LibC++ headers
 #include <list>

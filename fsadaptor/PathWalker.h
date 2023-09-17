@@ -13,8 +13,8 @@
 #ifndef __ET_PATHWALKER__
 #define __ET_PATHWALKER__
 
-#include <FSAdaptor/namespace.h>
-#include <FSAdaptor/IPathWalker.h>
+#include <fsadaptor/namespace.h>
+#include <fsadaptor/IPathWalker.h>
 
 template<template<class...> class Container>
 class FSAdaptor::PathWalker : public FSAdaptor::IPathWalker

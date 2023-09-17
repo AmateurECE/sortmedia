@@ -15,7 +15,7 @@
 #ifndef __ET_PATH__
 #define __ET_PATH__
 
-#include <FSAdaptor/namespace.h>
+#include <fsadaptor/namespace.h>
 
 #include <iterator>
 #include <regex>

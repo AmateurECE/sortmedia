@@ -15,7 +15,7 @@
 #ifndef __ET_IFILESYSTEMADAPTOR__
 #define __ET_IFILESYSTEMADAPTOR__
 
-#include <FSAdaptor/namespace.h>
+#include <fsadaptor/namespace.h>
 
 class FSAdaptor::IFilesystemAdaptor
 {

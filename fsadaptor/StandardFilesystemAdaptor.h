@@ -14,8 +14,8 @@
 #ifndef __ET_STANDARDFILESYSTEMADAPTOR__
 #define __ET_STANDARDFILESYSTEMADAPTOR__
 
-#include <FSAdaptor/namespace.h>
-#include <FSAdaptor/IFilesystemAdaptor.h>
+#include <fsadaptor/namespace.h>
+#include <fsadaptor/IFilesystemAdaptor.h>
 
 class FSAdaptor::StandardFilesystemAdaptor
   : public FSAdaptor::IFilesystemAdaptor
