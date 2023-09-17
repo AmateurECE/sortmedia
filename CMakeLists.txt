@@ -1,7 +1,7 @@
 ###############################################################################
 # NAME:             CMakeLists.txt
 #
-# AUTHOR:           Ethan D. Twardy <edtwardy@mtu.edu>
+# AUTHOR:           Ethan D. Twardy <ethan.twardy@gmail.com>
 #
 # DESCRIPTION:      Cmake configuration file.
 #
@@ -13,7 +13,7 @@ cmake_minimum_required(VERSION 3.22.2)
 project(SortMedia DESCRIPTION "Media Sorter")
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-set(VERSION_STRING "0.1.1")
+set(VERSION_STRING "0.1.4")
 configure_file("sortlibrary/config.h.in"
   "${PROJECT_BINARY_DIR}/config.h")
 
