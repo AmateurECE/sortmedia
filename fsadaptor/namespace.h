@@ -15,7 +15,6 @@
 
 namespace FSAdaptor
 {
-  class PathConstIter;
   class Path;
   class IPathWalker;
   template<template<class...> class Container>

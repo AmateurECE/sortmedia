@@ -62,8 +62,32 @@ public:
   bool operator==(const Path& that) const;
   bool operator!=(const Path& that) const;
 
+  class PathConstIter
+  {
+  public:
+    using iterator_category = std::input_iterator_tag;
+    using difference_type = std::ptrdiff_t;
+    using value_type = const Path;
+    using pointer = const Path*;
+    using reference = const Path&;
+
+    PathConstIter() = delete;
+    ~PathConstIter() {}
+    PathConstIter(std::vector<std::string>::const_iterator);
+    PathConstIter(const PathConstIter&);
+    PathConstIter& operator=(const PathConstIter& that);
+    PathConstIter& operator++();
+    PathConstIter operator++(int);
+    bool operator==(const PathConstIter& that) const;
+    bool operator!=(const PathConstIter& that) const;
+    Path operator*() const;
+
+  private:
+    std::vector<std::string>::const_iterator m_iterator;
+  };
+
   // Iterators
-  typedef PathConstIter const_iterator;
+  using const_iterator = PathConstIter;
   const_iterator cbegin() const;
   const_iterator cend() const;
 
@@ -80,25 +104,6 @@ private:
 };
 
 std::ostream& operator<<(std::ostream& out, const FSAdaptor::Path& path);
-
-class FSAdaptor::PathConstIter
-  : public virtual std::iterator<std::input_iterator_tag, Path>
-{
-public:
-  PathConstIter() = delete;
-  ~PathConstIter() {}
-  PathConstIter(std::vector<std::string>::const_iterator);
-  PathConstIter(const PathConstIter&);
-  PathConstIter& operator=(const PathConstIter& that);
-  PathConstIter& operator++();
-  PathConstIter operator++(int);
-  bool operator==(const PathConstIter& that) const;
-  bool operator!=(const PathConstIter& that) const;
-  Path operator*() const;
-
-private:
-  std::vector<std::string>::const_iterator m_iterator;
-};
 
 #endif // __ET_PATH__
 
