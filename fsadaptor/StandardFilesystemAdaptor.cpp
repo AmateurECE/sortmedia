@@ -75,9 +75,7 @@ FSAdaptor::StandardFilesystemAdaptor
                 const FSAdaptor::Path& directory) const
 {
   DIR* directoryStream = NULL;
-  struct dirent* result = NULL;
-  struct dirent entry;
-  memset(&entry, 0, sizeof(struct dirent));
+  struct dirent* entry = NULL;
 
   errno = 0;
   if (NULL == (directoryStream = opendir(directory.string().c_str())))
@@ -87,13 +85,12 @@ FSAdaptor::StandardFilesystemAdaptor
 
   errno = 0;
   int readdirError = 0;
-  while (!(readdirError = readdir_r(directoryStream, &entry, &result))
-         && NULL != result)
+  while (NULL != (entry = readdir(directoryStream)))
     {
-      if (strncmp(entry.d_name, ".", sizeof("."))
-          && strncmp(entry.d_name, "..", sizeof("..")))
+      if (strncmp(entry->d_name, ".", sizeof("."))
+          && strncmp(entry->d_name, "..", sizeof("..")))
         {
-          walker.insert(directory/Path{entry.d_name});
+          walker.insert(directory/Path{entry->d_name});
         }
     }
 
