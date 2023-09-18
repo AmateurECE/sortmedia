@@ -26,7 +26,7 @@ class FSAdaptor::Path
 {
 public:
   // Constructors
-  Path() : Path{""} {}
+  Path() : m_components{} {};
   template<typename S>
   Path(const S& source)
     : m_components{split(*s_sep, normalizePath(std::string{source}))}
