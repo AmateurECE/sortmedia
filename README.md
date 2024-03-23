@@ -3,26 +3,24 @@ dual LGPL and MPL licenses.
 
 # Building
 
-This project depends on taglib, which must be located somehow. The CMake build
-script will first attempt to locate taglib as if it were installed by Conan.
-If this fails, the build script will fall back to using `pkg-config`.
+This project depends on a few libraries, which must be located somehow. The
+`default` preset provides a `Find<lib>.cmake` script for each of these
+dependencies, but there is also a `conanfile.txt` which can be used to build
+with dependencies from Conan.
 
-## Building with taglib from Conan
-
-```
-$ conan install -of build .
-$ cmake -B build -G Ninja \
-    -DCMAKE_BUILD_TYPE=Release \
-    -DCMAKE_INSTALL_PREFIX=$DESTDIR/usr \
-    -DCMAKE_TOOLCHAIN_FILE=$PWD/build/conan_toolchain.cmake .
-$ cmake --build build
-```
-
-## Building with taglib from pkg-config
+## Building with dependencies from Conan
 
 ```
-$ cmake -B build -G Ninja -DCMAKE_INSTALL_PREFIX=$DESTDIR/usr
-$ cmake --build build
+conan install --build=missing -of builddir .
+cmake --preset conan-release
+cmake --build build
+```
+
+## Building with system libraries
+
+```
+cmake --preset default
+cmake --build build
 ```
 
 # Compilation Database
@@ -31,5 +29,5 @@ CMake is configured to generate a compilation database at configure time. To
 use this, e.g. with neovim, symlink it into the project root directory:
 
 ```
-$ ln -s build/compile_commands.json compile_commands.json
+ln -s build/compile_commands.json compile_commands.json
 ```

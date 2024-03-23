@@ -4,7 +4,10 @@
     {
       "name": "default",
       "generator": "Ninja",
-      "binaryDir": "${sourceDir}/build"
+      "binaryDir": "${sourceDir}/builddir",
+      "cacheVariables": {
+        "CMAKE_MODULE_PATH": "${sourceDir}/cmake"
+      }
     }
   ],
 
