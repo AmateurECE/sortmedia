@@ -1,10 +1,13 @@
 #include <CLI/CLI.hpp>
 #include <iostream>
 
+#include "version.h"
+
 using namespace std;
 
 int main(int argc, char** argv) {
     CLI::App app{"Media library sorting application"};
+    app.set_version_flag("--version", version::VERSION);
 
     string input_tree = "", output_tree = "";
     app.add_option("-i", input_tree, "Input file tree");

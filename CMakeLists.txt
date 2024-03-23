@@ -7,10 +7,13 @@ set(CMAKE_COLOR_DIAGNOSTICS ON)
 find_package(taglib REQUIRED)
 find_package(CLI11 REQUIRED)
 
+include(cmake/version.cmake)
+
 add_executable(sortlibrary src/main.cpp)
 target_link_libraries(sortlibrary PRIVATE
   taglib::taglib
-  CLI11::CLI11)
+  CLI11::CLI11
+  version::version)
 
 include(GNUInstallDirs)
 install(TARGETS sortlibrary
