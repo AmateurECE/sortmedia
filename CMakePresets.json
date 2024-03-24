@@ -6,7 +6,9 @@
       "generator": "Ninja",
       "binaryDir": "${sourceDir}/builddir",
       "cacheVariables": {
-        "CMAKE_MODULE_PATH": "${sourceDir}/cmake"
+        "CMAKE_MODULE_PATH": "${sourceDir}/cmake",
+        "CMAKE_CXX_STANDARD": "20",
+        "CMAKE_BUILD_TYPE": "Debug"
       }
     }
   ],

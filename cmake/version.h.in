@@ -1,3 +1,5 @@
+#include <string>
+
 /// The version obtained from the git repository.
 namespace version {
 inline const std::string& VERSION = "${GIT_REPO_VERSION}";

@@ -9,7 +9,9 @@ find_package(CLI11 REQUIRED)
 
 include(cmake/version.cmake)
 
-add_executable(sortlibrary src/main.cpp)
+add_executable(sortlibrary
+  src/main.cpp)
+
 target_link_libraries(sortlibrary PRIVATE
   taglib::taglib
   CLI11::CLI11
