@@ -13,6 +13,8 @@ public:
   get_compliant_path(const std::filesystem::directory_entry& entry) const {
     TagLib::FileRef file{entry.path().c_str()};
 
+    // TODO: Need to run all metadata through a sanitizer to replace one or
+    // more non [a-zA-Z0-9 ] with '_'
     auto artist{file.tag()->artist().to8Bit(true)};
     auto album{file.tag()->album().to8Bit(true)};
 

@@ -74,6 +74,7 @@ class MusicLibrary {
 public:
   MusicLibrary(std::string directory) : m_directory{directory} {}
   LibraryFileIterator begin() const {
+    // TODO: Should put together a builder class for this regex
     return {std::regex(".*\\.flac$"), m_directory};
   }
   LibraryFileIterator end() const { return LibraryFileIterator::end(); }
