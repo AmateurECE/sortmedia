@@ -1,3 +1,6 @@
+#ifndef LIBRARY_H
+#define LIBRARY_H
+
 #include <filesystem>
 #include <regex>
 
@@ -70,11 +73,13 @@ static_assert(std::input_iterator<LibraryFileIterator>);
 class MusicLibrary {
 public:
   MusicLibrary(std::string directory) : m_directory{directory} {}
-  LibraryFileIterator begin() {
+  LibraryFileIterator begin() const {
     return {std::regex(".*\\.flac$"), m_directory};
   }
-  LibraryFileIterator end() { return LibraryFileIterator::end(); }
+  LibraryFileIterator end() const { return LibraryFileIterator::end(); }
 
 private:
   std::string m_directory;
 };
+
+#endif // LIBRARY_H

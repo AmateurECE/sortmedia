@@ -1,7 +1,8 @@
 #include <CLI/CLI.hpp>
-#include <iostream>
 
 #include "library.h"
+#include "policy.h"
+#include "service.h"
 #include "version.h"
 
 using namespace std;
@@ -17,11 +18,10 @@ int main(int argc, char** argv) {
 
   CLI11_PARSE(app, argc, argv);
 
-  std::cout << "input_tree=" << input_tree
-            << ", output_tree=" << output_directory << "\n";
+  MusicLibrary input_library{input_tree};
+  MusicLibrary destination_library{output_directory};
+  CopyAndOrganize service;
+  AudioOrganizationPolicy policy;
 
-  MusicLibrary library{input_tree};
-  for (const auto& entry : library) {
-    std::cout << entry << '\n';
-  }
+  service.run(input_library, policy, destination_library);
 }
