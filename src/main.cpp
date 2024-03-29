@@ -1,12 +1,12 @@
 #include <CLI/CLI.hpp>
 
+#include "convert.h"
 #include "library.h"
 #include "policy.h"
 #include "service.h"
 #include "version.h"
 
 using namespace std;
-using namespace std::filesystem;
 
 int main(int argc, char** argv) {
   CLI::App app{"Media library sorting application"};
@@ -19,9 +19,12 @@ int main(int argc, char** argv) {
   CLI11_PARSE(app, argc, argv);
 
   MusicLibrary input_library{input_tree};
-  MusicLibrary destination_library{output_directory};
-  CopyAndOrganize service;
-  AudioOrganizationPolicy policy;
 
-  service.run(input_library, policy, destination_library);
+  vector<unique_ptr<ITransformLibraryFiles>> transformations;
+  transformations.push_back(make_unique<AudioOrganizationPolicy>());
+  LibraryCreator destination{filesystem::path(output_directory),
+                             std::move(transformations)};
+
+  CopyAndOrganize service;
+  service.run(input_library, destination);
 }

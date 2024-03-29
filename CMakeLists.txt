@@ -10,6 +10,8 @@ find_package(CLI11 REQUIRED)
 include(cmake/version.cmake)
 
 add_executable(sortlibrary
+  src/convert.cpp
+  src/library.cpp
   src/main.cpp)
 
 target_link_libraries(sortlibrary PRIVATE
