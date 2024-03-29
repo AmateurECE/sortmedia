@@ -22,7 +22,6 @@ private:
   template <class... Ts> struct overloaded : Ts... {
     using Ts::operator()...;
   };
-  template <class> inline static constexpr bool always_false_v = false;
 
 public:
   NonStandardTags(const TagLib::FileRef& file) {
@@ -36,25 +35,27 @@ public:
     }
   }
 
-  std::optional<unsigned int> track_total() const {
+  std::optional<unsigned int> track_total() const { return total("TRACK"); }
+  std::optional<unsigned int> disc_total() const { return total("DISC"); }
+  std::optional<unsigned int> disc_number() const {
     return std::visit(
         overloaded{
             [](const FlacProperties& flac) {
-              return get_property<unsigned int>(flac.properties,
-                                                "TOTALTRACKS");
+              return get_property<unsigned int>(flac.properties, "DISCNUMBER");
             },
             [](const Id3v2Properties& id3v2) -> std::optional<unsigned int> {
               const auto property{
-                  get_property<std::string>(id3v2.properties, "TRACKNUMBER")};
+                  get_property<std::string>(id3v2.properties, "DISCNUMBER")};
               if (!property.has_value()) {
                 return {};
               }
 
-              if (const auto& slash{property->find("/")};
-                  std::string::npos == slash) {
-                return {std::stoi(property->substr(slash + 1))};
+              if (auto slash{property->find("/")};
+                  std::string::npos != slash) {
+                return {
+                    Into<unsigned int>::convert(property->substr(0, slash))};
               } else {
-                return {};
+                return {Into<unsigned int>::convert(property)};
               }
             },
         },
@@ -71,6 +72,35 @@ private:
   using Properties = std::variant<FlacProperties, Id3v2Properties>;
 
   Properties m_properties;
+
+  /// Obtain a "total" property from the map. "quantity" may either be "DISC",
+  /// in which case, the total number of discs is returned, or it may be
+  /// "TRACK", in which case the total number of tracks is returned.
+  std::optional<unsigned int> total(const std::string& quantity) const {
+    return std::visit(
+        overloaded{
+            [&quantity](const FlacProperties& flac) {
+              return get_property<unsigned int>(
+                  flac.properties, std::string("TOTAL") + quantity + "S");
+            },
+            [quantity](
+                const Id3v2Properties& id3v2) -> std::optional<unsigned int> {
+              const auto property{get_property<std::string>(
+                  id3v2.properties, quantity + "NUMBER")};
+              if (!property.has_value()) {
+                return {};
+              }
+
+              if (const auto& slash{property->find("/")};
+                  std::string::npos == slash) {
+                return {std::stoi(property->substr(slash + 1))};
+              } else {
+                return {};
+              }
+            },
+        },
+        m_properties);
+  }
 
   template <ConvertibleFrom<std::string> T>
   static std::optional<T> get_property(const TagLib::PropertyMap& properties,
