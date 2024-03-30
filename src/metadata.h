@@ -2,8 +2,14 @@
 #define METADATA_H
 
 #include <filesystem>
+#include <memory>
 #include <optional>
+#include <taglib/apetag.h>
 #include <taglib/fileref.h>
+#include <taglib/flacfile.h>
+#include <taglib/id3v2tag.h>
+#include <taglib/mp4file.h>
+#include <taglib/mpegfile.h>
 #include <taglib/tpropertymap.h>
 #include <variant>
 
@@ -121,6 +127,81 @@ private:
       return {Into<T>::convert(value)};
     }
   }
+};
+
+/// Detects embedded cover art in audio files.
+class ImageDetector {
+public:
+  static std::optional<ImageDetector> make(std::filesystem::path path) {
+    std::string extension{path.extension().c_str()};
+
+    if (extension == ".mp3") {
+      auto file{std::make_unique<TagLib::MPEG::File>(path.c_str())};
+      if (file->hasAPETag()) {
+        return {ImageDetector{Image{APEv2Image{std::move(file)}}}};
+      } else if (file->hasID3v1Tag()) {
+        return {ImageDetector{Image{ID3v1Image{}}}};
+      } else if (file->hasID3v2Tag()) {
+        return {ImageDetector{Image{ID3v2Image{std::move(file)}}}};
+      } else {
+        return {};
+      }
+    } else if (extension == ".m4a") {
+      return {ImageDetector{
+          Image{Mp4Image{std::make_unique<TagLib::MP4::File>(path.c_str())}}}};
+    } else if (extension == ".flac") {
+      return {ImageDetector{Image{
+          FlacImage{std::make_unique<TagLib::FLAC::File>(path.c_str())}}}};
+    } else {
+      return {};
+    }
+  }
+
+  bool has_image() const {
+    return std::visit([](const auto& image) { return image.has_image(); },
+                      m_image);
+  }
+
+private:
+  struct FlacImage {
+    std::unique_ptr<TagLib::FLAC::File> file;
+    bool has_image() const { return !file->pictureList().isEmpty(); }
+  };
+  struct APEv2Image {
+    std::unique_ptr<TagLib::MPEG::File> file;
+    bool has_image() const {
+      // APEv2 embedded pictures may appear under a number of keys,
+      // all of which start with "Cover Art". See:
+      // https://wiki.hydrogenaud.io/index.php?title=Tag_Mapping#Ape_pictures
+      for (const auto& item : file->APETag()->itemListMap()) {
+        if (item.first.startsWith("Cover Art")) {
+          return true;
+        }
+      }
+
+      return false;
+    }
+  };
+  struct ID3v2Image {
+    std::unique_ptr<TagLib::MPEG::File> file;
+    bool has_image() const {
+      return !file->ID3v2Tag()->frameListMap()["APIC"].isEmpty();
+    }
+  };
+  struct ID3v1Image {
+    // ID3v1 does not support embedded cover art.
+    bool has_image() const { return false; }
+  };
+  struct Mp4Image {
+    std::unique_ptr<TagLib::MP4::File> file;
+    bool has_image() const { return file->tag()->itemMap().contains("covr"); };
+  };
+  using Image =
+      std::variant<FlacImage, APEv2Image, ID3v1Image, ID3v2Image, Mp4Image>;
+
+  ImageDetector(Image image) : m_image{std::move(image)} {}
+
+  Image m_image;
 };
 } // namespace metadata
 
