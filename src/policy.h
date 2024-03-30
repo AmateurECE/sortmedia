@@ -15,7 +15,7 @@
 /// The policy that dictates the final state of audio files in the library.
 class AudioOrganizationPolicy : public ITransformLibraryFiles {
 public:
-  void apply(PendingCopyFileTransaction& transaction) final {
+  PolicyResult apply(PendingCopyFileTransaction& transaction) final {
     TagLib::FileRef file{transaction.source_path().c_str()};
 
     // Compose the filename using the artist, album, and track metadata.
@@ -44,6 +44,7 @@ public:
 
     transaction.set_destination_path(
         std::filesystem::path(artist).append(album).append(track));
+    return {std::monostate()};
   }
 
 private:

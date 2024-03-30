@@ -7,6 +7,7 @@
 #include <regex>
 #include <tag.h>
 #include <taglib/fileref.h>
+#include <variant>
 #include <vector>
 
 /// An iterator over media files in a library. This iterator fulfills the
@@ -154,6 +155,18 @@ private:
   std::vector<std::function<void(TagLib::Tag*)>> m_tag_callbacks;
 };
 
+/// An exception type returned from policy application. This allows policies
+/// to reject files because they don't meet the criteria required by the
+/// library.
+class InvalidFileError : public std::exception {
+public:
+  InvalidFileError(std::string message) : m_message{message} {}
+  const char* what() const noexcept final { return m_message.c_str(); }
+
+private:
+  std::string m_message;
+};
+
 /// A transformation that's applied to library files upon their creation
 /// in a library. Used primarily to implement policies about library
 /// organization. A transformation is responsible for:
@@ -169,8 +182,9 @@ private:
 ///   directory, if TOTALTRACKS is unset" etc.
 class ITransformLibraryFiles {
 public:
+  using PolicyResult = std::variant<std::monostate, InvalidFileError>;
   virtual ~ITransformLibraryFiles() = 0;
-  virtual void apply(PendingCopyFileTransaction& transaction) = 0;
+  virtual PolicyResult apply(PendingCopyFileTransaction& transaction) = 0;
 };
 
 /// Facilitates the creation of libraries by copying files from elsewhere
