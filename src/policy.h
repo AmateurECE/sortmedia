@@ -18,16 +18,29 @@ public:
   void apply(PendingCopyFileTransaction& transaction) final {
     TagLib::FileRef file{transaction.source_path().c_str()};
 
-    auto artist{metadata::sanitize_token(file.tag()->artist().to8Bit(true))};
-    auto album{metadata::sanitize_token(file.tag()->album().to8Bit(true))};
+    // Compose the filename using the artist, album, and track metadata.
+    const auto artist{
+        metadata::sanitize_token(file.tag()->artist().to8Bit(true))};
+    const auto album{
+        metadata::sanitize_token(file.tag()->album().to8Bit(true))};
 
-    auto alignment{
+    const auto alignment{
         calculate_track_number_alignment(file, transaction.source_path())};
-    auto track_number{file.tag()->track()};
-    auto title{metadata::sanitize_token(file.tag()->title().to8Bit(true))};
-    auto extension{transaction.source_path().extension().string()};
+    const auto track_number{file.tag()->track()};
+    const auto title{
+        metadata::sanitize_token(file.tag()->title().to8Bit(true))};
+    const auto extension{transaction.source_path().extension().string()};
     auto track{std::format("{:0>{}} {}{}", track_number, alignment, title,
                            extension)};
+
+    // Add disc number only if disc_total and disc_number are set.
+    metadata::NonStandardTags tags{file};
+    const auto disc_number{tags.disc_number()};
+    const auto disc_total{tags.disc_total()};
+    if (disc_number.has_value() && disc_total.has_value()) {
+      const auto disc_alignment{std::log10(*disc_total) + 1};
+      track = std::format("{:0>{}}{}", *disc_number, disc_alignment, track);
+    }
 
     transaction.set_destination_path(
         std::filesystem::path(artist).append(album).append(track));

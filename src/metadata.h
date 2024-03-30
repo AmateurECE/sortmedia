@@ -63,7 +63,7 @@ public:
                 return {
                     Into<unsigned int>::convert(property->substr(0, slash))};
               } else {
-                return {Into<unsigned int>::convert(property)};
+                return {Into<unsigned int>::convert(*property)};
               }
             },
         },
