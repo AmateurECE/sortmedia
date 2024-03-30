@@ -129,6 +129,11 @@ public:
 
   const std::filesystem::path& source_path() const { return m_from_path; }
 
+  void add_action(
+      std::function<void(const std::filesystem::path& new_file)> action) {
+    m_actions.push_back(action);
+  }
+
   // TODO: Can this be passed as a reference instead?
   void set_tag(std::function<void(TagLib::Tag*)> callback) {
     m_tag_callbacks.push_back(callback);
@@ -143,9 +148,16 @@ public:
     std::filesystem::copy_file(m_from_path, full_path);
 
     // Apply all of the tag callbacks to the file.
-    TagLib::FileRef file{full_path.c_str()};
-    for (auto& callback : m_tag_callbacks) {
-      callback(file.tag());
+    if (!m_tag_callbacks.empty()) {
+      TagLib::FileRef file{full_path.c_str()};
+      for (auto& callback : m_tag_callbacks) {
+        callback(file.tag());
+      }
+      file.save();
+    }
+
+    for (auto& action : m_actions) {
+      action(full_path);
     }
   }
 
@@ -153,6 +165,7 @@ private:
   std::filesystem::path m_from_path;
   std::filesystem::path m_to_path;
   std::vector<std::function<void(TagLib::Tag*)>> m_tag_callbacks;
+  std::vector<std::function<void(const std::filesystem::path&)>> m_actions;
 };
 
 /// An exception type returned from policy application. This allows policies
