@@ -10,6 +10,7 @@ find_package(CLI11 REQUIRED)
 include(cmake/version.cmake)
 
 add_executable(sortlibrary
+  src/metadata.cpp
   src/convert.cpp
   src/library.cpp
   src/main.cpp)

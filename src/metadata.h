@@ -3,7 +3,6 @@
 
 #include <filesystem>
 #include <optional>
-#include <regex>
 #include <taglib/fileref.h>
 #include <taglib/tpropertymap.h>
 #include <variant>
@@ -12,16 +11,20 @@
 
 namespace metadata {
 /// Replaces one or more "invalid characters" with a single underscore.
-std::string sanitize_token(const std::string& input) {
-  static const std::regex disallowed_characters{"[^A-Za-z0-9 ()\\[\\]]+"};
-  return std::regex_replace(input, disallowed_characters, "_");
-}
+std::string sanitize_token(const std::string& input);
 
 class NonStandardTags {
 private:
   template <class... Ts> struct overloaded : Ts... {
     using Ts::operator()...;
   };
+
+  enum class Quantity {
+    Disc,
+    Track,
+  };
+
+  friend struct From<Quantity>;
 
 public:
   NonStandardTags(const TagLib::FileRef& file) {
@@ -35,8 +38,13 @@ public:
     }
   }
 
-  std::optional<unsigned int> track_total() const { return total("TRACK"); }
-  std::optional<unsigned int> disc_total() const { return total("DISC"); }
+  std::optional<unsigned int> track_total() const {
+    return total(Quantity::Track);
+  }
+  std::optional<unsigned int> disc_total() const {
+    return total(Quantity::Disc);
+  }
+
   std::optional<unsigned int> disc_number() const {
     return std::visit(
         overloaded{
@@ -76,7 +84,8 @@ private:
   /// Obtain a "total" property from the map. "quantity" may either be "DISC",
   /// in which case, the total number of discs is returned, or it may be
   /// "TRACK", in which case the total number of tracks is returned.
-  std::optional<unsigned int> total(const std::string& quantity) const {
+  std::optional<unsigned int> total(Quantity value) const {
+    auto quantity{Into<std::string>::convert(value)};
     return std::visit(
         overloaded{
             [&quantity](const FlacProperties& flac) {

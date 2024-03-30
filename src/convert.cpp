@@ -4,13 +4,13 @@
 
 template <>
 template <>
-unsigned int Into<unsigned int>::convert<std::string>(std::string value) {
+unsigned int From<std::string>::convert<unsigned int>(std::string value) {
   return std::stoi(value);
 }
 
 /// Trivial case: string -> string
 template <>
 template <>
-std::string Into<std::string>::convert<std::string>(std::string value) {
+std::string From<std::string>::convert<std::string>(std::string value) {
   return value;
 }
