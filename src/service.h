@@ -9,7 +9,11 @@ class CopyAndOrganize {
 public:
   void run(const MusicLibrary& input, LibraryCreator& output) {
     for (const auto& file : input) {
-      output.add_file(file);
+      auto result{output.add_file(file)};
+      if (auto error{std::get_if<InvalidFileError>(&result)};
+          nullptr != error) {
+        std::cerr << error->what() << "\n";
+      }
     }
   }
 };

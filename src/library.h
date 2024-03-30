@@ -197,7 +197,8 @@ class ITransformLibraryFiles {
 public:
   using PolicyResult = std::variant<std::monostate, InvalidFileError>;
   virtual ~ITransformLibraryFiles() = 0;
-  virtual PolicyResult apply(PendingCopyFileTransaction& transaction) = 0;
+  [[nodiscard]] virtual PolicyResult
+  apply(PendingCopyFileTransaction& transaction) = 0;
 };
 
 /// Facilitates the creation of libraries by copying files from elsewhere
@@ -209,12 +210,17 @@ public:
       std::vector<std::unique_ptr<ITransformLibraryFiles>> transformations)
       : m_root{root}, m_transformations{std::move(transformations)} {}
 
-  void add_file(const std::filesystem::directory_entry& file) {
+  [[nodiscard]] ITransformLibraryFiles::PolicyResult
+  add_file(const std::filesystem::directory_entry& file) {
     PendingCopyFileTransaction transaction{file.path()};
     for (auto& transformation : m_transformations) {
-      transformation->apply(transaction);
+      auto result{transformation->apply(transaction)};
+      if (std::holds_alternative<InvalidFileError>(result)) {
+        return result;
+      }
     }
     transaction.complete(m_root);
+    return {std::monostate()};
   }
 
 private:
