@@ -1,8 +1,13 @@
-#ifndef CONVERT_H
-#define CONVERT_H
+module;
 
 #include <concepts>
+#include <string>
 
+export module convert;
+
+using namespace std;
+
+export namespace convert {
 /// This struct template provides a mechanism for easy type conversion
 /// based on user-defined functions. Similar to the From trait in the
 /// Rust standard library.
@@ -25,5 +30,17 @@ template <typename T, typename F>
 concept ConvertibleFrom = requires(T, F f) {
   { Into<T>::template convert<F>(f) } -> std::convertible_to<T>;
 };
+} // namespace convert
 
-#endif // CONVERT_H
+using namespace convert;
+
+template <>
+template <>
+unsigned int From<string>::convert<unsigned int>(string value) {
+  return std::stoi(value);
+}
+
+/// Trivial case: string -> string
+template <> template <> string From<string>::convert<string>(string value) {
+  return value;
+}

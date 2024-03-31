@@ -1,5 +1,4 @@
-#ifndef LIBRARY_H
-#define LIBRARY_H
+module;
 
 #include <filesystem>
 #include <functional>
@@ -10,17 +9,23 @@
 #include <variant>
 #include <vector>
 
+export module library;
+
+using namespace std;
+namespace fs = std::filesystem;
+
+export namespace library {
 /// An iterator over media files in a library. This iterator fulfills the
 /// requirements of an input iterator, and is also a range type.
 class LibraryFileIterator {
 public:
-  using difference_type = std::ptrdiff_t;
-  using element_type = std::filesystem::directory_entry;
+  using difference_type = ptrdiff_t;
+  using element_type = fs::directory_entry;
   using pointer = const element_type*;
   using reference = const element_type&;
 
-  LibraryFileIterator(std::regex file_filter, std::string directory)
-      : m_inner{std::filesystem::recursive_directory_iterator(directory)},
+  LibraryFileIterator(regex file_filter, string directory)
+      : m_inner{fs::recursive_directory_iterator(directory)},
         m_file_filter{file_filter} {
     find_captured_element();
   }
@@ -44,38 +49,36 @@ public:
   }
 
   static LibraryFileIterator end() noexcept {
-    return LibraryFileIterator(
-        std::filesystem::end(std::filesystem::recursive_directory_iterator()));
+    return LibraryFileIterator(fs::end(fs::recursive_directory_iterator()));
   }
 
 private:
-  std::filesystem::recursive_directory_iterator m_inner;
-  std::regex m_file_filter;
+  fs::recursive_directory_iterator m_inner;
+  regex m_file_filter;
 
-  LibraryFileIterator(std::filesystem::recursive_directory_iterator inner)
+  LibraryFileIterator(fs::recursive_directory_iterator inner)
       : m_inner{inner}, m_file_filter{} {
     find_captured_element();
   }
 
   void find_captured_element() {
-    const auto end{
-        std::filesystem::end(std::filesystem::recursive_directory_iterator())};
+    const auto end{fs::end(fs::recursive_directory_iterator())};
     while (end != m_inner && !is_captured_element())
       ++m_inner;
   }
 
   bool is_captured_element() const {
     return m_inner->is_regular_file() &&
-           std::regex_match(m_inner->path().c_str(), m_file_filter);
+           regex_match(m_inner->path().c_str(), m_file_filter);
   }
 };
 
-static_assert(std::input_iterator<LibraryFileIterator>);
+static_assert(input_iterator<LibraryFileIterator>);
 
 /// A regex builder for the MusicLibrary.
 class FileFilterBuilder {
 public:
-  FileFilterBuilder& extension(const std::string& extension) {
+  FileFilterBuilder& extension(const string& extension) {
     if (multiple_extensions) {
       m_regex += "|";
     } else {
@@ -86,12 +89,10 @@ public:
     return *this;
   }
 
-  std::regex build() const {
-    return std::regex(std::string(".*(") + m_regex + ")$");
-  }
+  regex build() const { return regex(string(".*(") + m_regex + ")$"); }
 
 private:
-  std::string m_regex;
+  string m_regex;
   bool multiple_extensions;
 };
 
@@ -101,7 +102,7 @@ private:
 /// iterator over the media files in the library.
 class MusicLibrary {
 public:
-  MusicLibrary(std::string directory) : m_directory{directory} {}
+  MusicLibrary(string directory) : m_directory{directory} {}
   LibraryFileIterator begin() const {
     auto regex{FileFilterBuilder()
                    .extension("flac")
@@ -113,38 +114,36 @@ public:
   LibraryFileIterator end() const { return LibraryFileIterator::end(); }
 
 private:
-  std::string m_directory;
+  string m_directory;
 };
 
 /// A synchronization object that applies a number of mutations "atomically"
 /// to a library file.
 class PendingCopyFileTransaction {
 public:
-  PendingCopyFileTransaction(std::filesystem::path from_path)
+  PendingCopyFileTransaction(fs::path from_path)
       : m_from_path{from_path}, m_to_path{}, m_tag_callbacks{} {}
 
-  void set_destination_path(std::filesystem::path to_path) {
-    m_to_path = to_path;
-  }
+  void set_destination_path(fs::path to_path) { m_to_path = to_path; }
 
-  const std::filesystem::path& source_path() const { return m_from_path; }
+  const fs::path& source_path() const { return m_from_path; }
 
-  void add_action(std::function<void(std::filesystem::path new_file)> action) {
+  void add_action(function<void(fs::path new_file)> action) {
     m_actions.push_back(action);
   }
 
   // TODO: Can this be passed as a reference instead?
-  void set_tag(std::function<void(TagLib::Tag*)> callback) {
+  void set_tag(function<void(TagLib::Tag*)> callback) {
     m_tag_callbacks.push_back(callback);
   }
 
   /// Complete this transaction by copying the source path to the desination
   /// path within the library.
-  void complete(std::filesystem::path library_path) {
-    std::cout << "Importing " << m_to_path << "\n";
-    std::filesystem::path full_path{library_path.append(m_to_path.c_str())};
-    std::filesystem::create_directories(full_path.parent_path());
-    std::filesystem::copy_file(m_from_path, full_path);
+  void complete(fs::path library_path) {
+    cout << "Importing " << m_to_path << "\n";
+    fs::path full_path{library_path.append(m_to_path.c_str())};
+    fs::create_directories(full_path.parent_path());
+    fs::copy_file(m_from_path, full_path);
 
     // Apply all of the tag callbacks to the file.
     if (!m_tag_callbacks.empty()) {
@@ -161,22 +160,22 @@ public:
   }
 
 private:
-  std::filesystem::path m_from_path;
-  std::filesystem::path m_to_path;
-  std::vector<std::function<void(TagLib::Tag*)>> m_tag_callbacks;
-  std::vector<std::function<void(std::filesystem::path)>> m_actions;
+  fs::path m_from_path;
+  fs::path m_to_path;
+  vector<function<void(TagLib::Tag*)>> m_tag_callbacks;
+  vector<function<void(fs::path)>> m_actions;
 };
 
 /// An exception type returned from policy application. This allows policies
 /// to reject files because they don't meet the criteria required by the
 /// library.
-class InvalidFileError : public std::exception {
+class InvalidFileError : public exception {
 public:
-  InvalidFileError(std::string message) : m_message{message} {}
+  InvalidFileError(string message) : m_message{message} {}
   const char* what() const noexcept final { return m_message.c_str(); }
 
 private:
-  std::string m_message;
+  string m_message;
 };
 
 /// A transformation that's applied to library files upon their creation
@@ -194,7 +193,7 @@ private:
 ///   directory, if TOTALTRACKS is unset" etc.
 class ITransformLibraryFiles {
 public:
-  using PolicyResult = std::variant<std::monostate, InvalidFileError>;
+  using PolicyResult = variant<monostate, InvalidFileError>;
   virtual ~ITransformLibraryFiles() = 0;
   [[nodiscard]] virtual PolicyResult
   apply(PendingCopyFileTransaction& transaction) = 0;
@@ -204,27 +203,29 @@ public:
 /// on the filesystem and applying policies to them.
 class LibraryCreator {
 public:
-  LibraryCreator(
-      std::filesystem::path root,
-      std::vector<std::unique_ptr<ITransformLibraryFiles>> transformations)
+  LibraryCreator(fs::path root,
+                 vector<unique_ptr<ITransformLibraryFiles>> transformations)
       : m_root{root}, m_transformations{std::move(transformations)} {}
 
   [[nodiscard]] ITransformLibraryFiles::PolicyResult
-  add_file(const std::filesystem::directory_entry& file) {
+  add_file(const fs::directory_entry& file) {
     PendingCopyFileTransaction transaction{file.path()};
     for (auto& transformation : m_transformations) {
       auto result{transformation->apply(transaction)};
-      if (std::holds_alternative<InvalidFileError>(result)) {
+      if (holds_alternative<InvalidFileError>(result)) {
         return result;
       }
     }
     transaction.complete(m_root);
-    return {std::monostate()};
+    return {monostate()};
   }
 
 private:
-  std::filesystem::path m_root;
-  std::vector<std::unique_ptr<ITransformLibraryFiles>> m_transformations;
+  fs::path m_root;
+  vector<unique_ptr<ITransformLibraryFiles>> m_transformations;
 };
+} // namespace library
 
-#endif // LIBRARY_H
+using namespace library;
+
+ITransformLibraryFiles::~ITransformLibraryFiles() = default;
