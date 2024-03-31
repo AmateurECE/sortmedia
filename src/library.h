@@ -3,6 +3,7 @@
 
 #include <filesystem>
 #include <functional>
+#include <iostream>
 #include <memory>
 #include <regex>
 #include <tag.h>
