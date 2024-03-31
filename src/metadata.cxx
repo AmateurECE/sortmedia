@@ -19,11 +19,13 @@ export module metadata;
 
 import convert;
 
+namespace fs = std::filesystem;
+using namespace std;
 using namespace convert;
 
 export namespace metadata {
 /// Replaces one or more "invalid characters" with a single underscore.
-std::string sanitize_token(const std::string& input);
+string sanitize_token(const string& input);
 
 class NonStandardTags {
 private:
@@ -42,7 +44,7 @@ public:
   NonStandardTags(const TagLib::FileRef& file) {
     TagLib::PropertyMap map = file.file()->properties();
     map.removeEmpty();
-    if (auto extension{std::filesystem::path(file.file()->name()).extension()};
+    if (auto extension{fs::path(file.file()->name()).extension()};
         extension == ".flac") {
       m_properties = {FlacProperties(map)};
     } else {
@@ -50,28 +52,23 @@ public:
     }
   }
 
-  std::optional<unsigned int> track_total() const {
-    return total(Quantity::Track);
-  }
-  std::optional<unsigned int> disc_total() const {
-    return total(Quantity::Disc);
-  }
+  optional<unsigned int> track_total() const { return total(Quantity::Track); }
+  optional<unsigned int> disc_total() const { return total(Quantity::Disc); }
 
-  std::optional<unsigned int> disc_number() const {
+  optional<unsigned int> disc_number() const {
     return std::visit(
         overloaded{
             [](const FlacProperties& flac) {
               return get_property<unsigned int>(flac.properties, "DISCNUMBER");
             },
-            [](const Id3v2Properties& id3v2) -> std::optional<unsigned int> {
+            [](const Id3v2Properties& id3v2) -> optional<unsigned int> {
               const auto property{
-                  get_property<std::string>(id3v2.properties, "DISCNUMBER")};
+                  get_property<string>(id3v2.properties, "DISCNUMBER")};
               if (!property.has_value()) {
                 return {};
               }
 
-              if (auto slash{property->find("/")};
-                  std::string::npos != slash) {
+              if (auto slash{property->find("/")}; string::npos != slash) {
                 return {
                     Into<unsigned int>::convert(property->substr(0, slash))};
               } else {
@@ -89,31 +86,31 @@ private:
   struct Id3v2Properties {
     TagLib::PropertyMap properties;
   };
-  using Properties = std::variant<FlacProperties, Id3v2Properties>;
+  using Properties = variant<FlacProperties, Id3v2Properties>;
 
   Properties m_properties;
 
   /// Obtain a "total" property from the map. "quantity" may either be "DISC",
   /// in which case, the total number of discs is returned, or it may be
   /// "TRACK", in which case the total number of tracks is returned.
-  std::optional<unsigned int> total(Quantity value) const {
-    auto quantity{Into<std::string>::convert(value)};
+  optional<unsigned int> total(Quantity value) const {
+    auto quantity{Into<string>::convert(value)};
     return std::visit(
         overloaded{
             [&quantity](const FlacProperties& flac) {
               return get_property<unsigned int>(
-                  flac.properties, std::string("TOTAL") + quantity + "S");
+                  flac.properties, string("TOTAL") + quantity + "S");
             },
             [quantity](
-                const Id3v2Properties& id3v2) -> std::optional<unsigned int> {
-              const auto property{get_property<std::string>(
-                  id3v2.properties, quantity + "NUMBER")};
+                const Id3v2Properties& id3v2) -> optional<unsigned int> {
+              const auto property{
+                  get_property<string>(id3v2.properties, quantity + "NUMBER")};
               if (!property.has_value()) {
                 return {};
               }
 
               if (const auto& slash{property->find("/")};
-                  std::string::npos == slash) {
+                  string::npos == slash) {
                 return {std::stoi(property->substr(slash + 1))};
               } else {
                 return {};
@@ -123,9 +120,9 @@ private:
         m_properties);
   }
 
-  template <ConvertibleFrom<std::string> T>
-  static std::optional<T> get_property(const TagLib::PropertyMap& properties,
-                                       const std::string& tag_name) {
+  template <ConvertibleFrom<string> T>
+  static optional<T> get_property(const TagLib::PropertyMap& properties,
+                                  const string& tag_name) {
     if (const auto& list{properties.value(tag_name)}; list.isEmpty()) {
       return {};
     } else {
@@ -138,11 +135,11 @@ private:
 /// Detects embedded cover art in audio files.
 class ImageDetector {
 public:
-  static std::optional<ImageDetector> make(std::filesystem::path path) {
-    std::string extension{path.extension().c_str()};
+  static optional<ImageDetector> make(fs::path path) {
+    string extension{path.extension().c_str()};
 
     if (extension == ".mp3") {
-      auto file{std::make_unique<TagLib::MPEG::File>(path.c_str())};
+      auto file{make_unique<TagLib::MPEG::File>(path.c_str())};
       if (file->hasAPETag()) {
         return {ImageDetector{Image{APEv2Image{std::move(file)}}}};
       } else if (file->hasID3v1Tag()) {
@@ -154,10 +151,10 @@ public:
       }
     } else if (extension == ".m4a") {
       return {ImageDetector{
-          Image{Mp4Image{std::make_unique<TagLib::MP4::File>(path.c_str())}}}};
+          Image{Mp4Image{make_unique<TagLib::MP4::File>(path.c_str())}}}};
     } else if (extension == ".flac") {
-      return {ImageDetector{Image{
-          FlacImage{std::make_unique<TagLib::FLAC::File>(path.c_str())}}}};
+      return {ImageDetector{
+          Image{FlacImage{make_unique<TagLib::FLAC::File>(path.c_str())}}}};
     } else {
       return {};
     }
@@ -170,11 +167,11 @@ public:
 
 private:
   struct FlacImage {
-    std::unique_ptr<TagLib::FLAC::File> file;
+    unique_ptr<TagLib::FLAC::File> file;
     bool has_image() const { return !file->pictureList().isEmpty(); }
   };
   struct APEv2Image {
-    std::unique_ptr<TagLib::MPEG::File> file;
+    unique_ptr<TagLib::MPEG::File> file;
     bool has_image() const {
       // APEv2 embedded pictures may appear under a number of keys,
       // all of which start with "Cover Art". See:
@@ -189,7 +186,7 @@ private:
     }
   };
   struct ID3v2Image {
-    std::unique_ptr<TagLib::MPEG::File> file;
+    unique_ptr<TagLib::MPEG::File> file;
     bool has_image() const {
       return !file->ID3v2Tag()->frameListMap()["APIC"].isEmpty();
     }
@@ -199,11 +196,11 @@ private:
     bool has_image() const { return false; }
   };
   struct Mp4Image {
-    std::unique_ptr<TagLib::MP4::File> file;
+    unique_ptr<TagLib::MP4::File> file;
     bool has_image() const { return file->tag()->itemMap().contains("covr"); };
   };
   using Image =
-      std::variant<FlacImage, APEv2Image, ID3v1Image, ID3v2Image, Mp4Image>;
+      variant<FlacImage, APEv2Image, ID3v1Image, ID3v2Image, Mp4Image>;
 
   ImageDetector(Image image) : m_image{std::move(image)} {}
 
@@ -224,11 +221,11 @@ string From<NonStandardTags::Quantity>::convert<string>(
   case NonStandardTags::Quantity::Disc:
     return "DISC";
   default:
-    throw std::runtime_error{"non-exhaustive conversion"};
+    throw runtime_error{"non-exhaustive conversion"};
   }
 }
 
-std::string metadata::sanitize_token(const std::string& input) {
-  static const std::regex disallowed_characters{"[^A-Za-z0-9 ()\\[\\]]+"};
-  return std::regex_replace(input, disallowed_characters, "_");
+string metadata::sanitize_token(const string& input) {
+  static const regex disallowed_characters{"[^A-Za-z0-9 ()\\[\\]]+"};
+  return regex_replace(input, disallowed_characters, "_");
 }

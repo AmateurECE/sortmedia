@@ -5,6 +5,8 @@ module;
 
 export module convert;
 
+using namespace std;
+
 export namespace convert {
 /// This struct template provides a mechanism for easy type conversion
 /// based on user-defined functions. Similar to the From trait in the
@@ -34,13 +36,11 @@ using namespace convert;
 
 template <>
 template <>
-unsigned int From<std::string>::convert<unsigned int>(std::string value) {
+unsigned int From<string>::convert<unsigned int>(string value) {
   return std::stoi(value);
 }
 
 /// Trivial case: string -> string
-template <>
-template <>
-std::string From<std::string>::convert<std::string>(std::string value) {
+template <> template <> string From<string>::convert<string>(string value) {
   return value;
 }
