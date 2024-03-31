@@ -12,7 +12,7 @@ public:
       auto result{output.add_file(file)};
       if (auto error{std::get_if<InvalidFileError>(&result)};
           nullptr != error) {
-        std::cerr << error->what() << "\n";
+        std::cerr << "Error: " << error->what() << "\n";
       }
     }
   }

@@ -129,8 +129,7 @@ public:
 
   const std::filesystem::path& source_path() const { return m_from_path; }
 
-  void add_action(
-      std::function<void(const std::filesystem::path& new_file)> action) {
+  void add_action(std::function<void(std::filesystem::path new_file)> action) {
     m_actions.push_back(action);
   }
 
@@ -165,7 +164,7 @@ private:
   std::filesystem::path m_from_path;
   std::filesystem::path m_to_path;
   std::vector<std::function<void(TagLib::Tag*)>> m_tag_callbacks;
-  std::vector<std::function<void(const std::filesystem::path&)>> m_actions;
+  std::vector<std::function<void(std::filesystem::path)>> m_actions;
 };
 
 /// An exception type returned from policy application. This allows policies

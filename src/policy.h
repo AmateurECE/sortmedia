@@ -8,6 +8,7 @@
 #include <taglib/fileref.h>
 #include <taglib/tpropertymap.h>
 #include <unordered_map>
+#include <unordered_set>
 
 #include "library.h"
 #include "metadata.h"
@@ -91,6 +92,67 @@ private:
     // Insert the calculated value into the cache for future queries.
     m_track_total_cache.insert({parent, count});
     return count;
+  }
+};
+
+/// This policy ensures that all tracks are associated with image metadata.
+/// This could be embedded in the audio file itself, or as a standalone image
+/// file adjacent to the audio file.
+class ImagePresencePolicy : public ITransformLibraryFiles {
+public:
+  PolicyResult apply(PendingCopyFileTransaction& transaction) final {
+    // First check to see if this policy has already copied artwork for
+    // this collection by checking the cache. The heuristic we apply assumes
+    // that the artwork in the source directory corresponds to the entire
+    // collection, and only that collection.
+    auto source_directory{transaction.source_path().parent_path()};
+    if (m_collection_cache.contains(source_directory)) {
+      return {std::monostate()};
+    }
+
+    // If the image has embedded metadata, we don't need to take any action.
+    auto image_detector{
+        metadata::ImageDetector::make(transaction.source_path())};
+    if (image_detector.has_value() && image_detector->has_image()) {
+      return {std::monostate()};
+    }
+
+    // Copy artwork from the source directory, if it exists, by
+    // attaching a copy action to the transaction.
+    static const auto artwork_filenames{known_artwork_filenames()};
+    for (const auto& filename : artwork_filenames) {
+      auto art{std::filesystem::path(source_directory).append(filename)};
+      if (std::filesystem::exists(art)) {
+        transaction.add_action([art](std::filesystem::path file) {
+          auto destination{file.append(art.filename().c_str())};
+          std::cout << art.filename() << "\n";
+          std::filesystem::copy_file(art, destination);
+        });
+        m_collection_cache.insert(source_directory);
+        return {std::monostate()};
+      }
+    }
+
+    return {InvalidFileError{std::format(
+        "{} does not contain embedded image data and {} does "
+        "not contain any images that appear to be cover art.",
+        transaction.source_path().c_str(), source_directory.c_str())}};
+  }
+
+private:
+  std::unordered_set<std::filesystem::path> m_collection_cache;
+
+  static std::vector<std::string> known_artwork_filenames() {
+    static const std::vector<std::string> extensions = {".jpg", ".png"};
+    static const std::vector<std::string> filenames = {"folder", "poster",
+                                                       "cover", "default"};
+    std::vector<std::string> result;
+    for (auto filename : filenames) {
+      for (const auto& extension : extensions) {
+        result.push_back(filename + extension);
+      }
+    }
+    return result;
   }
 };
 

@@ -21,6 +21,7 @@ int main(int argc, char** argv) {
 
   vector<unique_ptr<ITransformLibraryFiles>> transformations;
   transformations.push_back(make_unique<AudioOrganizationPolicy>());
+  transformations.push_back(make_unique<ImagePresencePolicy>());
   LibraryCreator destination{filesystem::path(output_directory),
                              std::move(transformations)};
 
