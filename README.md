@@ -1,28 +1,30 @@
-This application links against [TagLib](https://taglib.org/api/), which uses
-dual LGPL and MPL licenses.
+# Motivation
+
+This is mostly a fun project for me--something to save myself a little time
+(though I'm sure I've spent more time than I've saved in authoring this
+application over the years). It's also an exercise to help me stay up-to-date
+in modern C++. Every few years, I end up rewriting this application mostly from
+scratch, and I think it gets a little better every time.
 
 # Building
 
-This project depends on taglib, which must be located somehow. The CMake build
-script will first attempt to locate taglib as if it were installed by Conan.
-If this fails, the build script will fall back to using `pkg-config`.
+The `default` preset provides a `Find<lib>.cmake` script for required
+dependencies, but there is also a `conanfile.txt` which can be used to build
+using dependencies from Conan center.
 
-## Building with taglib from Conan
-
-```
-$ conan install -of build .
-$ cmake -B build -G Ninja \
-    -DCMAKE_BUILD_TYPE=Release \
-    -DCMAKE_INSTALL_PREFIX=$DESTDIR/usr \
-    -DCMAKE_TOOLCHAIN_FILE=$PWD/build/conan_toolchain.cmake .
-$ cmake --build build
-```
-
-## Building with taglib from pkg-config
+## Building with dependencies from Conan
 
 ```
-$ cmake -B build -G Ninja -DCMAKE_INSTALL_PREFIX=$DESTDIR/usr
-$ cmake --build build
+conan install --build=missing -of builddir .
+cmake --preset conan-release
+cmake --build build
+```
+
+## Building with system libraries
+
+```
+cmake --preset default
+cmake --build build
 ```
 
 # Compilation Database
@@ -31,5 +33,12 @@ CMake is configured to generate a compilation database at configure time. To
 use this, e.g. with neovim, symlink it into the project root directory:
 
 ```
-$ ln -s build/compile_commands.json compile_commands.json
+ln -s builddir/compile_commands.json compile_commands.json
 ```
+
+# Attributions
+
+This application links against [TagLib][1], which uses dual LGPL and MPL
+licenses.
+
+[1]: https://taglib.org/api/

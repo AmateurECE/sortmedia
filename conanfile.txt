@@ -1,5 +1,6 @@
 [requires]
 taglib/1.13
+cli11/2.4.1
 
 [generators]
 CMakeToolchain
