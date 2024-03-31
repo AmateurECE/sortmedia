@@ -1,5 +1,4 @@
-#ifndef POLICY_H
-#define POLICY_H
+module;
 
 #include <algorithm>
 #include <cmath>
@@ -10,9 +9,15 @@
 #include <unordered_map>
 #include <unordered_set>
 
-#include "library.h"
-#include "metadata.h"
+export module policy;
 
+import library;
+import metadata;
+
+using namespace library;
+using namespace metadata;
+
+export namespace policy {
 /// The policy that dictates the final state of audio files in the library.
 class AudioOrganizationPolicy : public ITransformLibraryFiles {
 public:
@@ -155,5 +160,4 @@ private:
     return result;
   }
 };
-
-#endif // POLICY_H
+} // namespace policy

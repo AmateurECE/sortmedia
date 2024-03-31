@@ -1,8 +1,15 @@
-#ifndef SERVICE_H
-#define SERVICE_H
+module;
 
-#include "library.h"
+#include <iostream>
+#include <variant>
 
+export module service;
+
+import library;
+
+using namespace library;
+
+export namespace service {
 // TODO: When we eventually support more than just audio, this class can
 // become templated.
 class CopyAndOrganize {
@@ -17,5 +24,4 @@ public:
     }
   }
 };
-
-#endif // SERVICE_H
+} // namespace service

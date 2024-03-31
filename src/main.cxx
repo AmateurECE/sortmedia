@@ -1,11 +1,18 @@
+module;
+
+#include "version.h"
 #include <CLI/CLI.hpp>
 
-#include "library.h"
-#include "policy.h"
-#include "service.h"
-#include "version.h"
+export module main;
+
+import library;
+import policy;
+import service;
 
 using namespace std;
+using namespace library;
+using namespace policy;
+using namespace service;
 
 int main(int argc, char** argv) {
   CLI::App app{"Media library sorting application"};

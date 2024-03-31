@@ -1,5 +1,4 @@
-#ifndef LIBRARY_H
-#define LIBRARY_H
+module;
 
 #include <filesystem>
 #include <functional>
@@ -10,6 +9,9 @@
 #include <variant>
 #include <vector>
 
+export module library;
+
+export namespace library {
 /// An iterator over media files in a library. This iterator fulfills the
 /// requirements of an input iterator, and is also a range type.
 class LibraryFileIterator {
@@ -226,5 +228,8 @@ private:
   std::filesystem::path m_root;
   std::vector<std::unique_ptr<ITransformLibraryFiles>> m_transformations;
 };
+} // namespace library
 
-#endif // LIBRARY_H
+using namespace library;
+
+ITransformLibraryFiles::~ITransformLibraryFiles() = default;

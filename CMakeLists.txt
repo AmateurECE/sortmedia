@@ -9,11 +9,15 @@ find_package(CLI11 REQUIRED)
 
 include(cmake/version.cmake)
 
-add_executable(sortlibrary
-  src/metadata.cpp
-  src/convert.cpp
-  src/library.cpp
-  src/main.cpp)
+add_executable(sortlibrary)
+target_sources(sortlibrary
+  PUBLIC FILE_SET CXX_MODULES FILES
+  src/convert.cxx
+  src/library.cxx
+  src/main.cxx
+  src/metadata.cxx
+  src/policy.cxx
+  src/service.cxx)
 
 target_link_libraries(sortlibrary PRIVATE
   taglib::taglib

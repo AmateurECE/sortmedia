@@ -1,9 +1,11 @@
-#ifndef METADATA_H
-#define METADATA_H
+module;
 
 #include <filesystem>
 #include <memory>
 #include <optional>
+#include <regex>
+#include <stdexcept>
+#include <string>
 #include <taglib/apetag.h>
 #include <taglib/fileref.h>
 #include <taglib/flacfile.h>
@@ -13,9 +15,13 @@
 #include <taglib/tpropertymap.h>
 #include <variant>
 
-#include "convert.h"
+export module metadata;
 
-namespace metadata {
+import convert;
+
+using namespace convert;
+
+export namespace metadata {
 /// Replaces one or more "invalid characters" with a single underscore.
 std::string sanitize_token(const std::string& input);
 
@@ -205,4 +211,24 @@ private:
 };
 } // namespace metadata
 
-#endif // METADATA_H
+using namespace std;
+using namespace metadata;
+
+template <>
+template <>
+string From<NonStandardTags::Quantity>::convert<string>(
+    NonStandardTags::Quantity quantity) {
+  switch (quantity) {
+  case NonStandardTags::Quantity::Track:
+    return "TRACK";
+  case NonStandardTags::Quantity::Disc:
+    return "DISC";
+  default:
+    throw std::runtime_error{"non-exhaustive conversion"};
+  }
+}
+
+std::string metadata::sanitize_token(const std::string& input) {
+  static const std::regex disallowed_characters{"[^A-Za-z0-9 ()\\[\\]]+"};
+  return std::regex_replace(input, disallowed_characters, "_");
+}
