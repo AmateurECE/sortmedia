@@ -135,7 +135,7 @@ public:
       if (std::filesystem::exists(art)) {
         transaction.add_action([art](std::filesystem::path file) {
           auto destination{file.parent_path().append(art.filename().c_str())};
-          std::cout << art.filename() << "\n";
+          std::cout << "Importing " << art.filename() << "\n";
           std::filesystem::copy_file(art, destination);
         });
         m_collection_cache.insert(source_directory);
