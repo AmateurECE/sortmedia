@@ -39,7 +39,8 @@ public:
     const auto disc_number{tags.disc_number()};
     const auto disc_total{tags.disc_total()};
     if (disc_number.has_value() && disc_total.has_value()) {
-      const auto disc_alignment{std::log10(*disc_total) + 1};
+      const auto disc_alignment{
+          static_cast<unsigned int>(std::log10(*disc_total) + 1)};
       track = std::format("{:0>{}}{}", *disc_number, disc_alignment, track);
     }
 
