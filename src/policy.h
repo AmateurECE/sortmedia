@@ -31,18 +31,9 @@ public:
     const auto title{
         metadata::sanitize_token(file.tag()->title().to8Bit(true))};
     const auto extension{transaction.source_path().extension().string()};
-    auto track{std::format("{:0>{}} {}{}", track_number, alignment, title,
-                           extension)};
-
-    // Add disc number only if disc_total and disc_number are set.
-    metadata::NonStandardTags tags{file};
-    const auto disc_number{tags.disc_number()};
-    const auto disc_total{tags.disc_total()};
-    if (disc_number.has_value() && disc_total.has_value()) {
-      const auto disc_alignment{
-          static_cast<unsigned int>(std::log10(*disc_total) + 1)};
-      track = std::format("{:0>{}}{}", *disc_number, disc_alignment, track);
-    }
+    auto track{optionally_add_disc_total(
+        std::format("{:0>{}} {}{}", track_number, alignment, title, extension),
+        file)};
 
     transaction.set_destination_path(
         std::filesystem::path(artist).append(album).append(track));
@@ -66,6 +57,24 @@ private:
         })};
     return std::max(static_cast<unsigned int>(std::log10(*track_total)) + 1,
                     MINIMUM_ALIGNMENT);
+  }
+
+  /// Append a disc number to a track, if both the disc number and disc total
+  /// are populated, and the disc total is greater than 1.
+  std::string optionally_add_disc_total(std::string track,
+                                        const TagLib::FileRef& file) {
+    metadata::NonStandardTags tags{file};
+
+    const auto disc_number{tags.disc_number()};
+    const auto disc_total{tags.disc_total()};
+
+    if (disc_number.has_value() && disc_total.has_value() && *disc_total > 1) {
+      const auto disc_alignment{
+          static_cast<unsigned int>(std::log10(*disc_total) + 1)};
+      return std::format("{:0>{}}{}", *disc_number, disc_alignment, track);
+    } else {
+      return track;
+    }
   }
 
   /// Assume that all tracks in the collection are present in the directory
