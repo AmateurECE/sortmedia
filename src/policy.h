@@ -17,7 +17,12 @@
 class AudioOrganizationPolicy : public ITransformLibraryFiles {
 public:
   PolicyResult apply(PendingCopyFileTransaction& transaction) final {
-    TagLib::FileRef file{transaction.source_path().c_str()};
+    auto result{make_file_ref(transaction.source_path())};
+    if (auto* error = std::get_if<InvalidFileError>(&result)) {
+      return {*error};
+    }
+
+    auto file{std::get<TagLib::FileRef>(result)};
 
     // Compose the filename using the artist, album, and track metadata.
     const auto artist{
@@ -41,6 +46,8 @@ public:
   }
 
 private:
+  using FileRefResult = std::variant<TagLib::FileRef, InvalidFileError>;
+
   static inline constexpr unsigned int MINIMUM_ALIGNMENT = 2;
   std::unordered_map<std::filesystem::path, unsigned int> m_track_total_cache;
 
@@ -102,6 +109,16 @@ private:
     // Insert the calculated value into the cache for future queries.
     m_track_total_cache.insert({parent, count});
     return count;
+  }
+
+  FileRefResult make_file_ref(const std::filesystem::path& source_path) {
+    TagLib::FileRef file{source_path.c_str()};
+    if (file.tag() == nullptr) {
+      return {InvalidFileError(std::string("Error: ") + source_path.c_str() +
+                               " is not a valid media file!")};
+    } else {
+      return {file};
+    }
   }
 };
 
