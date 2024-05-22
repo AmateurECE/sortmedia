@@ -137,12 +137,14 @@ public:
 
     if (extension == ".mp3") {
       auto file{std::make_unique<TagLib::MPEG::File>(path.c_str())};
-      if (file->hasAPETag()) {
+      // Prioritize ID3v2 tags, falling back onto APEv2 if necessary, and
+      // finally onto ID3v1.
+      if (file->hasID3v2Tag()) {
+        return {ImageDetector{Image{ID3v2Image{std::move(file)}}}};
+      } else if (file->hasAPETag()) {
         return {ImageDetector{Image{APEv2Image{std::move(file)}}}};
       } else if (file->hasID3v1Tag()) {
         return {ImageDetector{Image{ID3v1Image{}}}};
-      } else if (file->hasID3v2Tag()) {
-        return {ImageDetector{Image{ID3v2Image{std::move(file)}}}};
       } else {
         return {};
       }
