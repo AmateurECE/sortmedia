@@ -153,7 +153,8 @@ public:
         transaction.add_action([art](std::filesystem::path file) {
           auto destination{file.parent_path().append(art.filename().c_str())};
           std::cout << "Importing " << art.filename() << "\n";
-          std::filesystem::copy_file(art, destination);
+          std::error_code error{};
+          std::filesystem::copy_file(art, destination, error);
         });
         m_collection_cache.insert(source_directory);
         return {std::monostate()};

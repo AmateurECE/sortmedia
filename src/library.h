@@ -141,10 +141,16 @@ public:
   /// Complete this transaction by copying the source path to the desination
   /// path within the library.
   void complete(std::filesystem::path library_path) {
-    std::cout << "Importing " << m_to_path << "\n";
     std::filesystem::path full_path{library_path.append(m_to_path.c_str())};
     std::filesystem::create_directories(full_path.parent_path());
-    std::filesystem::copy_file(m_from_path, full_path);
+    std::error_code error{};
+    std::filesystem::copy_file(m_from_path, full_path, error);
+    if (error) {
+      std::cerr << m_to_path << ": " << error.message() << "\n";
+      return;
+    }
+
+    std::cout << "Imported " << m_to_path << "\n";
 
     // Apply all of the tag callbacks to the file.
     if (!m_tag_callbacks.empty()) {
