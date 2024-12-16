@@ -23,6 +23,6 @@ string From<NonStandardTags::Quantity>::convert<string>(
 }
 
 std::string metadata::sanitize_token(const std::string& input) {
-  static const std::regex disallowed_characters{"[^A-Za-z0-9 ()\\[\\]]+"};
-  return std::regex_replace(input, disallowed_characters, "_");
+  static const std::regex allowed_characters{"[^A-Za-z0-9 ()\\[\\]-]+"};
+  return std::regex_replace(input, allowed_characters, "_");
 }
