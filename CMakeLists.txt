@@ -20,8 +20,8 @@ target_sources(sortlibrary
   PRIVATE
     FILE_SET modules TYPE CXX_MODULES FILES
 #     src/metadata.cppm
-    src/convert.cppm)
-#     src/library.cppm)
+      src/convert.cppm
+      src/library.cppm)
 
 target_link_libraries(sortlibrary PRIVATE
   taglib::taglib

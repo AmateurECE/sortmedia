@@ -2,8 +2,8 @@
 #include "version.h"
 
 import std;
+import library;
 
-// #include "library.h"
 // #include "policy.h"
 // #include "service.h"
 
@@ -20,7 +20,10 @@ int main(int argc, char** argv) {
   CLI11_PARSE(app, argc, argv);
 
   std::cout << input_tree << "\n";
-  // MusicLibrary input_library{input_tree};
+  MusicLibrary input_library{input_tree};
+  for (const auto& file : input_library) {
+    std::cout << file << "\n";
+  }
 
   // vector<unique_ptr<ITransformLibraryFiles>> transformations;
   // transformations.push_back(make_unique<AudioOrganizationPolicy>());
