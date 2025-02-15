@@ -21,6 +21,7 @@ target_sources(sortlibrary
     FILE_SET modules TYPE CXX_MODULES FILES
       src/metadata.cppm
       src/policy.cppm
+      src/service.cppm
       src/convert.cppm
       src/library.cppm)
 

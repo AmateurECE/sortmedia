@@ -1,11 +1,11 @@
-#ifndef SERVICE_H
-#define SERVICE_H
+export module service;
 
-#include "library.h"
+import std;
+import library;
 
 // TODO: When we eventually support more than just audio, this class can
 // become templated.
-class CopyAndOrganize {
+export class CopyAndOrganize {
 public:
   void run(const MusicLibrary& input, LibraryCreator& output) {
     for (const auto& file : input) {
@@ -17,5 +17,3 @@ public:
     }
   }
 };
-
-#endif // SERVICE_H
