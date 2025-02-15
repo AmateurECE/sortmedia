@@ -19,7 +19,7 @@ target_sources(sortlibrary PRIVATE src/main.cpp)
 target_sources(sortlibrary
   PRIVATE
     FILE_SET modules TYPE CXX_MODULES FILES
-#     src/metadata.cppm
+      src/metadata.cppm
       src/convert.cppm
       src/library.cppm)
 
