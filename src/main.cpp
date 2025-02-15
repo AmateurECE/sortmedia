@@ -3,8 +3,8 @@
 
 import std;
 import library;
+import policy;
 
-// #include "policy.h"
 // #include "service.h"
 
 using namespace std;
@@ -25,11 +25,11 @@ int main(int argc, char** argv) {
     std::cout << file << "\n";
   }
 
-  // vector<unique_ptr<ITransformLibraryFiles>> transformations;
-  // transformations.push_back(make_unique<AudioOrganizationPolicy>());
-  // transformations.push_back(make_unique<ImagePresencePolicy>());
-  // LibraryCreator destination{filesystem::path(output_directory),
-  //                            std::move(transformations)};
+  vector<unique_ptr<ITransformLibraryFiles>> transformations;
+  transformations.push_back(make_unique<AudioOrganizationPolicy>());
+  transformations.push_back(make_unique<ImagePresencePolicy>());
+  LibraryCreator destination{filesystem::path(output_directory),
+                             std::move(transformations)};
 
   // CopyAndOrganize service;
   // service.run(input_library, destination);

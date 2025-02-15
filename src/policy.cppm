@@ -1,20 +1,16 @@
-#ifndef POLICY_H
-#define POLICY_H
+module;
 
-#include <algorithm>
-#include <cmath>
-#include <filesystem>
-#include <format>
 #include <taglib/fileref.h>
 #include <taglib/tpropertymap.h>
-#include <unordered_map>
-#include <unordered_set>
 
-#include "library.h"
-#include "metadata.h"
+export module policy;
+
+import std;
+import library;
+import metadata;
 
 /// The policy that dictates the final state of audio files in the library.
-class AudioOrganizationPolicy : public ITransformLibraryFiles {
+export class AudioOrganizationPolicy : public ITransformLibraryFiles {
 public:
   PolicyResult apply(PendingCopyFileTransaction& transaction) final {
     auto result{make_file_ref(transaction.source_path())};
@@ -125,7 +121,7 @@ private:
 /// This policy ensures that all tracks are associated with image metadata.
 /// This could be embedded in the audio file itself, or as a standalone image
 /// file adjacent to the audio file.
-class ImagePresencePolicy : public ITransformLibraryFiles {
+export class ImagePresencePolicy : public ITransformLibraryFiles {
 public:
   PolicyResult apply(PendingCopyFileTransaction& transaction) final {
     // First check to see if this policy has already copied artwork for
@@ -183,5 +179,3 @@ private:
     return result;
   }
 };
-
-#endif // POLICY_H
