@@ -16,11 +16,16 @@ using dependencies from Conan center.
 
 ```
 conan install --build=missing -of builddir .
-cmake --preset conan-release
-cmake --build build
+cmake -G Ninja --preset conan-release
+cmake --build builddir
 ```
 
 ## Building with system libraries
+
+Note that currently, Clang is required for the C++ modules build, and that
+executables built against libc++ with modules are not ABI-compatible with
+libraries that have been compiled against GCC and libstdc++, so it's not
+currently possible to compile the C++ modules build using system libraries.
 
 ```
 cmake --preset default

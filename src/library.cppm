@@ -1,18 +1,15 @@
-#ifndef LIBRARY_H
-#define LIBRARY_H
+module;
 
-#include <filesystem>
-#include <functional>
-#include <memory>
-#include <regex>
 #include <tag.h>
 #include <taglib/fileref.h>
-#include <variant>
-#include <vector>
+
+export module library;
+
+import std;
 
 /// An iterator over media files in a library. This iterator fulfills the
 /// requirements of an input iterator, and is also a range type.
-class LibraryFileIterator {
+export class LibraryFileIterator {
 public:
   using difference_type = std::ptrdiff_t;
   using element_type = std::filesystem::directory_entry;
@@ -73,7 +70,7 @@ private:
 static_assert(std::input_iterator<LibraryFileIterator>);
 
 /// A regex builder for the MusicLibrary.
-class FileFilterBuilder {
+export class FileFilterBuilder {
 public:
   FileFilterBuilder& extension(const std::string& extension) {
     if (multiple_extensions) {
@@ -99,7 +96,7 @@ private:
 /// their associated metadata, cover art images, and directory structures
 /// that arbitrarily group music files together. The library yields an
 /// iterator over the media files in the library.
-class MusicLibrary {
+export class MusicLibrary {
 public:
   MusicLibrary(std::string directory) : m_directory{directory} {}
   LibraryFileIterator begin() const {
@@ -118,7 +115,7 @@ private:
 
 /// A synchronization object that applies a number of mutations "atomically"
 /// to a library file.
-class PendingCopyFileTransaction {
+export class PendingCopyFileTransaction {
 public:
   PendingCopyFileTransaction(std::filesystem::path from_path)
       : m_from_path{from_path}, m_to_path{}, m_tag_callbacks{} {}
@@ -176,7 +173,7 @@ private:
 /// An exception type returned from policy application. This allows policies
 /// to reject files because they don't meet the criteria required by the
 /// library.
-class InvalidFileError : public std::exception {
+export class InvalidFileError : public std::exception {
 public:
   InvalidFileError(std::string message) : m_message{message} {}
   const char* what() const noexcept final { return m_message.c_str(); }
@@ -198,7 +195,7 @@ private:
 ///   have artwork, whether in the audio files themselves or as a separate
 ///   file" or, "set the value of TOTALTRACKS to be the number of files in the
 ///   directory, if TOTALTRACKS is unset" etc.
-class ITransformLibraryFiles {
+export class ITransformLibraryFiles {
 public:
   using PolicyResult = std::variant<std::monostate, InvalidFileError>;
   virtual ~ITransformLibraryFiles() = 0;
@@ -206,9 +203,11 @@ public:
   apply(PendingCopyFileTransaction& transaction) = 0;
 };
 
+ITransformLibraryFiles::~ITransformLibraryFiles() = default;
+
 /// Facilitates the creation of libraries by copying files from elsewhere
 /// on the filesystem and applying policies to them.
-class LibraryCreator {
+export class LibraryCreator {
 public:
   LibraryCreator(
       std::filesystem::path root,
@@ -232,5 +231,3 @@ private:
   std::filesystem::path m_root;
   std::vector<std::unique_ptr<ITransformLibraryFiles>> m_transformations;
 };
-
-#endif // LIBRARY_H

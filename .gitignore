@@ -3,3 +3,11 @@
 /compile_commands.json
 /package/
 /.cache/
+/.conan/.conan.db
+/.conan/extensions/
+/.conan/global.conf
+/.conan/migrations/
+/.conan/p/
+/.conan/remotes.json
+/.conan/version.txt
+/.direnv/
