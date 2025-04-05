@@ -3,12 +3,14 @@
 
 #include <filesystem>
 #include <functional>
+#include <iostream>
 #include <memory>
 #include <regex>
-#include <tag.h>
-#include <taglib/fileref.h>
 #include <variant>
 #include <vector>
+
+#include <tag.h>
+#include <taglib/fileref.h>
 
 /// An iterator over media files in a library. This iterator fulfills the
 /// requirements of an input iterator, and is also a range type.
