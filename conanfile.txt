@@ -1,5 +1,5 @@
 [requires]
-taglib/1.13
+taglib/2.0
 cli11/2.4.1
 
 [generators]
